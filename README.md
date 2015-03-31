@@ -6,6 +6,7 @@ A showcase of ideas built with react.
 ```
 git clone https://github.com/the-knights-of-the-reactangular-table/sir_predictalot.git
 cd sir_predictalot
+git checkout -b <branchname you want to run>
 python -m SimpleHTTPServer
 // Navigate to localhost:8000
 ```

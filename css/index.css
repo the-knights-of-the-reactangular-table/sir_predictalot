@@ -1,0 +1,23 @@
+.predictionSpan {
+    border: 2px solid black;
+    position: relative;
+    margin: auto;
+    padding: 2%;
+    display: block;
+    width: 30%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.predictionLeft {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.predictionRight {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+
+}

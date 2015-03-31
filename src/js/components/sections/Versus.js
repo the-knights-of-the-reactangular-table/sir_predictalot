@@ -3,9 +3,9 @@ var React = require("react");
 var Versus = React.createClass({
 	render: function() {
 		return (
-			<div className="sectionHolder" id="Prediction">
+			<div className={"sectionHolder " + this.props.topic} id="Prediction">
 				<div className="sectionHeader">
-					<h1>{this.props.header}</h1>
+					<h1>Versus</h1>
 				</div>
 				<div className="sectionBody">
 					<div className="section sectionLeft">{this.props.body.left}</div>

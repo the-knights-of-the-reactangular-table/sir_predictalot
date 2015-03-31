@@ -1,3 +1,4 @@
+/* Structure */
 html {
 	font-family: "Orbitron", sans-serif;
 }
@@ -13,7 +14,6 @@ html {
 .sectionHeader {
 	box-shadow:  0px 2px 1px 1px black;;
 	margin-bottom: 0px;
-	background-color: darkcyan;
 }
 
 .sectionBody {
@@ -43,9 +43,15 @@ h5 {
 }
 
 
-.section {
+.sectionBinary {
 	height: 75%;
 	width: 199px;
+	display: inline-block;
+}
+
+.sectionUnary {
+	height: 75%;
+	width: 400px;
 	display: inline-block;
 }
 
@@ -58,21 +64,52 @@ h5 {
 	float: right;
 }
 
+/* top navbar */
+.navbar {
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: -10;
+	width: 560px;
+}
+
 .dropdown {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
     height: 20px;
     background-color: white;
     width: 250px;
     top: -5;
     text-align: center;
     box-shadow: 0px 2px 1px 1px;
+    display:inline-block;
 }
+
+/* Buttons */
+.switcher,
+.switcher:active,
+.switcher:focus {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.dropdown {
+	float:center;
+}
+
 
 /*Leaderboard css*/
 .leaderitem {
-	margin-bottom: 10px;
+	padding-top: 10px;
 	border-bottom: 1px solid;
 	border-bottom-color: rgba(40, 48, 65, 0.29);
 	height: 10%;
@@ -91,4 +128,17 @@ h5 {
 	margin: auto;
 	width: 200px;
 	box-shadow: 0px 0px 1px 0px black;
+}
+
+/* Topic-based Css */
+.boxing > .sectionHeader {
+	background-color: darkcyan;
+}
+
+.football > .sectionHeader {
+	background-color: crimson;
+}
+
+.esports > .sectionHeader {
+	background-color: gold;
 }

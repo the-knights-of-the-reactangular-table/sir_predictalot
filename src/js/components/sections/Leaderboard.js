@@ -23,9 +23,9 @@ var Leaderboard = React.createClass({
 			});
 
 		return (
-			<div className="sectionHolder" id="Prediction">
+			<div className={"sectionHolder " + this.props.topic} id="Prediction">
 				<div className="sectionHeader">
-					<h1>{this.props.header}</h1>
+					<h1>Leaderboard</h1>
 				</div>
 				<div className="sectionBody">
 					{leaders}

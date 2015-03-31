@@ -24,15 +24,31 @@ var PredictionApp = React.createClass({
 			selectedEvent: Data.UserStore[currentUser].selectedEvent
 		};
 	},
-	onPrediction: function(selectedOption) {
+	onPrediction: function(selectedOption, type) {
 		this.setState(function(prevState, currentProps){
 			var thisEvent 		= prevState.selectedEvent;
 			var thisUsername  	= prevState.currentUser;
 			var thisUser 		= prevState.users[thisUsername];
-			var predictorArray  = prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic][selectedOption];
-				predictorArray.push(thisUsername);
-				thisUser.topics[thisEvent].topic += 1;
-				console.log(prevState);
+			var predictorArray;
+			var eventArrayToModify;
+			var userPanelDisplayCounter;
+
+			if (type === "prediction") {
+				eventArrayToModify = "predictionTopics";
+				userPanelDisplayCounter = "topic";
+			} else if (type === "challenge") {
+				eventArrayToModify = "challengeTopics";
+				userPanelDisplayCounter = "challenge";
+			}
+			// Recording user as having voted a certain way
+			predictorArray = prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]][selectedOption];
+			predictorArray.push(thisUsername);
+			// Adjusting User's Points
+			thisUser.topics[thisEvent].points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic.pointForCorrect];
+			thisUser.points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic].pointForCorrect;
+			// Recording which event topics they have already voted on
+			thisUser.topics[thisEvent][userPanelDisplayCounter] += 1;
+
 			return {
 				users: prevState.users,
 				events: prevState.events,
@@ -43,22 +59,30 @@ var PredictionApp = React.createClass({
 		var sections = this.state.sections.map(function(ele, ind) {
 				switch(ele.type) {
 				case "Predictions":
-					return <PredictionSection header={ele.type} selectedEvent={this.state.selectedEvent} event={this.state.events[this.state.selectedEvent]} currentUser={this.state.users[this.state.currentUser]} onPrediction={this.onPrediction}/>;
+					return <PredictionSection topic={this.state.selectedEvent} selectedEvent={this.state.selectedEvent} event={this.state.events[this.state.selectedEvent]} currentUser={this.state.users[this.state.currentUser]} onPrediction={this.onPrediction}/>;
 				case "Challenges":
-					return <ChallengeSection header={ele.type} body={ele.body}/>;
+					return <ChallengeSection topic={this.state.selectedEvent} selectedEvent={this.state.selectedEvent} event={this.state.events[this.state.selectedEvent]} currentUser={this.state.users[this.state.currentUser]} onPrediction={this.onPrediction}/>;
 				case "Profile":
-					return <ProfileSection header={ele.type} body={ele.body}/>;
+					return <ProfileSection topic={this.state.selectedEvent} body={ele.body}/>;
 				case "Leaderboard":
-					return <LeaderboardSection header={ele.type} users={this.state.users}/>;
+					return <LeaderboardSection topic={this.state.selectedEvent} users={this.state.users}/>;
 				case "Versus":
-					return <VersusSection header={ele.type} body={ele.body}/>;
+					return <VersusSection topic={this.state.selectedEvent} body={ele.body}/>;
 				default:
 					return;
 				}
 		}.bind(this));
 		return (
 				<div>
-					<DropDownMenu/>
+					<div className="navbar">
+						<button className="switcher left">
+							<img src="/build/assets/img/glyphicon-left.png" />
+						</button>
+						<DropDownMenu />
+						<button className="switcher right">
+							<img src="/build/assets/img/glyphicon-right.png" />
+						</button>
+					</div>
 					{sections}
 				</div>
 			);

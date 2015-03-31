@@ -1,5 +1,5 @@
 var React 		 		= require("react");
-var DropDownMenu 		= require("./DropDownMenu");
+var Navbar 		= require("./Navbar");
 var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
 var ProfileSection 		= require("./sections/Profile");
@@ -40,6 +40,8 @@ var PredictionApp = React.createClass({
 				eventArrayToModify = "challengeTopics";
 				userPanelDisplayCounter = "challenge";
 			}
+			console.log(type);
+			console.log(userPanelDisplayCounter);
 			// Recording user as having voted a certain way
 			predictorArray = prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]][selectedOption];
 			predictorArray.push(thisUsername);
@@ -52,6 +54,33 @@ var PredictionApp = React.createClass({
 			return {
 				users: prevState.users,
 				events: prevState.events,
+			};
+		});
+	},
+	switchEvent: function(direction) {
+		this.setState(function(prevState) {
+			var thisEvent 		= prevState.selectedEvent;
+			var thisUsername  	= prevState.currentUser;
+			var thisUser 		= prevState.users[thisUsername];
+
+			var selectedEvent;
+			if (thisUser.eventPreferences.indexOf(thisEvent) === 0 && direction === -1) {
+				selectedEvent 	= thisUser.eventPreferences[thisUser.eventPreferences.length];
+			} else if (thisUser.eventPreferences.indexOf(thisEvent) === thisUser.eventPreferences.length-1 && direction === 1) {
+				selectedEvent 	= thisUser.eventPreferences[0];
+			} else {
+				selectedEvent 	= thisUser.eventPreferences[thisUser.eventPreferences.indexOf(thisEvent) + direction];
+			}
+
+
+			console.log("index of this current event", thisUser.eventPreferences.indexOf(thisEvent));
+			console.log("direction", direction);
+			console.log(thisEvent);
+			console.log(selectedEvent);
+			console.log(thisUser.eventPreferences);
+			return {
+				users: prevState.users,
+				selectedEvent: selectedEvent
 			};
 		});
 	},
@@ -74,15 +103,7 @@ var PredictionApp = React.createClass({
 		}.bind(this));
 		return (
 				<div>
-					<div className="navbar">
-						<button className="switcher left">
-							<img src="/build/assets/img/glyphicon-left.png" />
-						</button>
-						<DropDownMenu />
-						<button className="switcher right">
-							<img src="/build/assets/img/glyphicon-right.png" />
-						</button>
-					</div>
+					<Navbar switchEvent={this.switchEvent}/>
 					{sections}
 				</div>
 			);

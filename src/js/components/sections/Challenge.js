@@ -6,7 +6,9 @@ var Challenge = React.createClass({
 		this.props.onPrediction(e.target.value, "challenge");
 	},
 	render: function() {
-		var currentChallenge = this.props.event.challengeTopics[this.props.currentUser.topics[this.props.selectedEvent].topic];
+		console.log("event", this.props.event);
+		var currentChallenge = this.props.event.challengeTopics[this.props.currentUser.topics[this.props.selectedEvent].challenge];
+		console.log(currentChallenge);
 		var challengeBody = (function(){
 			switch (currentChallenge.type[0]) {
 			case "binary":

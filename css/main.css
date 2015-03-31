@@ -69,18 +69,32 @@ h5 {
 	position: fixed;
 	left: 50%;
 	transform: translate(-50%, 0);
-	top: -10;
-	width: 560px;
+	top: 0;
+	width: 580px;
+	text-align: center;
 }
 
 .dropdown {
-    height: 20px;
+    height: 100px;
+    margin-top: -80px;
     background-color: white;
     width: 250px;
     top: -5;
     text-align: center;
     box-shadow: 0px 2px 1px 1px;
     display:inline-block;
+}
+
+.optionPanel {
+	height:80px;
+}
+
+.puller {
+	background-image: url("/build/assets/img/glyphicon-down-arrow.png");
+	width: 18px;
+	height: 20px;
+	border: none;
+	background-color: transparent;
 }
 
 /* Buttons */
@@ -92,14 +106,20 @@ h5 {
 	outline: none;
 	display: inline-block;
 	vertical-align: bottom;
+	color: transparent;
+	height: 18px;
+	width: 20px;
 }
 
 .left {
 	float: left;
+	background-image: url("/build/assets/img/glyphicon-left-arrow.png");
 }
 
 .right {
 	float: right;
+	background-image: url("/build/assets/img/glyphicon-right-arrow.png");
+
 }
 
 .dropdown {

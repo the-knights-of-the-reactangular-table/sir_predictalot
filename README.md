@@ -15,3 +15,10 @@ python -m SimpleHTTPServer
 ```
 gulp
 ```
+### Run tests
+```
+npm install
+npm install -g gulp jest-cli
+
+npm test
+```

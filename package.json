@@ -26,6 +26,8 @@
     "watchify": "^3.0.0"
   },
   "dependencies": {
+    "flux": "^2.0.1",
+    "object-assign": "^2.0.0",
     "react": "^0.13.1"
   }
 }

@@ -31,7 +31,7 @@ gulp.task("jest", function () {
 
 gulp.task('browserify', function() {
     var bundler = browserify({
-        entries: ['./src/main.js'],
+        entries: ['./src/js/main.js'],
         transform: [reactify],
         debug: true,
         cache: {}, packageCache: {}, fullPaths: true

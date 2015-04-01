@@ -1,25 +1,36 @@
-.predictionSpan {
-    border: 2px solid black;
-    position: relative;
-    margin: auto;
-    padding: 2%;
-    display: block;
-    width: 30%;
-    text-align: center;
-    padding-bottom: 10px;
+#content {
+    border: 2px black solid;
+    width: 250px;
+    height: 90%;
+    margin-top: 10px;
 }
 
-.predictionLeft {
-    display: inline-block;
-    width: 50%;
+
+.mainBox {
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid black;
+    height: 90%;
+    width: 100%;
     text-align: center;
 }
 
-.predictionRight {
-    display: inline-block;
-    width: 50%;
+.predictionBox {
+    padding: 5px;
+    border: 1px solid black;
+    height: 85%;
+    width: 100%;
     text-align: center;
 }
+
+.menuBox {
+    padding: 5px;
+    border: 1px solid black;
+    height: 10%;
+    width: 100%;
+    text-align: center;
+}
+
 
 #content{
     width: 300px;
@@ -116,3 +127,13 @@
   left: 40px;
   text-shadow: none;
 }
+
+.imageBox {
+    padding: 5px;
+    border: 1px solid black;
+    height: 80%;
+    width: 100%;
+    text-align: center;
+}
+
+

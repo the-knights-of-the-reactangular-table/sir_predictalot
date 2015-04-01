@@ -41,7 +41,7 @@ var MainBox = React.createClass({
         image_number = this.state.data.indexOf(image);
         newData[image_number].animation_class = swipe;
         console.log('image_number: ', image_number);
-        console.log('newData: ', newData)
+        console.log('newData: ', newData);
         //newData.splice(image_number, 1);
         
         this.setState(
@@ -111,8 +111,15 @@ var ImageBox = React.createClass({
         var that = this;
         var images = this.props.data.map(function(image, i){
            return (
+                <div>                <span className="imgText">Hello</span> 
 
-                <div key={that.props.data.key} className={image.animation_class} onTouchMove={that.props.handleTouchMove} onTouchEnd={that.props.onTouchEnd.bind(null,image)} onTouchStart={that.props.handleTouchStart}><img className="predictionImg"  src={image.url}  /> </div>
+                <div key={that.props.data.key} 
+                    className={image.animation_class} 
+                    onTouchMove={that.props.handleTouchMove} 
+                    onTouchEnd={that.props.onTouchEnd.bind(null,image)} 
+                    onTouchStart={that.props.handleTouchStart}> 
+                <img className="predictionImg" src={image.url} /></div>
+                </div>
             );
         });
 
@@ -121,6 +128,7 @@ var ImageBox = React.createClass({
         return(
             <div className="imageBox" >
             <ReactCSSTransitionGroup transitionName="swipe">
+
                 {images}  
             </ReactCSSTransitionGroup>
 

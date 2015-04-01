@@ -12,10 +12,15 @@ var Profile = React.createClass({
 						<ul>{this.props.user.username}</ul>
 						<ul>{this.props.user.points}</ul>
 					</div>
+					<div className="section sectionSingle">
+						<ul>{this.props.user.topics.boxing.name}: {this.props.user.topics.boxing.points}</ul>
+						<ul>{this.props.user.topics.football.name}: {this.props.user.topics.football.points}</ul>
+					</div>
 				</div>
 			</div>
 		);
 	}
 });
+// How do I make it for every topic they have?
 
 module.exports = Profile;

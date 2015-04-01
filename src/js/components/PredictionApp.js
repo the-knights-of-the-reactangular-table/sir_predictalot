@@ -1,10 +1,11 @@
 var React 		 		= require("react");
-var Navbar 		= require("./Navbar");
+var Navbar 				= require("./Navbar");
 var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
 var ProfileSection 		= require("./sections/Profile");
 var LeaderboardSection 	= require("./sections/Leaderboard");
 var VersusSection 		= require("./sections/Versus");
+var TopicsSection		= require("./sections/Topics");
 var Data 				= require("../ExampleData.js");
 
 var PredictionApp = React.createClass({
@@ -16,7 +17,8 @@ var PredictionApp = React.createClass({
 						 	{type: "Challenges", body: {left: "ChallengesLeft", right: "ChallengesRight"}},
 						 	{type: "Profile", body: {left: "ProfileLeft", right: "ProfileRight"}},
 						 	{type: "Leaderboard", body: {left: "LeaderboardLeft", right: "LeaderboardRight"}},
-						 	{type: "Versus", body: {left: "VersusLeft", right: "VersusRight"}}
+						 	{type: "Versus", body: {left: "VersusLeft", right: "VersusRight"}},
+						 	{type: "Topics", body: {left: "TopicsLeft", right: "TopicsRight"}}
 						],
 			users: Data.UserStore,
 			events: Data.EventStore,
@@ -97,6 +99,8 @@ var PredictionApp = React.createClass({
 					return <LeaderboardSection topic={this.state.selectedEvent} users={this.state.users}/>;
 				case "Versus":
 					return <VersusSection topic={this.state.selectedEvent} body={ele.body}/>;
+				case "Topics":
+					return <TopicsSection topic={this.state.selectedEvent} body={ele.body}/>;
 				default:
 					return;
 				}

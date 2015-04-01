@@ -1,9 +1,10 @@
-var React = require("react");
+var React 			  		 = require("react");
+var PredictionActionCreators = require("../../actions/PredictionActionCreators");
 
 var Prediction = React.createClass({
 	clickHandler: function(e) {
 		e.preventDefault();
-		this.props.onPrediction(e.target.value, "prediction");
+		PredictionActionCreators.newPrediction("prediction", this.props.selectedEvent, this.props.prediction_level, e.target.value);
 	},
 	render: function() {
 			var currentPrediction = this.props.event.predictionTopics[this.props.currentUser.topics[this.props.selectedEvent].topic];

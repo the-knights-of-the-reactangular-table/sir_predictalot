@@ -62,8 +62,7 @@ var MainBox = React.createClass({
     render: function() {
         return(
         <div className="mainBox">
-            Predict the News
-            <button  />     
+            Predict the News   
             <PredictionBox data={this.props.data} onTouchEnd={this.onTouchEnd} handleTouchStart={this.handleTouchStart} handleTouchMove={this.handleTouchMove}/>
             <MenuBox />
         </div>
@@ -112,9 +111,12 @@ var ImageBox = React.createClass({
         var that = this;
         var images = this.props.data.map(function(image, i){
            return (
-                <div key={that.props.data.key} className={image.animation_class} onTouchMove={that.props.handleTouchMove} onTouchEnd={that.props.onTouchEnd.bind(null,image)} onTouchStart={that.props.handleTouchStart} ><img className="predictionImg"  src={image.url}  /> </div>
+
+                <div key={that.props.data.key} className={image.animation_class} onTouchMove={that.props.handleTouchMove} onTouchEnd={that.props.onTouchEnd.bind(null,image)} onTouchStart={that.props.handleTouchStart}><img className="predictionImg"  src={image.url}  /> </div>
             );
         });
+
+
        
         return(
             <div className="imageBox" >

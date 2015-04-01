@@ -150,19 +150,21 @@
 }
 
 .swipe-left {
-  transform: translate(100px,0);
-  transform: rotate(30deg) scale(0.8);
-  opacity: 0.01;
-  transition: 1s;
+  transform: rotate(-40deg) scale(0.8) translate(-500px,0);
+  opacity: 0;
+  transition: 1.2s;
 }
 
 
-.swipe-right {
-  transform: translate(100px,0);
-  transform: rotate(-30deg) scale(0.8);
-  opacity: 0.01;
+.imgText{
+    position: absolute;
+}
 
-  transition: 1s;
+.swipe-right {
+  transform: rotate(40deg) scale(0.8) translate(500px,0);
+  opacity: 0;
+
+  transition: 1.2s;
 }
 
 .swipe-enter {

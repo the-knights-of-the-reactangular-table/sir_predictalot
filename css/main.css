@@ -64,6 +64,14 @@ h5 {
 	float: right;
 }
 
+.sectionCenter {
+	text-align: center;
+}
+
+.sectionSingle {
+	float: left;
+}
+
 /* top navbar */
 .navbar {
 	position: fixed;

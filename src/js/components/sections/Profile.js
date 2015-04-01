@@ -8,8 +8,10 @@ var Profile = React.createClass({
 					<h1>Profile</h1>
 				</div>
 				<div className="sectionBody">
-					<div className="section sectionLeft">{this.props.body.left}</div>
-					<div className="section sectionRight">{this.props.body.right}</div>
+					<div className="section sectionSingle">
+						<ul>{this.props.user.username}</ul>
+						<ul>{this.props.user.points}</ul>
+					</div>
 				</div>
 			</div>
 		);

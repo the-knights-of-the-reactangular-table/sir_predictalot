@@ -92,7 +92,7 @@ var PredictionApp = React.createClass({
 				case "Challenges":
 					return <ChallengeSection topic={this.state.selectedEvent} selectedEvent={this.state.selectedEvent} event={this.state.events[this.state.selectedEvent]} currentUser={this.state.users[this.state.currentUser]} onPrediction={this.onPrediction}/>;
 				case "Profile":
-					return <ProfileSection topic={this.state.selectedEvent} body={ele.body}/>;
+					return <ProfileSection topic={this.state.selectedEvent} body={ele.body} user={this.state.users[this.state.currentUser]}/>;
 				case "Leaderboard":
 					return <LeaderboardSection topic={this.state.selectedEvent} users={this.state.users}/>;
 				case "Versus":

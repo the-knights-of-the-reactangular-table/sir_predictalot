@@ -1,7 +1,7 @@
 #content {
     border: 2px black solid;
     width: 250px;
-    height: 90%;
+    height: 450px;
     margin-top: 10px;
 }
 
@@ -128,7 +128,15 @@
   text-shadow: none;
 }
 
+
+.predictionImg{
+    position: absolute;
+    left: 0px;
+
+}
+
 .imageBox {
+    position: relative;
     padding: 5px;
     border: 1px solid black;
     height: 80%;
@@ -136,4 +144,16 @@
     text-align: center;
 }
 
+.swipe-leave{
+    display:none;
+}
+
+.swipe-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.swipe-enter.swipe-enter-active {
+  opacity: 1;
+}
 

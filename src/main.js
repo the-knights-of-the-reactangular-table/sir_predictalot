@@ -4,9 +4,9 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 //var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 React.initializeTouchEvents(true);
 
-var DATA = [{url: 'http://lorempixel.com/g/400/400/sports', text: 'Will this couple break up this week 1?', key: 1, animation_class: "hello1"},
-            {url: 'http://lorempixel.com/g/400/400/food', text: 'Will this couple break up this week 1?', key: 2, animation_class: "hello2"},
-            {url: 'http://lorempixel.com/g/400/400/fashion', text: 'Will this couple break up this week 1?', key: 3, animation_class: "hello3"}
+var DATA = [{url: 'http://lorempixel.com/g/400/400/sports', text: 'Will this couple break up this week 1?', key: 1, animation_class: ""},
+            {url: 'http://lorempixel.com/g/400/400/food', text: 'Will this couple break up this week 1?', key: 2, animation_class: ""},
+            {url: 'http://lorempixel.com/g/400/400/fashion', text: 'Will this couple break up this week 1?', key: 3, animation_class: ""}
 ];
 
 var MainBox = React.createClass({ 
@@ -24,11 +24,14 @@ var MainBox = React.createClass({
     },
 
     onTouchEnd: function(image){
-        
+        var swipe = "";
         if(this.props.firstX - this.props.lastX > 75) {
             console.log("swipe left");
+            swipe = 'swipe-left';
         } else if (this.props.firstX - this.props.lastX < -75) {
             console.log("swipe right");
+            swipe = 'swipe-right';
+
         }
 
 
@@ -36,9 +39,10 @@ var MainBox = React.createClass({
         var newData = this.state.data;
        // newData.animation_class = "swipe-left";
         image_number = this.state.data.indexOf(image);
+        newData[image_number].animation_class = swipe;
         console.log('image_number: ', image_number);
         console.log('newData: ', newData)
-        newData.splice(image_number, 1);
+        //newData.splice(image_number, 1);
         
         this.setState(
             {data:newData}

@@ -144,13 +144,30 @@
     text-align: center;
 }
 
+
 .swipe-leave{
     display:none;
 }
 
+.swipe-left {
+  transform: translate(100px,0);
+  transform: rotate(30deg) scale(0.8);
+  opacity: 0.01;
+  transition: 1s;
+}
+
+
+.swipe-right {
+  transform: translate(100px,0);
+  transform: rotate(-30deg) scale(0.8);
+  opacity: 0.01;
+
+  transition: 1s;
+}
+
 .swipe-enter {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
+transition: opacity .5s ease-in;
 }
 
 .swipe-enter.swipe-enter-active {

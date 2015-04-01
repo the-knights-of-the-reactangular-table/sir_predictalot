@@ -4,9 +4,12 @@ var ChallengeSection 	= require("./sections/Challenge");
 
 
 function getStateFromStores() {
+	var user  = UserStore.getCurrentUser;
+	var	event = EventStore.getCurrentEvent;
+
 	return {
-		user: UserStore.getCurrentUser,
-		event: EventStore.getCurrentEvent
+		user: user,
+		event: event
 	};
 }
 var PredictionApp = React.createClass({
@@ -28,7 +31,7 @@ var PredictionApp = React.createClass({
 		var sections = this.state.user.preferences.sections.map(function(ele, ind) {
 				switch(ele.type) {
 				case "predictions":
-					return <PredictionSection />;
+					return <PredictionSection selectedEvent={this.state.user.preferences.currentSelection} prediction_level={this.state.user}/>;
 				case "challenges":
 					return <ChallengeSection />;
 				default:

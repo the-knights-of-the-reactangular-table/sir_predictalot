@@ -42,14 +42,13 @@ var PredictionApp = React.createClass({
 				eventArrayToModify = "challengeTopics";
 				userPanelDisplayCounter = "challenge";
 			}
-			console.log(type);
-			console.log(userPanelDisplayCounter);
+
 			// Recording user as having voted a certain way
 			predictorArray = prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]][selectedOption];
 			predictorArray.push(thisUsername);
 			// Adjusting User's Points
-			thisUser.topics[thisEvent].points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic.pointForCorrect];
-			thisUser.points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic].pointForCorrect;
+			thisUser.topics[thisEvent].points += prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]].pointForCorrect;
+			thisUser.points += prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]].pointForCorrect;
 			// Recording which event topics they have already voted on
 			thisUser.topics[thisEvent][userPanelDisplayCounter] += 1;
 

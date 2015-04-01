@@ -2,6 +2,7 @@ var React = require("react");
 
 var Profile = React.createClass({
 	render: function() {
+		console.log(this.props.user.topics);
 		return (
 			<div className={"sectionHolder " + this.props.topic} id="Profile">
 				<div className="sectionHeader">
@@ -13,7 +14,7 @@ var Profile = React.createClass({
 						<ul>{this.props.user.points}</ul>
 					</div>
 					<div className="section sectionSingle">
-						<ul>{this.props.user.topics[this.props.topic].name}: {this.props.user.topics[this.props.topic].points}</ul>
+						<ul>{this.props.user.topics[this.props.topic].name} {this.props.user.topics[this.props.topic].points}</ul>
 					</div>
 				</div>
 			</div>

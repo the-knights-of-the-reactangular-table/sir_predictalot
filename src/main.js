@@ -4,9 +4,12 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 //var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 React.initializeTouchEvents(true);
 
-var DATA = [{url: '../build/zlatan.jpg', text: 'Will PSG win the Champions League?', key: 1, animation_class: ""},
-            {url: 'http://lorempixel.com/g/400/400/people', text: "Will he win Eurovision 2015?", key: 2, animation_class: ""},
-            {url: 'http://lorempixel.com/g/400/400/people', text: 'Will they break up?', key: 3, animation_class: ""}
+
+var DATA = [
+            {url: 'img/ronaldo_square.jpg', text: "Will Real Madrid win Champions League 2015?", key: 4, animation_class: ""},
+            {url: 'img/sterling_square.jpg', text: 'Will he leave Liverpool this summer?', key: 3, animation_class: ""},
+            {url: 'img/manu_square.jpg', text: "Will ManU get the 2. place in PL?", key: 2, animation_class: ""},
+            {url: 'img/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 1, animation_class: ""}
 ];
 
 var MainBox = React.createClass({
@@ -25,6 +28,7 @@ var MainBox = React.createClass({
 
     onTouchEnd: function(image){
         var swipe = "";
+
         if(this.props.firstX - this.props.lastX > 75) {
             console.log("swipe left");
             swipe = 'swipe-left';
@@ -82,10 +86,17 @@ var PredictionBox = React.createClass({
         return(
             <div className="predictionBox">
                 <TextBox data={this.props.data} active={this.props.active}/>
+<<<<<<< HEAD
                 <ImageBox data={this.props.data}
                             onTouchEnd={this.props.onTouchEnd}
                             handleTouchStart={this.props.handleTouchStart}
                             handleTouchMove={this.props.handleTouchMove}/>
+=======
+                <ImageBox   data={this.props.data}
+                            onTouchEnd={this.props.onTouchEnd}
+                            handleTouchStart={this.props.handleTouchStart}
+                            handleTouchMove={this.props.handleTouchMove}/>
+>>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
             </div>
         );
     }
@@ -131,11 +142,22 @@ var ImageBox = React.createClass({
         var images = this.props.data.map(function(image, i){
            return (
                 <div>
+<<<<<<< HEAD
                     <div key={that.props.data.key}
                         className={image.animation_class}
                         onTouchMove={that.props.handleTouchMove}
                         onTouchEnd={that.props.onTouchEnd.bind(null,image)}
                         onTouchStart={that.props.handleTouchStart}>
+=======
+                    <div key={that.props.data.key}
+                        className={image.animation_class}
+                        onTouchMove={that.props.handleTouchMove}
+                        onTouchEnd={that.props.onTouchEnd.bind(null,image)}
+                        onTouchStart={that.props.handleTouchStart}>
+                    <div className="yes_stamp">Yes</div>
+                    <div className="no_stamp">No</div>
+
+>>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
                     <img className="predictionImg" src={image.url} /></div>
                 </div>
             );
@@ -145,8 +167,12 @@ var ImageBox = React.createClass({
         return(
             <div className="imageBox" >
             <ReactCSSTransitionGroup transitionName="swipe">
+<<<<<<< HEAD
 
                 {images}
+=======
+                {images}
+>>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
             </ReactCSSTransitionGroup>
 
             </div>

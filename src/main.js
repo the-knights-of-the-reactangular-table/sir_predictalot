@@ -102,7 +102,7 @@ var MainBox = React.createClass({
         return  {
             data: DATA,
             active: active
-        }
+        };
     },
 
 

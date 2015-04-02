@@ -1,5 +1,8 @@
+body{
+  font-family: 'Lato', sans-serif;
+}
+
 #content {
-    border: 2px black solid;
     width: 250px;
     height: 450px;
     margin-top: 10px;
@@ -7,17 +10,16 @@
 
 
 .mainBox {
-    padding: 5px;
     margin-top: 5px;
     border: 1px solid black;
+    border-radius: 10px;
     height: 90%;
     width: 100%;
     text-align: center;
 }
 
 .predictionBox {
-    padding: 5px;
-    border: 1px solid black;
+
     height: 85%;
     width: 100%;
     text-align: center;
@@ -39,13 +41,19 @@
 
 .predictionImg{
     width: 100%;
-      cursor: hand;
+    cursor: hand;
+    position: absolute;
+    left: 0px;
 }
 
-.mainBox{
+
+.textBox{
+  height: 50px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  padding-top: 11px;
 }
-
-
+}
 
 
 /* SWIPE */
@@ -129,17 +137,10 @@
 }
 
 
-.predictionImg{
-    position: absolute;
-    left: 0px;
-
-}
 
 .imageBox {
     position: relative;
-    padding: 5px;
     border: 1px solid black;
-    height: 80%;
     width: 100%;
     text-align: center;
 }

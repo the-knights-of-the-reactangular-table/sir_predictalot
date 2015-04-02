@@ -1,4 +1,5 @@
 var React = require("react/addons");
+var cx = React.addons.classSet;
 //var addons = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 //var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -6,10 +7,17 @@ React.initializeTouchEvents(true);
 
 
 var DATA = [
-            {url: 'img/ronaldo_square.jpg', text: "Will Real Madrid win Champions League 2015?", key: 4, animation_class: ""},
-            {url: 'img/sterling_square.jpg', text: 'Will he leave Liverpool this summer?', key: 3, animation_class: ""},
-            {url: 'img/manu_square.jpg', text: "Will ManU get the 2. place in PL?", key: 2, animation_class: ""},
-            {url: 'img/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 1, animation_class: ""}
+            {url: 'img/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
+            {url: 'img/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
+            {url: 'img/david-cameron_square.jpg', text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
+            {url: 'img/kim-jong-un_square.jpg', text: 'Will he die this year?', key: 3, animation_class: "",left: false, right: false},
+            {url: 'img/is_square.jpg', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
+            {url: 'img/saudi_square.png', text: 'Will Saudi Arabia invade Yemen this month  ?', key: 2, animation_class: "",left: false, right: false},
+            {url: 'img/ronaldo_square.jpg', text: "Will Real Madrid win Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
+            {url: 'img/sterling_square.jpg', text: 'Will he leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
+            {url: 'img/manu_square.jpg', text: "Will ManU get the 2. place in PL?", key: 6, animation_class: "",left: false, right: false},
+            {url: 'img/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
+
 ];
 
 var MainBox = React.createClass({
@@ -27,14 +35,25 @@ var MainBox = React.createClass({
     },
 
     onTouchEnd: function(image){
+        var didSwipe = false;
         var swipe = "";
+            console.log('image = ', image);
+        var newData = this.state.data;
+        // newData.animation_class = "swipe-left";
+        image_number = this.state.data.indexOf(image);
 
         if(this.props.firstX - this.props.lastX > 75) {
+            didSwipe= true;
             console.log("swipe left");
             swipe = 'swipe-left';
+            console.log('applying visible to no')
+            newData[image_number].left = true;
+
         } else if (this.props.firstX - this.props.lastX < -75) {
+            didSwipe= true;
             console.log("swipe right");
             swipe = 'swipe-right';
+            newData[image_number].right = true;
         }
 
 
@@ -54,14 +73,35 @@ var MainBox = React.createClass({
             active : new_active
         });
 
+        if (didSwipe){
+            newData[image_number].animation_class = swipe;
+
+            console.log('image_number: ', image_number);
+            console.log('newData: ', newData);
+            //newData.splice(image_number, 1);
+            new_active = image_number - 1;
+            console.log('new_active_text: ', new_active);
+
+            this.setState({
+                data : newData,
+                active : new_active,
+                swipe: {
+                    left: '',
+                    right: ''
+                }
+            });
+        }
+
+
 
     },
 
 
     getInitialState: function(){
+        var active = DATA.length - 1;
         return  {
             data: DATA,
-            active: 2
+            active: active
         }
     },
 
@@ -86,17 +126,11 @@ var PredictionBox = React.createClass({
         return(
             <div className="predictionBox">
                 <TextBox data={this.props.data} active={this.props.active}/>
-<<<<<<< HEAD
-                <ImageBox data={this.props.data}
-                            onTouchEnd={this.props.onTouchEnd}
-                            handleTouchStart={this.props.handleTouchStart}
-                            handleTouchMove={this.props.handleTouchMove}/>
-=======
+
                 <ImageBox   data={this.props.data}
                             onTouchEnd={this.props.onTouchEnd}
                             handleTouchStart={this.props.handleTouchStart}
                             handleTouchMove={this.props.handleTouchMove}/>
->>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
             </div>
         );
     }
@@ -107,7 +141,7 @@ var MenuBox = React.createClass({
     render: function() {
         return(
             <div className="menuBox">
-                My Profile - More info - Settings
+                My Profile 23 | Read article | Categories
             </div>
             );
     }
@@ -138,26 +172,30 @@ var TextBox = React.createClass({
 var ImageBox = React.createClass({
 
     render: function() {
+        console.log('after style attr added 2');
         var that = this;
         var images = this.props.data.map(function(image, i){
+        if (image.left){
+            var no_style = {
+                opacity: 1
+            };
+        }
+        if (image.right){
+            var yes_style = {
+                opacity: 1
+            };
+        }
+
            return (
                 <div>
-<<<<<<< HEAD
-                    <div key={that.props.data.key}
-                        className={image.animation_class}
-                        onTouchMove={that.props.handleTouchMove}
-                        onTouchEnd={that.props.onTouchEnd.bind(null,image)}
-                        onTouchStart={that.props.handleTouchStart}>
-=======
-                    <div key={that.props.data.key}
-                        className={image.animation_class}
-                        onTouchMove={that.props.handleTouchMove}
-                        onTouchEnd={that.props.onTouchEnd.bind(null,image)}
-                        onTouchStart={that.props.handleTouchStart}>
-                    <div className="yes_stamp">Yes</div>
-                    <div className="no_stamp">No</div>
 
->>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
+                    <div key={that.props.data.key}
+                        className={image.animation_class}
+                        onTouchMove={that.props.handleTouchMove}
+                        onTouchEnd={that.props.onTouchEnd.bind(null,image)}
+                        onTouchStart={that.props.handleTouchStart}>
+                    <div style={yes_style} className='yes_stamp'>Yes</div>
+                    <div style={no_style} className='no_stamp'>No</div>
                     <img className="predictionImg" src={image.url} /></div>
                 </div>
             );
@@ -167,12 +205,7 @@ var ImageBox = React.createClass({
         return(
             <div className="imageBox" >
             <ReactCSSTransitionGroup transitionName="swipe">
-<<<<<<< HEAD
-
                 {images}
-=======
-                {images}
->>>>>>> 18e0213a6de292115570e63be2506e5e89bdc7ef
             </ReactCSSTransitionGroup>
 
             </div>

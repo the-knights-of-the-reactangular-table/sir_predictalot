@@ -1,19 +1,19 @@
-var React 		 		= require("react");
 var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
+var UserStore 			= require("../stores/UserStore");
+var EventStore 			= require("../stores/EventStore");
+var React 		 		= require("react");
 
 
 function getStateFromStores() {
-	var user  = UserStore.getCurrentUser;
-	var	event = EventStore.getCurrentEvent;
-
 	return {
-		user: user,
-		event: event
+		user: UserStore.getCurrentUser(),
+		event: EventStore.getCurrentEvent(),
 	};
 }
+
 var PredictionApp = React.createClass({
-	
+
 	getInitialState: function() {
 		return getStateFromStores();
 	},
@@ -25,24 +25,33 @@ var PredictionApp = React.createClass({
 
 	componentWillUnmount: function() {
 		UserStore.removeChangeListener(this._onChange);
-		EventStore.removeChangeListener(this._onChange);		
+		EventStore.removeChangeListener(this._onChange);
 	},
+
 	render: function() {
-		var sections = this.state.user.preferences.sections.map(function(ele, ind) {
-				switch(ele.type) {
-				case "predictions":
-					return <PredictionSection selectedEvent={this.state.user.preferences.currentSelection} prediction_level={this.state.user}/>;
-				case "challenges":
-					return <ChallengeSection />;
-				default:
-					return;
+		var preferences = this.state.user.preferences;
+		var sections = preferences.sections.map(function(ele, ind) {
+				switch(ele) {
+
+					case "predictions":
+						return <PredictionSection key={ele}/>;
+
+					case "challenges":
+						return <ChallengeSection key={ele}/>;
+
+					default:
+						return;
 				}
 		}.bind(this));
 		return (
-				<div>
-					{sections}
-				</div>
-			);
+			<div>
+				{sections}
+			</div>
+		);
+	},
+
+	_onChange: function() {
+		this.setState(getStateFromStores());
 	}
 });
 

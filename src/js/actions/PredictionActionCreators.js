@@ -6,7 +6,7 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
-	newPrediction: function(type, topic, pred_lvl, selected) {
+	newPrediction: function(info) {
 		// PredictionAppDispatcher.dispatch({
 		// 	type   : PredictionConstants.NEW_PREDICTION,
 		// 	option : option
@@ -17,10 +17,10 @@ module.exports = {
 			id 		 : "p_" + timestamp,
 			date 	 : new Date(timestamp),
 			username : "MIJOTHY",
-			type 	 : type,
-			topic 	 : topic,
-			pred_lvl : pred_lvl,
-			selected : selected
+			type 	 : info.type,
+			topic 	 : info.topic,
+			pred_lvl : info.pred_lvl,
+			chosen   : info.chosen
 		};
 
 		PredictionAPIUtils.createPrediction(prediction);

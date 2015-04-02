@@ -9,27 +9,27 @@ var CHANGE_EVENT = "change";
 var _username 	 = null;
 var _currentUser = {};
 
+function _setUser(rawUser) {
+	var user = rawUser.username;
+
+	_currentUser[user] = {
+		username: user,
+		email: rawUser.email,
+		preferences: rawUser.preferences,
+		stats: rawUser.stats
+	};
+
+	if(!_username) {
+		_username = user;
+	}
+}
+
 var UserStore = assign({}, EventEmitter.prototype, {
 
 	init: function(rawUser) {
-		this.setUser(rawUser);
+		_setUser(rawUser);
 	},
 
-	setUser: function(rawUser) {
-		var user = rawUser.username;
-		
-		_currentUser[user] = {
-			username: user,
-			email: rawUser.email,
-			points: rawUser.points,
-			preferences: rawUser.preferences,
-			stats: rawUser.stats 
-		};
-
-		if(!_username) {
-			_username = user;
-		}
-	},
 
 	emitChange: function() {
 		this.emit(CHANGE_EVENT);
@@ -57,18 +57,17 @@ var UserStore = assign({}, EventEmitter.prototype, {
 
 	getCurrentUser: function() {
 		return _currentUser[_username];
-	}
+	},
 
 });
 
 UserStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
-
 	switch(action.type) {
 
 		case ActionTypes.RECEIVE_UPDATED_USER:
-			_username = action.rawPrediction.username;
+			_username = action.rawUser.username;
 			_currentUser._oldUser = _currentUser[_username];
-			UserStore.setUser(action.rawUser);
+			_setUser(action.rawUser);
 			UserStore.emitChange();
 			break;
 
@@ -78,6 +77,7 @@ UserStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 			break;
 
 		default:
+
 	}
 });
 

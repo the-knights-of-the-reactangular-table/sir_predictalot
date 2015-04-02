@@ -7,16 +7,16 @@ React.initializeTouchEvents(true);
 
 
 var DATA = [
-            {url: 'img/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
-            {url: 'img/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
-            {url: 'img/david-cameron_square.jpg', text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
-            {url: 'img/kim-jong-un_square.jpg', text: 'Will he die this year?', key: 3, animation_class: "",left: false, right: false},
-            {url: 'img/is_square.jpg', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
-            {url: 'img/saudi_square.png', text: 'Will Saudi Arabia invade Yemen this month  ?', key: 2, animation_class: "",left: false, right: false},
-            {url: 'img/ronaldo_square.jpg', text: "Will Real Madrid win Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
-            {url: 'img/sterling_square.jpg', text: 'Will he leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
-            {url: 'img/manu_square.jpg', text: "Will ManU get the 2. place in PL?", key: 6, animation_class: "",left: false, right: false},
-            {url: 'img/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
+            {url: '/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
+            {url: '/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
+            {url: '/david-cameron_square.jpg', text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
+            {url: '/kim-jong-un_square.jpg', text: 'Will he die this year?', key: 3, animation_class: "",left: false, right: false},
+            {url: '/is_square.jpg', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
+            {url: '/saudi_square.png', text: 'Will Saudi Arabia invade Yemen this month  ?', key: 2, animation_class: "",left: false, right: false},
+            {url: '/ronaldo_square.jpg', text: "Will Real Madrid win Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
+            {url: '/sterling_square.jpg', text: 'Will he leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
+            {url: '/manu_square.jpg', text: "Will ManU get the 2. place in PL?", key: 6, animation_class: "",left: false, right: false},
+            {url: '/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
 
 ];
 
@@ -150,7 +150,7 @@ var MenuBox = React.createClass({
 
 var TextBox = React.createClass({
     render: function() {
-        console.log('checkin if else')
+        console.log('checking if else');
         if (this.props.active < 0) {
             return(
                 <div className="textBox">

@@ -1,4 +1,5 @@
 var Path 	= require('path');
+var Db 		= require('./db');
 var Hapi 	= require('hapi');
 var server 	= new Hapi.Server();
 

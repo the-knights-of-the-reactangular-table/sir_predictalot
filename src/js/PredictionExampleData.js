@@ -56,6 +56,14 @@ module.exports = {
 						{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
 					]
 				},
+				"m8s": {
+					"name": "Your m8s predictions",
+					"participants": ["all your friends"],
+					"predictions": [
+					],
+					"challenges": [
+					],
+				}
 			}
     	}
 	    ));

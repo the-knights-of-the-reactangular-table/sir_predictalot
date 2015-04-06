@@ -55,7 +55,7 @@ var PredictionApp = React.createClass({
 			predictorArray = prevState.events[thisEvent][eventArrayToModify][thisUser.topics[thisEvent][userPanelDisplayCounter]][selectedOption];
 			predictorArray.push(thisUsername);
 			// Adjusting User's Points
-			thisUser.topics[thisEvent].points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic.pointForCorrect];
+			thisUser.topics[thisEvent].points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic].pointForCorrect;
 			thisUser.points += prevState.events[thisEvent].predictionTopics[thisUser.topics[thisEvent].topic].pointForCorrect;
 			// Recording which event topics they have already voted on
 			thisUser.topics[thisEvent][userPanelDisplayCounter] += 1;

@@ -14,14 +14,12 @@ var Profile = React.createClass({
 						<ul>{this.props.user.points}</ul>
 					</div>
 					<div className="section sectionSingle">
-						<ul>{this.props.user.topics.boxing.name}: {this.props.user.topics.boxing.points}</ul>
-						<ul>{this.props.user.topics.football.name}: {this.props.user.topics.football.points}</ul>
+						<ul>{this.props.user.topics[this.props.topic].name}: {this.props.user.topics[this.props.topic].points}</ul>
 					</div>
 				</div>
 			</div>
 		);
 	}
 });
-// Needs a loop.
 
 module.exports = Profile;

@@ -2,6 +2,7 @@ var React = require("react");
 
 var Profile = React.createClass({
 	render: function() {
+		console.log(this.props.user.eventPreferences);
 		return (
 			<div className={"sectionHolder " + this.props.topic} id="Profile">
 				<div className="sectionHeader">
@@ -21,6 +22,6 @@ var Profile = React.createClass({
 		);
 	}
 });
-// How do I make it for every topic they have?
+// Needs a loop.
 
 module.exports = Profile;

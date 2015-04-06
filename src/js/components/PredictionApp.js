@@ -26,6 +26,13 @@ var PredictionApp = React.createClass({
 			selectedEvent: Data.UserStore[currentUser].selectedEvent
 		};
 	},
+	// onSelection: function() {
+	// 	this.setState(function(prevState, currentProps){
+	// 		var thisTopics = prevState.events;
+	// 		var array = users.eventPreferences;
+	// 	})
+	// },
+	//Need to add points to individual topics
 	onPrediction: function(selectedOption, type) {
 		this.setState(function(prevState, currentProps){
 			var thisEvent 		= prevState.selectedEvent;
@@ -100,7 +107,7 @@ var PredictionApp = React.createClass({
 				case "Versus":
 					return <VersusSection topic={this.state.selectedEvent} body={ele.body}/>;
 				case "Topics":
-					return <TopicsSection topic={this.state.selectedEvent} body={ele.body}/>;
+					return <TopicsSection topic={this.state.selectedEvent} body={ele.body} event={this.state.events}/>;
 				default:
 					return;
 				}

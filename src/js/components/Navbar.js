@@ -1,13 +1,10 @@
-var React = require("react");
+var React 			  = require("react");
+var PredictionActions = require("../actions/PredictionActionCreators");
 
 var Navbar = React.createClass({
 	clickHandler: function(e) {
 		e.preventDefault();
-		if (e.target.value === "right") {
-			this.props.switchEvent(1);
-		} else if (e.target.value === "left") {
-			this.props.switchEvent(-1);
-		}
+		PredictionActions.switchEvent(e.target.value);
 	},
 	render: function() {
 		return(

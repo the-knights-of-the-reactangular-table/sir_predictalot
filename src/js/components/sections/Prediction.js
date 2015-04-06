@@ -1,51 +1,23 @@
 var React 			  		 = require("react");
 var PredictionActionCreators = require("../../actions/PredictionActionCreators");
-var SubjectStore 			 = require("../../stores/SubjectStore");
-var UserStore 				 = require("../../stores/UserStore");
-
-
-function getStateFromStores() {
-	var currentUser  = UserStore.getCurrentUser();
-	var currentEvent = currentUser.preferences.currentSelection;
-	var currentTopic = currentUser.stats[currentEvent].predictions;
-
-	return {
-		topic: currentEvent,
-		pred_lvl: currentTopic,
-		prediction: SubjectStore.getCurrentSubject("predictions")
-	};
-}
 
 var Prediction = React.createClass({
-
-	getInitialState: function() {
-		return getStateFromStores();
-	},
-
-	componentDidMount: function() {
-		UserStore.addChangeListener(this._onChange);
-		SubjectStore.addChangeListener(this._onChange);
-	},
-
-	componentWillUnmount: function() {
-		UserStore.removeChangeListener(this._onChange);
-		SubjectStore.removeChangeListener(this._onChange);
-	},
 
 	clickHandler: function(e) {
 		e.preventDefault();
 		var predictionInfo = {
 			type: "predictions",
-			topic: this.state.topic,
-			pred_lvl: this.state.pred_lvl,
+			topic: this.props.topic,
+			pred_lvl: this.props.pred_number,
 			chosen: e.target.value
 		};
 		PredictionActionCreators.newPrediction(predictionInfo);
 	},
 
 	render: function() {
-		var prediction = this.state.prediction;
+		var prediction = this.props.prediction;
 		var predictionBody = (function(){
+
 			switch (prediction.type[0]) {
 
 				case "binary":
@@ -81,18 +53,15 @@ var Prediction = React.createClass({
 			}.bind(this)());
 
 		return (
-			<div className={"sectionHolder " + this.state.topic} id="Predictions">
+			<div className={"sectionHolder " + this.props.topic} id="Predictions">
 				<div className="sectionHeader">
 					<h1>Prediction</h1>
 				</div>
 				{predictionBody}
 			</div>
 		);
-	},
-
-	_onChange: function() {
-		this.setState(getStateFromStores());
 	}
+
 });
 
 module.exports = Prediction;

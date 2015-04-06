@@ -24,6 +24,13 @@ module.exports = {
 		};
 
 		PredictionAPIUtils.createPrediction(prediction);
+	},
+
+	switchEvent: function(value) {
+		PredictionAppDispatcher.dispatch({
+			type: PredictionConstants.SWITCH_CURRENT_EVENT,
+			direction: value
+		});
 	}
 
 };

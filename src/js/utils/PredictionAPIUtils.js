@@ -1,7 +1,6 @@
 var PredictionServerActionCreators = require("../actions/PredictionServerActionCreators");
-
+var SuperAgent = require("superagent");
 // Localstorage used as a temporary measure to simulate API interaction with ajax or the like
-
 module.exports = {
 
   getAllData: function() {

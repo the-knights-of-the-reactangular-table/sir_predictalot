@@ -41,6 +41,7 @@ var SubjectStore = assign({}, EventEmitter.prototype, {
 });
 
 SubjectStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
+	
 	PredictionAppDispatcher.waitFor([
 		UserStore.dispatchToken,
 		EventStore.dispatchToken

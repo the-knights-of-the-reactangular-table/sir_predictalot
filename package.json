@@ -27,7 +27,9 @@
   },
   "dependencies": {
     "flux": "^2.0.1",
+    "hapi": "^8.4.0",
     "object-assign": "^2.0.0",
-    "react": "^0.13.1"
+    "react": "^0.13.1",
+    "superagent": "^1.1.0"
   }
 }

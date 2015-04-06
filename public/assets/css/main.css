@@ -102,7 +102,7 @@ h5 {
 }
 
 .puller {
-	background-image: url("/build/assets/img/glyphicon-down-arrow.png");
+	background-image: url("/assets/img/glyphicon-down-arrow.png");
 	width: 18px;
 	height: 20px;
 	border: none;
@@ -125,12 +125,12 @@ h5 {
 
 .left {
 	float: left;
-	background-image: url("/build/assets/img/glyphicon-left-arrow.png");
+	background-image: url("/assets/img/glyphicon-left-arrow.png");
 }
 
 .right {
 	float: right;
-	background-image: url("/build/assets/img/glyphicon-right-arrow.png");
+	background-image: url("/assets/img/glyphicon-right-arrow.png");
 
 }
 

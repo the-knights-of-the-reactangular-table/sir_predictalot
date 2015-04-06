@@ -49,7 +49,7 @@ module.exports = {
 			"email": "jason.gandhi.2332@googlemail.com",
 			"points": 39001,
 			"selectedEvent": "boxing",
-			"eventPreferences": ["boxing", "football"],
+			"eventPreferences": ["boxing", "football", "esports"],
 			"topics": {
 				"boxing":{"name": "boxing", "points": 7001, "topic": 0, "challenge": 0},
 				"football":{"name": "football", "points": 30000, "topic": 0, "challenge": 0},
@@ -93,6 +93,9 @@ module.exports = {
 				{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
 				{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
 				{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
+			],
+			"challengeTopics": [
+				{"type": ["unary", "method"],"name": "Number of kills per game","option1": [],"option2": [],"pointForCorrect": 20000},
 			]
 		},
 	}

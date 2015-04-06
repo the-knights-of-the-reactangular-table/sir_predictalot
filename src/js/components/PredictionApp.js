@@ -11,7 +11,7 @@ var Data 				= require("../ExampleData.js");
 var PredictionApp = React.createClass({
 	getInitialState: function() {
 		var users = Data.UserStore;
-		var currentUser = "MIJOTHY";
+		var currentUser = "JASON";
 		return {
 			sections: 	[   {type: "Predictions", body: {left: "PredictionLeft", right: "PredictionRight"}},
 						 	{type: "Challenges", body: {left: "ChallengesLeft", right: "ChallengesRight"}},
@@ -26,13 +26,27 @@ var PredictionApp = React.createClass({
 			selectedEvent: Data.UserStore[currentUser].selectedEvent
 		};
 	},
-	// onSelection: function() {
-	// 	this.setState(function(prevState, currentProps){
-	// 		var thisTopics = prevState.events;
-	// 		var array = users.eventPreferences;
-	// 	})
-	// },
-	//Need to add points to individual topics
+	onSelection: function(selectedTopic) {
+		this.setState(function(prevState, currentProps){
+			console.log(selectedTopic.toString());
+			var s = selectedTopic.toString();
+			var thisUsername = prevState.currentUser;
+			var thisUser = prevState.users[thisUsername];
+			console.log(thisUser);
+			var Pref = thisUser.eventPreferences;
+			console.log(Pref);
+			var index = Pref.indexOf(s);
+			console.log(index);
+			if (index !== -1) {
+				Pref.splice([index], 1);
+			} else {
+				Pref.push(s);
+			}
+			return {
+				users: prevState.users
+			};
+		})
+	},
 	onPrediction: function(selectedOption, type) {
 		this.setState(function(prevState, currentProps){
 			var thisEvent 		= prevState.selectedEvent;
@@ -107,7 +121,7 @@ var PredictionApp = React.createClass({
 				case "Versus":
 					return <VersusSection topic={this.state.selectedEvent} body={ele.body}/>;
 				case "Topics":
-					return <TopicsSection topic={this.state.selectedEvent} body={ele.body} event={this.state.events}/>;
+					return <TopicsSection topic={this.state.selectedEvent} body={ele.body} event={this.state.events} onSelection={this.onSelection}/>;
 				default:
 					return;
 				}

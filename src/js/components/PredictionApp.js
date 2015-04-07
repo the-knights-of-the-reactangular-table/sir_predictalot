@@ -28,15 +28,13 @@ var PredictionApp = React.createClass({
 	},
 	onSelection: function(selectedTopic) {
 		this.setState(function(prevState, currentProps){
-			console.log(selectedTopic.toString());
 			var s = selectedTopic.toString();
+
 			var thisUsername = prevState.currentUser;
 			var thisUser = prevState.users[thisUsername];
-			console.log(thisUser);
 			var Pref = thisUser.eventPreferences;
-			console.log(Pref);
+
 			var index = Pref.indexOf(s);
-			console.log(index);
 			if (index !== -1) {
 				Pref.splice([index], 1);
 			} else {

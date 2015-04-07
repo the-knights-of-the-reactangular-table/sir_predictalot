@@ -77,8 +77,8 @@ module.exports = {
 			"participants": ["team1", "team2"],
 			"predictionTopics": [
 				{"type": ["binary", "method"], "name": "Who will win", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointForCorrect": 10000},
-				{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
-				{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
+				{"type": ["binary"], "name": "First team to score", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
+				{"type": ["binary", "percentage", "bar"], "name": "Who will have more possession", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
 				{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
 			],
 			"challengeTopics": [
@@ -90,8 +90,8 @@ module.exports = {
 			"participants": ["gamer1", "gamer2"],
 			"predictionTopics": [
 				{"type": ["binary", "method"], "name": "Who will win", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointForCorrect": 10000},
-				{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
-				{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
+				{"type": ["binary"], "name": "Most kills", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
+				{"type": ["binary", "percentage", "bar"], "name": "MVP of the match", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
 				{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
 			],
 			"challengeTopics": [

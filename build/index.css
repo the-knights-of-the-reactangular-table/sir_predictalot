@@ -209,3 +209,74 @@ transition: opacity .5s ease-in;
   opacity: 1;
 }
 
+
+/* --------------------------------- */
+
+.cssAnim {
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  position: relative;
+}
+
+.shadow {
+  background: transparent;
+  height: 30px;
+  top: 30%;
+  position: relative;
+  z-index: 1000000;
+}
+.btn {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.span {
+  background-color: red;
+  display: inline-block;
+  position: absolute;
+  width: 100px;
+  font-size: 1em;
+  height: 30px;
+  right: 100px;
+}
+
+.carousel-enter {
+  position: absolute;
+  right: 0px;
+  width: 120px;
+}
+
+.carousel-enter.carousel-enter-active {
+  opacity: 1;
+  transform: translate(-100px,0);
+  transition: 0.5s ease-in-out;
+  width: 100px;
+}
+
+.carousel-leave {
+  opacity: 1;
+  transform: translate(-97px,0);
+  transition: 0.5s ease-in-out;
+
+}
+
+.carousel-leave.carousel-leave-active {
+}
+
+.hider {
+  height: 30px;
+  width: 100px;
+  background-color: black;
+  position: relative;
+  z-index: 110000;
+}
+
+.lefty {
+  float: left;
+}
+
+.righty {
+  float: right;
+}

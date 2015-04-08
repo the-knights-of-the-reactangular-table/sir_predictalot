@@ -14,6 +14,7 @@ module.exports = {
 		RECEIVE_RAW_EVENT: null,
 		RECEIVE_RAW_NEW_EVENTS: null,
 		RECEIVE_RAW_UPDATED_EVENTS: null,
+		RECEIVE_SWIPE: null,
 
 
 		RECEIVE_UPDATED_USER: null,

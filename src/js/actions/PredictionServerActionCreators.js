@@ -5,6 +5,13 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
+  receiveSwipe: function(rawData){
+    PredictionAppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_SWIPE,
+      rawData: rawData
+    });
+  },
+
   receiveAll: function(rawData) {
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_DATA,

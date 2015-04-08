@@ -1,13 +1,28 @@
 var PredictionAppDispatcher = require("../dispatcher/PredictionAppDispatcher");
 var PredictionConstants  = require("../constants/PredictionConstants");
 var PredictionAPIUtils 	 = require("../utils/PredictionAPIUtils");
-
+var PredictionServerActionCreators = require('./PredictionServerActionCreators');
 var ActionTypes = PredictionConstants.ActionTypes;
+
 
 module.exports = {
 
-	newPrediction: function(info) {
+	newSwipe: function(info){
+		
+		var choice = {
+			username : "MIJOTHY",
+			image    : info.image,
+			type 	 : info.type,
+			topic 	 : info.topic	
+		};
 
+	PredictionServerActionCreators.receiveSwipe(choice);
+	
+	},
+
+
+
+	newPrediction: function(info) {
 		var prediction = {
 			username : "MIJOTHY",
 			type 	 : info.type,

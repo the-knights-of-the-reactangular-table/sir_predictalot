@@ -11,6 +11,8 @@ module.exports = {
     PredictionServerActionCreators.receiveAll(rawData);
   },
 
+  
+
   createPrediction: function(prediction) {
     // simulate writing to a database
     var rawData = JSON.parse(localStorage.getItem("data"));
@@ -29,7 +31,9 @@ module.exports = {
     localStorage.setItem("data", JSON.stringify(rawData));
 
     //success callback
-    PredictionServerActionCreators.receiveUpdatedUser(rawData.user);
+    PredictionServerActionCreators.receiveUpdatedUser(prediction);
+
+
   }
 
 };

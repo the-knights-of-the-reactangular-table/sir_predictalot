@@ -46,10 +46,11 @@ var MainBox = React.createClass({
 
         if(this.state.firstX - this.state.lastX > 75) {
             didSwipe = true;
-            swipe = 'swipe-left';
+            swipe = "swipe-left";
             newData[image_number].left = true;
         } else if (this.state.firstX - this.state.lastX < -75) {
             didSwipe = true;
+            swipe = "swipe-right";
             newData[image_number].right = true;
         }
 

@@ -53,7 +53,6 @@ var PredictionApp = React.createClass({
 		}, this);
 		return (
 			<div>
-				<PredictionSpinner currentEventName={this.state.currentEventName} />
 				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} />;
 				{sections}
 			</div>

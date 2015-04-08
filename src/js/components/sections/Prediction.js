@@ -44,7 +44,6 @@ var TextBox = React.createClass({
 
         return(
             <div className="textBox">
-            	Stories from FLUX
             </div>
             );
         }

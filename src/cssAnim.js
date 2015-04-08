@@ -1,7 +1,10 @@
 var React = require("react");
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+var cats = ["Boxing", "Racing", "Football", "Celebrities", ""];
+
 var CSSAnim = React.createClass({
+
     getInitialState: function() {
         return {text: "boxing"};
     },

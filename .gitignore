@@ -22,8 +22,20 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
+<<<<<<< HEAD
+=======
+# The Build. Coming in 2016.
+build
+public/assets/js
+
+>>>>>>> 40100b6002714a5b75a938b43044d05c6cb7b7b9
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
+<<<<<<< HEAD
 .DS_Store
+=======
+# Bloody macs
+.DS_Store
+>>>>>>> 40100b6002714a5b75a938b43044d05c6cb7b7b9

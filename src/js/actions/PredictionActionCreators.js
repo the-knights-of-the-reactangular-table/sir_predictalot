@@ -1,0 +1,34 @@
+var PredictionAppDispatcher = require("../dispatcher/PredictionAppDispatcher");
+var PredictionConstants  = require("../constants/PredictionConstants");
+var PredictionAPIUtils 	 = require("../utils/PredictionAPIUtils");
+
+var ActionTypes = PredictionConstants.ActionTypes;
+
+module.exports = {
+
+	newPrediction: function(info) {
+
+		var prediction = {
+			username : "MIJOTHY",
+			type 	 : info.type,
+			topic 	 : info.topic,
+			pred_id  : info.pred_id,
+			chosen   : info.chosen
+		};
+
+		PredictionAPIUtils.createPrediction(prediction);
+	},
+
+	nextRandomEvent: function() {
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.NEXT_RANDOM_EVENT
+		});
+	},
+
+	previousEvent: function() {
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.PREVIOUS_EVENT
+		});
+	}
+
+};

@@ -7,29 +7,27 @@ var ActionTypes = PredictionConstants.ActionTypes;
 module.exports = {
 
 	newPrediction: function(info) {
-		// PredictionAppDispatcher.dispatch({
-		// 	type   : PredictionConstants.NEW_PREDICTION,
-		// 	option : option
-		// });
 
-		var timestamp = Date.now();
 		var prediction = {
-			id 		 : "p_" + timestamp,
-			date 	 : new Date(timestamp),
 			username : "MIJOTHY",
 			type 	 : info.type,
 			topic 	 : info.topic,
-			pred_lvl : info.pred_lvl,
+			pred_id  : info.pred_id,
 			chosen   : info.chosen
 		};
 
 		PredictionAPIUtils.createPrediction(prediction);
 	},
 
-	switchEvent: function(value) {
+	nextRandomEvent: function() {
 		PredictionAppDispatcher.dispatch({
-			type: PredictionConstants.SWITCH_CURRENT_EVENT,
-			direction: value
+			type: ActionTypes.NEXT_RANDOM_EVENT
+		});
+	},
+
+	previousEvent: function() {
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.PREVIOUS_EVENT
 		});
 	}
 

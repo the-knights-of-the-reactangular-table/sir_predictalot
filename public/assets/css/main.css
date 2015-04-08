@@ -3,12 +3,16 @@ html {
 	font-family: "Orbitron", sans-serif;
 }
 
+.spinnerHolder,
 .sectionHolder {
-	width: 500px;
 	margin: auto;
 	margin-top: 20px;
-	/* border: 1px solid black; */
 	text-align: center;
+}
+
+.sectionHolder,
+.spinnerHolder {
+	width: 500px;
 }
 
 .sectionHeader {
@@ -119,8 +123,10 @@ h5 {
 	display: inline-block;
 	vertical-align: bottom;
 	color: transparent;
-	height: 18px;
+	height: 50px;
 	width: 20px;
+	background-repeat: space;
+	margin-top: 5px;
 }
 
 .left {
@@ -138,6 +144,45 @@ h5 {
 	float:center;
 }
 
+/* Spinner css */
+.spinner {
+	height: 60px;
+	width: 350px;
+	margin: auto;
+}
+.spinnerHolder {
+	background-color: transparent;
+}
+
+.spinnerBlock {
+	background-color: white;
+	height: 60%;
+	position: relative;
+	top: 20%;
+}
+
+.hider {
+	height: 100%;
+	position: absolute;
+	z-index: 10000;
+	width: 70px;
+}
+
+.hider-left {
+	left: 0;
+}
+
+.hider-right {
+	right: 0;
+}
+
+.flyer {
+	height: 100%;
+	position: absolute;
+	width: 210px;
+	left: 70px;
+	font-size: 30px;
+}
 
 /*Leaderboard css*/
 .leaderitem {
@@ -167,14 +212,17 @@ h5 {
 	color: white;
 }
 
-.boxing > .sectionHeader {
+.boxing > .sectionHeader,
+.boxing > .hider {
 	background-color: hsla(240, 80%, 20%, 1);
 }
 
-.football > .sectionHeader {
+.football > .sectionHeader,
+.football > .hider {
 	background-color: crimson;
 }
 
-.esports > .sectionHeader {
+.esports > .sectionHeader,
+.esports > .hider {
 	background-color: gold;
 }

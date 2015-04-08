@@ -15,27 +15,21 @@ module.exports = {
     // simulate writing to a database
     var rawData = JSON.parse(localStorage.getItem("data"));
 
-    var timestamp = Date.now();
-    var id = "p_" + timestamp;
-
-    var createdPrediction = {
-      id: id,
-      timestamp: timestamp,
-      username : prediction.username,
-      type     : prediction.type,
-      topic    : prediction.topic,
-      pred_lvl : prediction.pred_lvl,
-      chosen   : prediction.chosen
-    };
+    if (!rawData.user.stats[prediction.topic]) {
+      rawData.user.stats[prediction.topic] = {
+          name: prediction.topic,
+          points: 0,
+          predictions: 0,
+          challenges: 0
+        };
+    }
 
     rawData.user.stats[prediction.topic][prediction.type] += 1;
-    rawData.events[prediction.topic][prediction.type][prediction.pred_lvl][prediction.chosen].push(prediction.username);
+    rawData.events[prediction.topic][prediction.type][prediction.pred_id][prediction.chosen].push(prediction.username);
     localStorage.setItem("data", JSON.stringify(rawData));
 
-    // simulate success callback
-    setTimeout(function() {
-      PredictionServerActionCreators.receiveUpdatedUser(rawData.user);
-    }, 0);
+    //success callback
+    PredictionServerActionCreators.receiveUpdatedUser(rawData.user);
   }
 
 };

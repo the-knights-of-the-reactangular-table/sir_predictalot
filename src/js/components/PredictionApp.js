@@ -1,23 +1,21 @@
 var React 		 		= require("react");
 var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
-var Navbar 				= require("./Navbar");
-var UserStore 			= require("../stores/UserStore");
-var EventStore 			= require("../stores/EventStore");
-var SubjectStore 		= require("../stores/SubjectStore");
+var PredictionSpinner 	= require("./sections/PredictionSpinner");
+var AppStore 			= require("../stores/AppStore");
 
 
 function getStateFromStores() {
-	var currentUser  = UserStore.getCurrentUser();
-	var currentEvent = currentUser.preferences.currentSelection;
-	var currentTopic = currentUser.stats[currentEvent].predictions;
+	var currentUser  	 = AppStore.getUser();
+	var currentSelection = currentUser.preferences.currentSelection;
+	var predictionId 	 = currentUser.stats[currentSelection].predictions;
 
 	return {
-		user 		: currentUser,
-		topic 		: currentEvent,
-		event 		: EventStore.getCurrentEvent(),
-		pred_number : currentTopic,
-		current_pred: SubjectStore.getCurrentSubject("predictions")
+		user 		     : currentUser,
+		currentEventName : currentSelection,
+		currentEvent 	 : AppStore.getCurrentEvent(),
+		predictionId 	 : predictionId,
+		current_pred  	 : AppStore.getCurrentSubject("predictions")
 
 	};
 }
@@ -29,24 +27,17 @@ var PredictionApp = React.createClass({
 	},
 
 	componentDidMount: function() {
-		UserStore.addChangeListener(this._onChange);
-		EventStore.addChangeListener(this._onChange);
-		SubjectStore.addChangeListener(this._onChange);
+		AppStore.addChangeListener(this._onChange);
 	},
 
 	componentWillUnmount: function() {
-		UserStore.removeChangeListener(this._onChange);
-		EventStore.removeChangeListener(this._onChange);
-		SubjectStore.removeChangeListener(this._onChange);
+		AppStore.removeChangeListener(this._onChange);
 	},
 
 	render: function() {
 		var preferences = this.state.user.preferences;
 		var sections = preferences.sections.map(function(ele, ind) {
 				switch(ele) {
-
-					case "predictions":
-						return <PredictionSection key={ele} topic={this.state.topic} pred_number={this.state.pred_number} prediction={this.state.current_pred}/>;
 
 					case "challenges":
 						return <ChallengeSection key={ele}/>;
@@ -57,7 +48,8 @@ var PredictionApp = React.createClass({
 		}, this);
 		return (
 			<div>
-				<Navbar />
+				<PredictionSpinner currentEventName={this.state.currentEventName} />
+				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred}/>;
 				{sections}
 			</div>
 		);

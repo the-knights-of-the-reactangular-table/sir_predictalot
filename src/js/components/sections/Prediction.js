@@ -7,8 +7,8 @@ var Prediction = React.createClass({
 		e.preventDefault();
 		var predictionInfo = {
 			type: "predictions",
-			topic: this.props.topic,
-			pred_lvl: this.props.pred_number,
+			topic: this.props.currentEventName,
+			pred_id: this.props.predictionId,
 			chosen: e.target.value
 		};
 		PredictionActionCreators.newPrediction(predictionInfo);
@@ -25,7 +25,7 @@ var Prediction = React.createClass({
 						<div className="sectionBody">
 							<div className="topicName">
 								<h3>{prediction.name}</h3>
-								<h5>{prediction.pointForCorrect}</h5>
+								<h5>{prediction.pointsForCorrect}</h5>
 							</div>
 							<div className="sectionBinary sectionLeft">
 								<h3>HardCodedBoxer1</h3>
@@ -43,7 +43,7 @@ var Prediction = React.createClass({
 						<div className="sectionBody">
 							<div className="topicName">
 								<h3>{prediction.name}</h3>
-								<h5>{prediction.pointForCorrect}</h5>
+								<h5>{prediction.pointsForCorrect}</h5>
 							</div>
 							<div className="sectionUnary">HardCodedBoxer1</div>
 						</div>
@@ -53,7 +53,7 @@ var Prediction = React.createClass({
 			}.bind(this)());
 
 		return (
-			<div className={"sectionHolder " + this.props.topic} id="Predictions">
+			<div className={"sectionHolder " + this.props.currentEventName} id="Predictions">
 				<div className="sectionHeader">
 					<h1>Prediction</h1>
 				</div>

@@ -6,6 +6,8 @@ var Topics = React.createClass({
 		this.props.onSelection(e.target.value);
 	},
 	render: function() {
+		console.log(this.props.pref);
+		var text = this.props.pref ? 'selected' : 'not selected	';
 		return (
 			<div className={"sectionHolder " + this.props.topic} id="Topics">
 				<div className="sectionHeader">
@@ -26,6 +28,11 @@ var Topics = React.createClass({
 						<ul>
 							<div>
 								<button value={this.props.event.events[2]} onClick={this.handleClick}>{this.props.event.events[2]}</button>
+							</div>
+						</ul>
+						<ul>
+							<div>
+								<button value={this.props.event.events[2]} onClick={this.handleClick}>{text}</button>
 							</div>
 						</ul>
 					</div>

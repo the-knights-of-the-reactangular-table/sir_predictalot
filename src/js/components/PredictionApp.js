@@ -23,7 +23,8 @@ var PredictionApp = React.createClass({
 			users: Data.UserStore,
 			events: Data.EventStore,
 			currentUser: currentUser,
-			selectedEvent: Data.UserStore[currentUser].selectedEvent
+			selectedEvent: Data.UserStore[currentUser].selectedEvent,
+			selectedPref: true
 		};
 	},
 	onSelection: function(selectedTopic) {
@@ -44,6 +45,7 @@ var PredictionApp = React.createClass({
 				users: prevState.users
 			};
 		})
+		this.setState({selectedPref: !this.state.selectedPref});
 	},
 	onPrediction: function(selectedOption, type) {
 		this.setState(function(prevState, currentProps){
@@ -119,7 +121,7 @@ var PredictionApp = React.createClass({
 				case "Versus":
 					return <VersusSection topic={this.state.selectedEvent} body={ele.body}/>;
 				case "Topics":
-					return <TopicsSection topic={this.state.selectedEvent} body={ele.body} event={this.state.events} onSelection={this.onSelection}/>;
+					return <TopicsSection topic={this.state.selectedEvent} body={ele.body} event={this.state.events} pref={this.state.selectedPref} onSelection={this.onSelection}/>;
 				default:
 					return;
 				}

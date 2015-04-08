@@ -11,7 +11,7 @@ var PredictionCreator = React.createClass({
 			text: this.refs.text.getDOMNode().value,
 			imgURL: this.refs.imgURL.getDOMNode().value
 		};
-		console.log(info);
+
 		PredictionActions.submitCustomPrediction(info);
 	},
 	

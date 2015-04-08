@@ -11,11 +11,9 @@ module.exports = {
 		var prediction = {
 			// username would be taken server-side from credentials, not here
 			username : info.username,
-			type 	 : info.type,
 			topic 	 : info.topic,
 			pred_id  : info.pred_id,
 			chosen   : info.chosen,
-			quantity : info.quantity || null
 		};
 
 		PredictionAPIUtils.makePrediction(prediction);

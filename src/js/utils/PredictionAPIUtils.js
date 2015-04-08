@@ -1,57 +1,43 @@
 var PredictionServerActionCreators = require("../actions/PredictionServerActionCreators");
 var Request = require("superagent");
-// Localstorage used as a temporary measure to simulate API interaction with ajax or the like
+
 module.exports = {
 
-  getAllData: function() {
-    // simulate retrieving data from a database
-    var rawData = JSON.parse(localStorage.getItem("data"));
+	getAllData: function(callback) {
 
-    // simulate success callback
-    PredictionServerActionCreators.receiveAll(rawData);
-  },
+		Request.get("/api/v1")
+			.end(function(err, res) {
+				PredictionServerActionCreators.receiveAll(res.body, callback);
+			});
+			
+	},
 
-  makePrediction: function(prediction) {
-    // simulate writing to a database
-    var rawData = JSON.parse(localStorage.getItem("data"));
+	makePrediction: function(prediction) {
 
-    if (!rawData.user.stats[prediction.topic]) {
-      rawData.user.stats[prediction.topic] = {
-          name: prediction.topic,
-          points: 0,
-          predictions: 0,
-          challenges: 0
-        };
-    }
+		Request.post("api/v1/events/" + prediction.topic + "/predictions/" + prediction.pred_id)
+			.send(prediction)
+			.end(function(err, res) {
+				if (err) {
+					console.log("Need to set up error action creator, ", err);
+					return err;
+				}
+				return PredictionServerActionCreators.receiveUpdatedUser(res.body);
+			});
 
-    var predictionInfo = { 
-        "username": prediction.username,
-        "quantity": prediction.quantity  || null
-    };
+	},
 
-    // Move the user on to the next prediction level
-    rawData.user.stats[prediction.topic][prediction.type] += 1;
-    // Set the current topic as the user's current selection
-    rawData.user.preferences.currentSelection = prediction.topic;
-    // Add the user to the array of users in the prediction who have selected one option
-    rawData.events[prediction.topic][prediction.type][prediction.pred_id][prediction.chosen].push(predictionInfo);
-    localStorage.setItem("data", JSON.stringify(rawData));
+	submitCustomPrediction: function(prediction) {
 
-    //success callback
-    PredictionServerActionCreators.receiveUpdatedUser(rawData.user);
-  },
+		Request.post("api/v1/events/" + prediction.topic + "/predictions")
+			.send(prediction)
+			.end(function(err, res) {
+				if (err) {
+					console.log("Need to set up error action creator, ", err);
+					return err;
+				}
+				return PredictionServerActionCreators.receiveUpdatedEvent(res.body);
+			});
 
-  submitCustomPrediction: function(prediction) {
-    Request.post("api/v1/events/" + prediction.topic)
-      .send(prediction)
-      .end(function(err, res) {
-        if (err) {
-          console.log("Need to set up error action creator, ", err);
-          return err;
-        }
-        console.log(res.body);
-        return PredictionServerActionCreators.receiveUpdatedEvent(res.body);
-      });
-  }
+	}
 
 };

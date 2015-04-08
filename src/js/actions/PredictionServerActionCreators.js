@@ -5,10 +5,11 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
-  receiveAll: function(rawData) {
+  receiveAll: function(rawData, callback) {
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_DATA,
-      rawData: rawData
+      rawData: rawData,
+      callback: callback
     });
   },
 

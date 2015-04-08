@@ -37,7 +37,7 @@ function _setEvents(rawEvents) {
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
-	init: function(rawData) {
+	init: function(rawData, callback) {
 		_setUser(rawData.user);
 		_setEvents(rawData.events);
 		_currentEvent = _previousEvent = _user.preferences.currentSelection;
@@ -87,7 +87,7 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 
 		case ActionTypes.RECEIVE_RAW_DATA:
 			AppStore.init(action.rawData);
-			AppStore.emitChange();
+			action.callback();
 			break;
 
 		case ActionTypes.RECEIVE_UPDATED_USER:
@@ -98,6 +98,7 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 		case ActionTypes.RECEIVE_UPDATED_EVENT:
 			_events[event] = action.rawEvent;
 			console.log(_events[event]);
+			console.log(action.rawEvent);
 			AppStore.emitChange();
 			break;
 
@@ -116,7 +117,6 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 
 			prefs.currentSelection = newEvent;
 			_currentEvent = prefs.currentSelection;
-			console.log(_currentEvent);
 
 			if (!_user.stats[_currentEvent]) {
 				_user.stats[_currentEvent] = {

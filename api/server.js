@@ -20,11 +20,20 @@ server.route([
 		}
 	},
 
+	// Dumping all the data
+		{
+		path: "/api/v1",
+		method: "GET",
+		handler: function(request, reply) {
+			reply(DummyData);
+		}
+	},
+
 		{
 		path: "/api/v1/events",
 		method: "GET",
 		handler: function(request, reply) {
-			reply("Hi m8");
+			reply(DummyData.events);
 		}
 	},
 
@@ -41,7 +50,13 @@ server.route([
 		path: "/api/v1/events/{name}",
 		method: "GET",
 		handler: function(request, reply) {
-			reply("Hi m8");
+			var events      = DummyData.events;
+			var singleEvent = request.params.name;
+
+			if (!events.hasOwnProperty(singleEvent)) {
+				return reply("That event doesn't exist!");
+			}
+			reply(DummyData.events[singleEvent]);
 		}
 	},
 
@@ -54,16 +69,24 @@ server.route([
 		}
 	},
 
-	// Route for posting a new prediction
-		{
+	{
 		path: "/api/v1/events/{name}",
 		method: "POST",
 		handler: function(request, reply) {
-			var rawEvents = DummyData.events;
-			var event 	= request.params.name;
+			reply("Hi m8");
+		}
+	},
+
+	// Route for posting a custom prediction
+		{
+		path: "/api/v1/events/{name}/predictions",
+		method: "POST",
+		handler: function(request, reply) {
+			var events      = DummyData.events;
+			var singleEvent = request.params.name;
 			var newPrediction;
 
-			if (!rawEvents.hasOwnProperty(event)) {
+			if (!events.hasOwnProperty(singleEvent)) {
 				return reply("Invalid submission");
 			}
 
@@ -77,9 +100,50 @@ server.route([
 				"pointsForCorrect": 10000 
 			};
 
-			rawEvents[event].predictions.push(newPrediction);
-			console.log(rawEvents[event]);
-			reply(rawEvents[event]);
+			events[singleEvent].predictions.push(newPrediction);
+			reply(events[singleEvent]);
+		}
+	},
+
+	// Route for making a prediction
+		{
+		path: "/api/v1/events/{name}/predictions/{id}",
+		method: "POST",
+		handler: function(request, reply) {
+			var events       = DummyData.events;
+			var user 		 = DummyData.user;
+			var singleEvent  = request.params.name;
+			var predictionId = request.params.id;
+			var chosenOption = request.payload.chosen;
+
+			console.log(events[singleEvent].predictions);
+			
+			var newPrediction = {
+				username: request.payload.username,
+			};
+
+			if (!events.hasOwnProperty(singleEvent)) {
+				return reply("Invalid submission");
+			}
+
+			// Push our user to the array of users that have selected that option
+			events[singleEvent].predictions[predictionId][chosenOption].push(newPrediction);
+			
+			// If the user doesn't have the event in their stats, add it
+			if (!user.stats[singleEvent]) {
+				user.stats[singleEvent] = {
+					name: singleEvent,
+					points: 0,
+					predictions: 0,
+					challenges: 0
+				};
+			}
+
+			// Increment the prediction level that the user is on, and set their current selection to that event
+			user.stats[singleEvent].predictions += 1;
+			user.preferences.currentSelection = singleEvent;
+
+			return reply(user);
 		}
 	}
 

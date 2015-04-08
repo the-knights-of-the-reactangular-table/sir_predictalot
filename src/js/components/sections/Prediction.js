@@ -18,6 +18,16 @@ var Prediction = React.createClass({
 	render: function() {
 		var prediction = this.props.prediction;
 		var predictionBody = (function(){
+			if(!prediction) {
+				return (
+					<div className="sectionBody">
+						<div className="topicName completion">
+							<h3>All predictions completed</h3>
+							<h5>Try another topic, or submit your own!</h5>
+						</div>
+					</div>
+				);
+			}
 
 			switch (prediction.type[0]) {
 
@@ -29,12 +39,12 @@ var Prediction = React.createClass({
 								<h5>{prediction.pointsForCorrect}</h5>
 							</div>
 							<div className="sectionBinary sectionLeft">
-								<h3>HardCodedBoxer1</h3>
-								<button value="option1" onClick={this.clickHandler}>1</button>
+								<button value="option1" onClick={this.clickHandler} className="swipe swipe-left" />
+							</div>
+							<div className="imageHolder">
 							</div>
 							<div className="sectionBinary sectionRight">
-								<h3>HardCodedBoxer2</h3>
-								<button value="option2" onClick={this.clickHandler}>2</button>
+								<button value="option2" onClick={this.clickHandler} className="swipe swipe-right" />
 							</div>
 						</div>
 						);

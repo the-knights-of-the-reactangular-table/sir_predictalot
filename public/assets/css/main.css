@@ -23,7 +23,7 @@ html {
 .sectionBody {
 	width: 400px;
 	margin: auto;
-	height: 200px;
+	height: 250px;
 	box-shadow:  0px 2px 1px 1px black;;
 	background-color: white;
 }
@@ -53,7 +53,7 @@ h5 {
 
 .sectionBinary {
 	height: 80%;
-	width: 199px;
+	width: 50px;
 	display: inline-block;
 }
 
@@ -64,11 +64,12 @@ h5 {
 }
 
 .sectionLeft {
+	display: inline-block;
 	float: left;
-	border-right: 1px solid black;
 }
 
 .sectionRight {
+	display: inline-block;
 	float: right;
 }
 
@@ -80,6 +81,17 @@ h5 {
 	float: left;
 }
 
+.imageHolder {
+	width: 298px;
+	display: inline-block;
+	border: 1px dashed black;
+	height: 200px;
+	float: left;
+}
+
+.completion {
+
+}
 
 
 /* Topic-based Css */
@@ -158,6 +170,23 @@ h5 {
 
 .dropdown {
 	float:center;
+}
+
+.swipe,
+.swipe:active,
+.swipe:focus {
+	border: none;
+	background-color: transparent;
+	outline: none;
+	height: 100px;
+}
+
+.swipe-left {
+	background-image: url("/assets/img/glyphicon-left.png");
+}
+
+.swipe-right {
+	background-image: url("/assets/img/glyphicon-right.png");
 }
 
 /* Spinner css */

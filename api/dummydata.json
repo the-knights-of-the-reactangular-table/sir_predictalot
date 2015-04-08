@@ -53,6 +53,7 @@
 			"name": "Your m8s predictions",
 			"participants": ["all your friends"],
 			"predictions": [
+				{"type": ["binary"], "name": "lol u got no m8s", "option1": [{"username": "JASON"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 10000}
 			],
 			"challenges": [
 			]

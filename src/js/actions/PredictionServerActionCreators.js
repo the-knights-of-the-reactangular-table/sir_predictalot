@@ -24,6 +24,13 @@ module.exports = {
       type: ActionTypes.RECEIVE_UPDATED_USER,
       rawUser: user
     });
+  },
+
+  receiveUpdatedEvent: function(event) {
+    PredictionAppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_UPDATED_EVENT,
+      rawEvent: event 
+    });
   }
 
 };

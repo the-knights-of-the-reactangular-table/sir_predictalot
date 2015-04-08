@@ -6,17 +6,32 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
-	newPrediction: function(info) {
+	makePrediction: function(info) {
 
 		var prediction = {
-			username : "MIJOTHY",
+			// username would be taken server-side from credentials, not here
+			username : info.username,
 			type 	 : info.type,
 			topic 	 : info.topic,
 			pred_id  : info.pred_id,
-			chosen   : info.chosen
+			chosen   : info.chosen,
+			quantity : info.quantity || null
 		};
 
-		PredictionAPIUtils.createPrediction(prediction);
+		PredictionAPIUtils.makePrediction(prediction);
+	},
+
+	submitCustomPrediction: function(info) {
+
+		var prediction = {
+			// username would be taken server-side from credentials, not here
+			username : info.username,
+			topic 	 : info.topic,
+			text 	 : info.text,
+			imgURL 	 : info.imgURL
+		};
+
+		PredictionAPIUtils.submitCustomPrediction(prediction);
 	},
 
 	nextRandomEvent: function() {

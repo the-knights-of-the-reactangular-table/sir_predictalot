@@ -1,6 +1,6 @@
 var React 		 		= require("react");
 var PredictionSection 	= require("./sections/Prediction");
-var ChallengeSection 	= require("./sections/Challenge");
+var PredictionCreator 	= require("./sections/PredictionCreator");
 var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
 
@@ -14,6 +14,7 @@ function getStateFromStores() {
 		user 		     : currentUser,
 		currentEventName : currentSelection,
 		currentEvent 	 : AppStore.getCurrentEvent(),
+		eventsList 		 : AppStore.getEventsList(),
 		predictionId 	 : predictionId,
 		current_pred  	 : AppStore.getCurrentSubject("predictions")
 
@@ -35,22 +36,11 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		var preferences = this.state.user.preferences;
-		var sections = preferences.sections.map(function(ele, ind) {
-				switch(ele) {
-
-					case "challenges":
-						return <ChallengeSection key={ele}/>;
-
-					default:
-						return;
-				}
-		}, this);
 		return (
 			<div>
 				<PredictionSpinner currentEventName={this.state.currentEventName} />
-				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred}/>;
-				{sections}
+				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} username={this.state.user.username} />
+				<PredictionCreator currentEventName={this.state.currentEventName} events={this.state.eventsList} username={this.state.user.username} />
 			</div>
 		);
 	},

@@ -1,5 +1,6 @@
-var React 			  = require("react");
-var PredictionActions = require("../../actions/PredictionActionCreators");
+var React 			  		= require("react/addons");
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var PredictionActions 		= require("../../actions/PredictionActionCreators");
 
 var Navbar = React.createClass({
 
@@ -21,9 +22,11 @@ var Navbar = React.createClass({
 				<input type="button" className="switcher right" onClick={this.rightHandler} />
 				<div className="sectionHeader spinner">
 					<div className={"spinnerBlock " + this.props.currentEventName}>
-						<span className="hider hider-left" />
-						<span className="flyer" key={this.props.currentEventName}>{this.props.currentEventName}</span>
-						<span className="hider hider-right" />
+						<ReactCSSTransitionGroup transitionName="spinMe" className={this.props.currentEventName}>
+							<span key={"hider-left"} className="hider hider-left" />
+							<span key={this.props.currentEventName} className="flyer">{this.props.currentEventName}</span>
+							<span key={"hider-right"} className="hider hider-right" />
+						</ReactCSSTransitionGroup>
 					</div>
 				</div>
 			</div>

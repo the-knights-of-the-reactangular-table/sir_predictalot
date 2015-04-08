@@ -14,7 +14,7 @@ module.exports = {
 				},
 				"preferences": {
 					"currentSelection": "boxing",
-					"events": ["boxing", "football", "esports"],
+					"events": ["boxing", "football", "esports", "m8s"],
 					"sections": []
 				}
 			},
@@ -23,10 +23,10 @@ module.exports = {
 					"name": "Boxer 1 vs Boxer 2",
 					"participants": ["boxer1", "boxer2"],
 					"predictions": [
-						{"type": ["binary", "method"], "name": "Victor", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointsForCorrect": 10000},
-						{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointsForCorrect": 15000},
-						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointsForCorrect": 20000},
-						{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punches", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointsForCorrect": 40000}
+						{"type": ["binary", "method"], "name": "Victor", "option1": [{"username": "JASON"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 10000},
+						{"type": ["binary"], "name": "Most knockdowns", "option1": [{"username": "WHIMMY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 15000},
+						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": [{"username": "MIJOTHY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 20000},
+						{"type": ["binary", "percentage", "bar", "challenge"], "name": "Landed punches", "option1": [{"username": "MIJOTHY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 40000}
 					],
 					"challenges": [
 						{"type": ["binary", "method"],"name": "Guess the weigh-in","option1": [],"option2": [],"pointsForCorrect": 30000},
@@ -36,9 +36,9 @@ module.exports = {
 					"name": "Team 1 vs Team 2",
 					"participants": ["team1", "team2"],
 					"predictions": [
-						{"type": ["binary", "method"], "name": "Hector", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointsForCorrect": 10000},
-						{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointsForCorrect": 15000},
-						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointsForCorrect": 20000},
+						{"type": ["binary", "method"], "name": "Hector", "option1": [{"username": "JASON"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 10000},
+						{"type": ["binary"], "name": "Most knockdowns", "option1": [{"username": "WHIMMY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 15000},
+						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": [{"username": "MIJOTHY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 20000},
 						{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
 					],
 					"challenges": [
@@ -49,9 +49,9 @@ module.exports = {
 					"name": "Gamer 1 vs Gamer 2",
 					"participants": ["gamer1", "gamer2"],
 					"predictions": [
-						{"type": ["binary", "method"], "name": "Tractor", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointsForCorrect": 10000},
-						{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointsForCorrect": 15000},
-						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointsForCorrect": 20000},
+						{"type": ["binary", "method"], "name": "Tractor", "option1": [{"username": "JASON"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 10000},
+						{"type": ["binary"], "name": "Most knockdowns", "option1": [{"username": "WHIMMY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 15000},
+						{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": [{"username": "MIJOTHY"}], "option2": [{"username": "TIMOTHY"}], "pointsForCorrect": 20000},
 						{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
 					]
 				},

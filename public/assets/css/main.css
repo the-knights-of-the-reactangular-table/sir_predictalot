@@ -80,38 +80,54 @@ h5 {
 	float: left;
 }
 
-/* top navbar */
-.navbar {
-	position: fixed;
-	left: 50%;
-	transform: translate(-50%, 0);
-	top: 0;
-	width: 580px;
-	text-align: center;
+
+
+/* Topic-based Css */
+.topicName {
+	margin: auto;
+	width: 300px;
+	box-shadow: -1px 0px 2px 1px black;
+	padding-top: 5px;
+	color: white;
 }
 
-.dropdown {
-    height: 100px;
-    margin-top: -80px;
-    background-color: white;
-    width: 250px;
-    top: -5;
-    text-align: center;
-    box-shadow: 0px 2px 1px 1px;
-    display:inline-block;
+.boxing > .sectionHeader,
+.boxing > .hider {
+	background-color: hsla(240, 80%, 20%, 1);
 }
 
-.optionPanel {
-	height:80px;
+.boxing > .sectionBody > .topicName {
+	background-color: hsla(240, 80%, 30%, 1);
 }
 
-.puller {
-	background-image: url("/assets/img/glyphicon-down-arrow.png");
-	width: 18px;
-	height: 20px;
-	border: none;
-	background-color: transparent;
+.football > .sectionHeader,
+.football > .hider {
+	background-color: hsla(349, 86%, 40%, 1);
 }
+
+.football > .sectionBody > .topicName {
+	background-color: hsla(349, 86%, 50%, 1);
+}
+
+.esports > .sectionHeader,
+.esports > .hider {
+	background-color: hsla(51, 100%, 40%, 1);
+}
+
+.esports > .sectionBody > .topicName {
+	background-color: hsla(51, 100%, 50%, 1);
+}
+
+.m8s > .sectionHeader,
+.m8s > .hider {
+	background-color: hsla(170, 86%, 40%, 1);
+}
+
+.m8s > .sectionBody > .topicName {
+	background-color: hsla(170, 86%, 50%, 1);
+}
+
+
 
 /* Buttons */
 .switcher,
@@ -155,10 +171,15 @@ h5 {
 }
 
 .spinnerBlock {
-	background-color: white;
+	background-color: black;
 	height: 60%;
 	position: relative;
 	top: 20%;
+	overflow: hidden;
+}
+
+.spinnerBlock > div { 
+  height: 100%; 
 }
 
 .hider {
@@ -170,10 +191,12 @@ h5 {
 
 .hider-left {
 	left: 0;
+	box-shadow: 0px 0px 4px 0px;
 }
 
 .hider-right {
 	right: 0;
+	box-shadow: 2px 0px 4px 3px;
 }
 
 .flyer {
@@ -182,6 +205,33 @@ h5 {
 	width: 210px;
 	left: 70px;
 	font-size: 30px;
+	padding-top: 4px;
+	color: white;
+}
+
+/* Spinner Animation */
+.spinMe-enter {
+	transition-delay: 1s;
+  	left: -140px;
+}
+
+.spinMe-enter.spinMe-enter-active {
+  	transform: translate(210px, 0); 
+  	transition: 1s ease-in-out;
+}
+
+.spinMe-leave {
+  
+}
+
+.spinMe-leave.spinMe-leave-active {
+	transform: translate(210px, 0); 
+	transition: 1s ease-in-out;
+}
+
+/* Form css */
+#predictionCreator {
+	padding-top: 20px;
 }
 
 /*Leaderboard css*/
@@ -201,28 +251,35 @@ h5 {
 	width:200px;
 }
 
-
-/* Topic-based Css */
-.topicName {
-	margin: auto;
-	width: 300px;
-	box-shadow: -1px 0px 2px 1px black;
-	padding-top: 5px;
-	background-color: hsla(240, 80%, 30%, 1);
-	color: white;
+/* top navbar */
+.navbar {
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 0;
+	width: 580px;
+	text-align: center;
 }
 
-.boxing > .sectionHeader,
-.boxing > .hider {
-	background-color: hsla(240, 80%, 20%, 1);
+.dropdown {
+	height: 100px;
+	margin-top: -80px;
+	background-color: white;
+	width: 250px;
+	top: -5;
+	text-align: center;
+	box-shadow: 0px 2px 1px 1px;
+	display:inline-block;
 }
 
-.football > .sectionHeader,
-.football > .hider {
-	background-color: crimson;
+.optionPanel {
+	height:80px;
 }
 
-.esports > .sectionHeader,
-.esports > .hider {
-	background-color: gold;
+.puller {
+	background-image: url("/assets/img/glyphicon-down-arrow.png");
+	width: 18px;
+	height: 20px;
+	border: none;
+	background-color: transparent;
 }

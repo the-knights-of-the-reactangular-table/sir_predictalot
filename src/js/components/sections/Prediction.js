@@ -1,17 +1,18 @@
 var React 			  		 = require("react");
-var PredictionActionCreators = require("../../actions/PredictionActionCreators");
+var PredictionActions 		 = require("../../actions/PredictionActionCreators");
 
 var Prediction = React.createClass({
 
 	clickHandler: function(e) {
 		e.preventDefault();
 		var predictionInfo = {
+			username: this.props.username,
 			type: "predictions",
 			topic: this.props.currentEventName,
 			pred_id: this.props.predictionId,
 			chosen: e.target.value
 		};
-		PredictionActionCreators.newPrediction(predictionInfo);
+		PredictionActions.makePrediction(predictionInfo);
 	},
 
 	render: function() {
@@ -45,7 +46,9 @@ var Prediction = React.createClass({
 								<h3>{prediction.name}</h3>
 								<h5>{prediction.pointsForCorrect}</h5>
 							</div>
-							<div className="sectionUnary">HardCodedBoxer1</div>
+							<div className="sectionUnary">
+								<input type="range" />
+							</div>
 						</div>
 					);
 

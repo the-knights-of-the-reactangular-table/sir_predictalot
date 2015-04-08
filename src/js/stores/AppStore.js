@@ -7,10 +7,12 @@ var ActionTypes  = PredictionConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 
 var _username 	   = null;
+var _user  		   = {};
+
 var _currentEvent  = null;
 var _previousEvent = null;
-var _user  		   = {};
 var _events 	   = {};
+var _eventsList    = [];
 
 function _setUser(rawUser) {
 	var user = rawUser.username;
@@ -24,9 +26,11 @@ function _setUser(rawUser) {
 
 function _setEvents(rawEvents) {
 	var event;
+	_eventsList = [];
 	for (event in rawEvents) {
 		if (rawEvents.hasOwnProperty(event)) {
 			_events[event] = rawEvents[event];
+			_eventsList.push(event);
 		}
 	}
 }
@@ -67,6 +71,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return _events;
 	},
 
+	getEventsList: function() {
+		return _eventsList;
+	},
+
 	getCurrentSubject: function(type) {
 		return _events[_currentEvent][type][_user.stats[_currentEvent][type]];
 	}
@@ -74,7 +82,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 });
 
 AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
-	console.log(action);
+
 	switch(action.type) {
 
 		case ActionTypes.RECEIVE_RAW_DATA:
@@ -84,6 +92,12 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 
 		case ActionTypes.RECEIVE_UPDATED_USER:
 			_setUser(action.rawUser);
+			AppStore.emitChange();
+			break;
+
+		case ActionTypes.RECEIVE_UPDATED_EVENT:
+			_events[event] = action.rawEvent;
+			console.log(_events[event]);
 			AppStore.emitChange();
 			break;
 
@@ -119,11 +133,6 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 		case ActionTypes.PREVIOUS_EVENT:
 			_user.preferences.currentSelection = _previousEvent;
 			_currentEvent = _previousEvent;
-			AppStore.emitChange();
-			break;
-
-		case ActionTypes.NEW_PREDICTION:
-			_events[ActionTypes.prediction.eventName].predictions.push(ActionTypes.prediction);
 			AppStore.emitChange();
 			break;
 

@@ -22,6 +22,7 @@ module.exports = {
 
 	newSwipe: function(info){
 
+
 		var prediction = {
 			username : info.username,
 			id 		 : info.id,

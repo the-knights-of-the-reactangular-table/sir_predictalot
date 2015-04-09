@@ -86,7 +86,7 @@ server.route([
 
 	{
 		path: "/makeprediction",
-		method: "GET",
+		method: "POST",
 		handler: function(request, reply) {
 			var prediction = request.payload;
 			var user 	   = prediction.username;
@@ -111,8 +111,8 @@ server.route([
 			Data.topics[prediction.topic].predictions.forEach(function(ele, index) {
 				if (ele.id === prediction.id) {
 					// Check that the user hasn't already voted
-					if (ele.option1.indexOf(user) !== -1 &&
-						ele.option2.indexOf(user) !== -1) {
+					if (ele.option1.indexOf(user) === -1 &&
+						ele.option2.indexOf(user) === -1) {
 						ele[prediction.chosen].push(user);
 					} else {
 						return reply({alert: "error", description: "You've already voted on that!"});
@@ -120,7 +120,17 @@ server.route([
 				}
 			});
 
-			return reply();
+			var options = {
+				url: '/api/v1/topics/random/1',
+				method: 'GET',
+				payload: {
+					username: user
+				}
+			};
+			server.inject(options, function(err,response){
+				reply(response.payload);
+			});
+
 
 		}
 	},
@@ -206,7 +216,7 @@ server.route([
 		path: '/api/v1/topics/random/{number?}',
 		method: 'GET',
 		handler: function(request, reply) {
-
+			console.log('request', request);
 			var user 			= request.payload.username;
 			var topicOptions 	= Data.users[user].preferences.topics;
 			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];

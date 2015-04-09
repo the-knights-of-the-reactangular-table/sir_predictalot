@@ -1,61 +1,132 @@
-"user": {
-	"username": "MIJOTHY",
-	"email": "james.gandhi.2332@googlemail.com",
-	"stats": {
-		"points": 30000,
-		"boxing":{"name": "boxing", "points": 10000, "predictions": 0, "challenges": 0},
-		"football": {"name": "football", "points": 20000, "predictions": 0, "challenges": 0}
+{
+	"users": {
+
+		"BEECHWARE": {
+			"username": "BEECHWARE",
+			"email": "BEECHWARE@BEECH.com",
+			"stats": {
+				"points": 	30000,
+				"boxing":	{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
+			},
+			"preferences": {
+				"topics": ["boxing", "football"]
+			},
+			"friendList": []
+		},
+
+		"jaysone": {
+			"username": "jaysone",
+			"email": "jaysone@sonejay.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
+			},
+			"preferences": {
+				"topics": ["boxing", "football"]
+			},
+			"friendList": []
+		},
+
+		"MIJOTHY": {
+			"username": "MIJOTHY",
+			"email": "james.gandhi.2332@googlemail.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
+			},
+			"preferences": {
+				"topics": ["boxing", "football"]
+			},
+			"friendList": []
+		},
+
+		"PHB": {
+			"username": "PHB",
+			"email": "per.per@per.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
+			},
+			"preferences": {
+				"topics": ["boxing", "football"]
+			},
+			"friendList": []
+		},
+
+
+		"rory": {
+			"username": "rory",
+			"email": "rory.rory@rory.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
+			},
+			"preferences": {
+				"topics": ["boxing", "football"]
+			},
+			"friendList": []
+		}
+
+
 	},
-	"preferences": {
-		"home": "boxing",
-		"currentSelection": "boxing",
-		"events": ["boxing", "football"],
-		"sections": ["predictions"]
+
+	"topics" : {
+
+		"boxing": {
+			"predictions": [
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Fayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Mayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567814},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Crayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567812},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Jayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567821},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Scayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567811}
+			]
+		},
+		"football": {
+			"predictions": [
+				{"topic": "football", 	"url": "/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "option1": [], "option2": [], "id": 1234567896},
+				{"topic": "football", 	"url": "/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "option1": [], "option2": [], "id": 1234567897},
+				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567891},
+				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567892},
+				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567893}
+			]
+		},
+		"esports": {
+			"predictions": [
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports!", 					 "option1": [], "option2": [], "id": 1234567899}
+			]
+		},
+		"politics": {
+			"predictions": [
+				{"topic": "politics", 	"url": "/david-cameron_square.jpg", "text": "Will he be PM after the election?", 				 "option1": [], "option2": [], "id": 1234567892},
+				{"topic": "politics", 	"url": "/kim-jong-un_square.jpg",   "text": "Will Kim die this year?", 							 "option1": [], "option2": [], "id": 1234567893},
+				{"topic": "politics", 	"url": "/is_square.jpg", 			"text": "Will IS lose the city of Mosul this summer?", 		 "option1": [], "option2": [], "id": 1234567894},
+				{"topic": "politics", 	"url": "/saudi_square.png", 		"text": "Will Saudi Arabia invade Yemen this month?", 		 "option1": [], "option2": [], "id": 1234567895}
+			]
+		},
+		"celebrity": {
+			"predictions": [
+			    {"topic": "celebrity", 	"url": "/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/one_direction_square.png", "text": "Will they break up this year?", 					 "option1": [], "option2": [], "id": 1234567891}
+			]
+		},
+		"m8s": {
+			"predictions": [
+			]
+		}
 	}
-},
-"events" : {
-	"boxing": {
-		"name": "Boxer 1 vs Boxer 2",
-		"participants": ["boxer1", "boxer2"],
-		"predictions": [
-			{"type": ["binary", "method"], "name": "Victor", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointForCorrect": 10000},
-			{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
-			{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
-			{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punches", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 40000}
-		],
-		"challenges": [
-			{"type": ["binary", "method"],"name": "Guess the weigh-in","option1": [],"option2": [],"pointForCorrect": 30000},
-		]
-	},
-	"football": {
-		"name": "Team 1 vs Team 2",
-		"participants": ["team1", "team2"],
-		"predictions": [
-			{"type": ["binary", "method"], "name": "Victor", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointForCorrect": 10000},
-			{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
-			{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
-			{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
-		],
-		"challenges": [
-			{"type": ["unary", "method"],"name": "Number of yellow cards","option1": [],"option2": [],"pointForCorrect": 20000},
-		]
-	},
-	"esports": {
-		"name": "Gamer 1 vs Gamer 2",
-		"participants": ["gamer1", "gamer2"],
-		"predictions": [
-			{"type": ["binary", "method"], "name": "Victor", "option1": ["JASON"], "option2": ["TIMOTHY"], "pointForCorrect": 10000},
-			{"type": ["binary"], "name": "Most knockdowns", "option1": ["WHIMMY"], "option2": ["TIMOTHY"], "pointForCorrect": 15000},
-			{"type": ["binary", "percentage", "bar"], "name": "Punches landed", "option1": ["MIJOTHY"], "option2": ["TIMOTHY"], "pointForCorrect": 20000},
-			{"type": ["unary", "percentage", "bar", "challenge"], "name": "Landed punch %"}
-		]
-	},
-	"m8s": {
-		"name": "Your m8s predictions",
-		"participants": ["all your friends"],
-		"predictions": [
-		],
-		"challenges": [
-		],
-	}
+
 }

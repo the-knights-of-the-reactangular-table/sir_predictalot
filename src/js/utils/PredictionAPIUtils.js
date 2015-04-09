@@ -1,39 +1,36 @@
 var PredictionServerActionCreators = require("../actions/PredictionServerActionCreators");
-var SuperAgent = require("superagent");
-// Localstorage used as a temporary measure to simulate API interaction with ajax or the like
+var Request = require("superagent");
+
 module.exports = {
 
-  getAllData: function() {
-    // simulate retrieving data from a database
-    var rawData = JSON.parse(localStorage.getItem("data"));
+  login: function(username) {
+  	var userObj = {
+  		user: username
+  	};
 
-    // simulate success callback
-    PredictionServerActionCreators.receiveAll(rawData);
+  	Request.post("/login")
+  		.send(userObj)
+  		.end(function(err, res) {
+  			PredictionServerActionCreators.receiveRawData(res.body);
+  		});
   },
 
-  
+  submitForm: function(formData) {
 
-  createPrediction: function(prediction) {
-    // simulate writing to a database
-    var rawData = JSON.parse(localStorage.getItem("data"));
+  	Request.post("/api/v1/topics/" + formData.topic + "/predictions")
+  		.send(formData)
+  		.end(function(err, res) {
+  			PredictionServerActionCreators.receiveAlert(res.body);
+  		});
+  },
 
-    if (!rawData.user.stats[prediction.topic]) {
-      rawData.user.stats[prediction.topic] = {
-          name: prediction.topic,
-          points: 0,
-          predictions: 0,
-          challenges: 0
-        };
-    }
+  makePrediction: function(predictionInfo) {
 
-    rawData.user.stats[prediction.topic][prediction.type] += 1;
-    rawData.events[prediction.topic][prediction.type][prediction.pred_id][prediction.chosen].push(prediction.username);
-    localStorage.setItem("data", JSON.stringify(rawData));
-
-    //success callback
-    PredictionServerActionCreators.receiveUpdatedUser(prediction);
-
-
+    Request.post("/makeprediction")
+        .send(predictionInfo)
+        .end(function(err, res) {
+            PredictionServerActionCreators.receiveSwipe(res.body, predictionInfo.type);
+        });
   }
 
 };

@@ -12,24 +12,25 @@ module.exports = {
     });
   },
 
-  receiveFormData: function(rawData) {
+  receiveAlert: function(alert) {
     PredictionAppDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_FORM_DATA,
-      rawData: rawData
+      type: ActionTypes.RECEIVE_ALERT,
+      alert: alert
     });
   },
 
-  receiveSwipe: function(rawData){
+  receiveSwipe: function(newPrediction, direction){
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_SWIPE,
-      rawData: rawData
+      newPrediction: newPrediction,
+      direction: direction
     });
   },
 
-  receiveAll: function(rawData) {
+  receiveRawData: function(rawData) {
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_DATA,
-      rawData: rawData
+      rawData: rawData,
     });
   },
 

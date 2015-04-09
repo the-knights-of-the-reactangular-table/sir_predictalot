@@ -6,7 +6,7 @@ var assign 					= require("object-assign");
 var ActionTypes  = PredictionConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 
-var DATA = [
+var _DATA = [
     {topic: "celebrity", 	url: '/bieber_square.jpg', 		  text: 'Will they get back together in 2015?', 			 animation_class: "", left: false, right: false, id: 1234567890},
     {topic: "celebrity", 	url: '/one_direction_square.png', text: 'Will they break up this year?', 					 animation_class: "", left: false, right: false, id: 1234567891},
     {topic: "politics", 	url: '/david-cameron_square.jpg', text: "Will he be PM after the election?", 				 animation_class: "", left: false, right: false, id: 1234567892},
@@ -19,7 +19,7 @@ var DATA = [
     {topic: "boxing", 		url: '/boxing_square.jpg', 		  text: 'Will Mayweather beat Pacquiao?', 					 animation_class: "", left: false, right: false, id: 1234567899}
 ];
 
-var active = DATA.length - 1;
+var active = _DATA.length - 1;
 
 var _username 	   = null;
 var _currentEvent  = null;
@@ -67,7 +67,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getData: function(){
-		return DATA;
+		return _DATA;
 	},
 
 	getUser: function() {
@@ -93,29 +93,17 @@ var AppStore = assign({}, EventEmitter.prototype, {
 });
 
 AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
-	console.log(action);
+
 	switch(action.type) {
 
 		case ActionTypes.RECEIVE_SWIPE:
+			var image_number;
+
 			rawData = action.rawData;
-			var image_number = DATA.indexOf(rawData.image);
-			DATA[image_number].animation_class = rawData.type;
+			image_number = _DATA.indexOf(rawData.image);
+
+			_DATA[image_number].animation_class = rawData.type;
 	        active = image_number - 1;
-
-
-
-/*	        var newStateObj = {};
-	        newStateObj.data = newData;
-	        newStateObj.active = new_active;
-
-	        if (didSwipe){
-	            newStateObj.swipe = {};
-	            newStateObj.swipe.left = "";
-	            newStateObj.swipe.right = "";
-	        }
-
-	        this.setState(newStateObj);
-*/
 
 	        AppStore.emitChange();
 	        break;
@@ -132,32 +120,6 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 			break;
 
 		case ActionTypes.NEXT_RANDOM_EVENT:
-			var prefs = _user.preferences;
-			var randomEventIndex = Math.floor(Math.random() * prefs.events.length);
-			var newEvent;
-
-			_previousEvent = prefs.currentSelection;
-
-			if (prefs.events[randomEventIndex] === _currentEvent) {
-				newEvent = prefs.events[randomEventIndex + 1] || prefs.events[randomEventIndex-1];
-			} else {
-				newEvent = prefs.events[randomEventIndex];
-			}
-
-			prefs.currentSelection = newEvent;
-			_currentEvent = prefs.currentSelection;
-			console.log(_currentEvent);
-
-			if (!_user.stats[_currentEvent]) {
-				_user.stats[_currentEvent] = {
-					name: _currentEvent,
-					points: 0,
-					predictions: 0,
-					challenges: 0
-				};
-			}
-
-			AppStore.emitChange();
 			break;
 
 		case ActionTypes.PREVIOUS_EVENT:

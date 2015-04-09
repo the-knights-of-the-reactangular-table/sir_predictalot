@@ -12,13 +12,7 @@ function getStateFromStores() {
 	var data 			 = AppStore.getData();
 
 	return {
-		user 		     : currentUser,
-		currentEventName : currentSelection,
-		currentEvent 	 : AppStore.getCurrentEvent(),
-		predictionId 	 : predictionId,
-		current_pred  	 : AppStore.getCurrentSubject("predictions"),
 		data 			 : data
-
 	};
 }
 
@@ -38,21 +32,9 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		var preferences = this.state.user.preferences;
-		var sections = preferences.sections.map(function(ele, ind) {
-				switch(ele) {
-
-					case "challenges":
-						return <ChallengeSection key={ele}/>;
-
-					default:
-						return;
-				}
-		}, this);
 		return (
 			<div>
 				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} />;
-				{sections}
 			</div>
 		);
 	},

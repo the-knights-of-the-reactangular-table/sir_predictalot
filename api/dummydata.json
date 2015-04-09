@@ -1,109 +1,111 @@
-"users": {
+{
+	"users": {
 
-	"BEECHWARE": {
-		"username": "BEECHWARE",
-		"email": "BEECHWARE@BEECH.com",
-		"stats": {
-			"points": 	30000,
-			"boxing":	{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-			"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+		"BEECHWARE": {
+			"username": "BEECHWARE",
+			"email": "BEECHWARE@BEECH.com",
+			"stats": {
+				"points": 	30000,
+				"boxing":	{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+			},
+			"preferences": {
+				"events": ["boxing", "football"]
+			}
 		},
-		"preferences": {
-			"events": ["boxing", "football"],
+
+		"jaysone": {
+			"username": "jaysone",
+			"email": "jaysone@sonejay.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+			},
+			"preferences": {
+				"events": ["boxing", "football"]
+			}
+		},
+
+		"MIJOTHY": {
+			"username": "MIJOTHY",
+			"email": "james.gandhi.2332@googlemail.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+			},
+			"preferences": {
+				"events": ["boxing", "football"]
+			}
+		},
+
+		"PHB": {
+			"username": "PHB",
+			"email": "per.per@per.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+			},
+			"preferences": {
+				"events": ["boxing", "football"]
+			}
+		},
+
+
+		"rory": {
+			"username": "rory",
+			"email": "rory.rory@rory.com",
+			"stats": {
+				"points": 30000,
+				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
+				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+			},
+			"preferences": {
+				"events": ["boxing", "football"]
+			}
 		}
+
+
 	},
 
-	"jaysone": {
-		"username": "jaysone",
-		"email": "jaysone@sonejay.com",
-		"stats": {
-			"points": 30000,
-			"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-			"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
-		},
-		"preferences": {
-			"events": ["boxing", "football"],
-		}
-	},
+	"events" : {
 
-	"MIJOTHY": {
-		"username": "MIJOTHY",
-		"email": "james.gandhi.2332@googlemail.com",
-		"stats": {
-			"points": 30000,
-			"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-			"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+		"boxing": {
+			"predictions": [
+				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Mayweather beat Pacquiao?", 					 "animation_class": "", "option1": [], "option2": true, "id": 1234567899}
+			]
 		},
-		"preferences": {
-			"events": ["boxing", "football"],
-		}
-	},
-
-	"PHB": {
-		"username": "PHB",
-		"email": "per.per@per.com",
-		"stats": {
-			"points": 30000,
-			"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-			"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+		"football": {
+			"predictions": [
+				{"topic": "football", 	"url": "/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "animation_class": "", "option1": [], "option2": true, "id": 1234567896},
+				{"topic": "football", 	"url": "/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "animation_class": "", "option1": [], "option2": true, "id": 1234567897},
+				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "animation_class": "", "option1": [], "option2": true, "id": 1234567898}
+			]
 		},
-		"preferences": {
-			"events": ["boxing", "football"],
-		}
-	},
-
-
-	"rory": {
-		"username": "rory",
-		"email": "rory.rory@rory.com",
-		"stats": {
-			"points": 30000,
-			"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-			"football": {"name": "football", "points": 20000, "last_prediction_id": 0 }
+		"esports": {
+			"predictions": [
+			]
 		},
-		"preferences": {
-			"events": ["boxing", "football"],
+		"politics": {
+			"predictions": [
+				{"topic": "politics", 	"url": "/david-cameron_square.jpg", "text": "Will he be PM after the election?", 				 "animation_class": "", "option1": [], "option2": true, "id": 1234567892},
+				{"topic": "politics", 	"url": "/kim-jong-un_square.jpg",   "text": "Will Kim die this year?", 							 "animation_class": "", "option1": [], "option2": true, "id": 1234567893},
+				{"topic": "politics", 	"url": "/is_square.jpg", 			"text": "Will IS lose the city of Mosul this summer?", 		 "animation_class": "", "option1": [], "option2": true, "id": 1234567894},
+				{"topic": "politics", 	"url": "/saudi_square.png", 		"text": "Will Saudi Arabia invade Yemen this month?", 		 "animation_class": "", "option1": [], "option2": true, "id": 1234567895}
+			]
+		},
+		"celebrity": {
+			"predictions": [
+			    {"topic": "celebrity", 	"url": "/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "animation_class": "", "option1": [], "option2": true, "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/one_direction_square.png", "text": "Will they break up this year?", 					 "animation_class": "", "option1": [], "option2": true, "id": 1234567891}
+			]
+		},
+		"m8s": {
+			"predictions": [
+			]
 		}
 	}
 
-
-},
-
-"events" : {
-
-	"boxing": {
-		"predictions": [
-			{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Mayweather beat Pacquiao?", 					 "animation_class": "", "option1": [], "option2": true, "id": 1234567899}
-		]
-	},
-	"football": {
-		"predictions": [
-			{"topic": "football", 	"url": "/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "animation_class": "", "option1": [], "option2": true, "id": 1234567896},
-			{"topic": "football", 	"url": "/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "animation_class": "", "option1": [], "option2": true, "id": 1234567897},
-			{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "animation_class": "", "option1": [], "option2": true, "id": 1234567898}
-		]
-	},
-	"esports": {
-		"predictions": [
-		]
-	},
-	"politics": {
-		"predictions": [
-			{"topic": "politics", 	"url": "/david-cameron_square.jpg", "text": "Will he be PM after the election?", 				 "animation_class": "", "option1": [], "option2": true, "id": 1234567892},
-			{"topic": "politics", 	"url": "/kim-jong-un_square.jpg",   "text": "Will Kim die this year?", 							 "animation_class": "", "option1": [], "option2": true, "id": 1234567893},
-			{"topic": "politics", 	"url": "/is_square.jpg", 			"text": "Will IS lose the city of Mosul this summer?", 		 "animation_class": "", "option1": [], "option2": true, "id": 1234567894},
-			{"topic": "politics", 	"url": "/saudi_square.png", 		"text": "Will Saudi Arabia invade Yemen this month?", 		 "animation_class": "", "option1": [], "option2": true, "id": 1234567895}
-		]
-	}
-	"celebrity": {
-		"predictions": [
-		    {"topic": "celebrity", 	"url": "/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "animation_class": "", "option1": [], "option2": true, "id": 1234567890},
-		    {"topic": "celebrity", 	"url": "/one_direction_square.png", "text": "Will they break up this year?", 					 "animation_class": "", "option1": [], "option2": true, "id": 1234567891}
-		]
-	},
-	"m8s": {
-		"predictions": [
-		]
-	}
 }
-

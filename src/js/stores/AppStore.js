@@ -30,6 +30,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return _user;
 	},
 
+	getPrediction: function(){
+		return _predictions[0];
+	},
+
 	getPredictions: function() {
 		return _predictions;
 	},

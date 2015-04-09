@@ -1,13 +1,14 @@
 var React 			  		 = require("react/addons");
 var ReactCSSTransitionGroup  = React.addons.CSSTransitionGroup;
 var PredictionActionCreators = require("../../actions/PredictionActionCreators");
+var ReactTransitionGroup  = React.addons.TransitionGroup;
 
 
 var Prediction = React.createClass({
 
 	render: function(){
 		return (
-			<PredictionBox predictions={this.props.predictions} />
+			<PredictionBox prediction={this.props.prediction} />
 			);
 	}
 
@@ -20,8 +21,8 @@ var PredictionBox = React.createClass({
     render: function() {
         return(
             <div className="predictionBox">
-                <TextBox predictions={this.props.predictions} />
-                <ImageBox predictions={this.props.predictions} />
+                <TextBox text={this.props.prediction.text} />
+                <ImageBox prediction={this.props.prediction} />
                 <MenuBox />
             </div>
         );
@@ -36,7 +37,7 @@ var TextBox = React.createClass({
     render: function() {
 	    return(
 	        <div className="textBox">
-	       		{this.props.predictions[this.props.predictions.length - 1].text}
+	       		{this.props.text}
 	        </div>
 	    );
     }
@@ -75,7 +76,6 @@ var ImageBox = React.createClass({
 
 
         var swipeInfo = {
-
         	id: image.id,
         	username: this.props.username,
 			topic: image.topic,
@@ -89,44 +89,45 @@ var ImageBox = React.createClass({
 
     },
 
+    componentWillLeave: function(done){
+		console.log('this.getDOMENode() ', this.getDOMNode());
+		var animated_element = this.getDOMNode();
+		animated_element.className = swipe;
+    	console.log('component will leave triggered');
+    	console.log('Swipe is :', swipe);
+    	setTimeout(function(){
+	    	done();
+    	},1000);
+    },
 
-    render: function() {
-	        var images = this.props.predictions.map(function(image, i){
-	        var yes_style;
-	        var no_style;
+    componentDidLeave: function(){
+    	console.log('component did leave triggered');
+    	console.log('Swipe is :', swipe);
 
-	        if (image.left){
-	            no_style = {
-	                opacity: 1
-	            };
-	        }
-	        if (image.right){
-	            yes_style = {
-	                opacity: 1
-	            };
-	        }
+    },
 
-	        return (
+    componentWillUnmount: function(){
+    	console.log('componentWillUnmount triggered');
+    },
 
-	                <div key={image.url + image.text}>
-	                    <div  className={image.animation_class}
+    render: function() { 
+     return(
+      
+            <ReactTransitionGroup transitionName="swipe">
+            <div className="imageBox">
+               <div key={this.props.prediction.url}>
+	                    <div className={this.props.prediction.animation_class}
 		                      onTouchMove={this.handleTouchMove}
-	                          onTouchEnd={this.onTouchEnd.bind(null,image)}
+	                          onTouchEnd={this.onTouchEnd}
 	                          onTouchStart={this.handleTouchStart}
 	                    >
-	                    <div style={yes_style} className='yes_stamp'>Yes</div>
-	                    <div style={no_style} className='no_stamp'>No</div>
-	                    <img className="predictionImg" src={image.url} /></div>
-	                </div>
-	            );
-	        }.bind(this));
-
-        return(
-            <div className="imageBox" >
-            <ReactCSSTransitionGroup transitionName="swipe">
-                {images}
-            </ReactCSSTransitionGroup>
+	                    <div  className='yes_stamp'>Yes</div>
+	                    <div  className='no_stamp'>No</div>
+	                    <img className="predictionImg" src={this.props.prediction.url} /></div>
+	            </div>
             </div>
+            </ReactTransitionGroup>
+          
         );
     }
 });

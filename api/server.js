@@ -87,10 +87,11 @@ server.route([
 
 	{
 		path: "/makeprediction",
-		method: "GET",
+		method: "POST",
 		handler: function(request, reply) {
 			var prediction = request.payload;
 			var user 	   = prediction.username;
+			console.log(prediction);
 			var topicStats = Data.users[user].stats[prediction.topic];
 
 			if (!Data.topics[prediction.topic]) {

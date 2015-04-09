@@ -1,0 +1,447 @@
+/* Structure */
+html {
+	font-family: "Orbitron", sans-serif;
+}
+
+.spinnerHolder,
+.sectionHolder {
+	margin: auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.sectionHolder,
+.spinnerHolder {
+	width: 500px;
+}
+
+.sectionHeader {
+	box-shadow:  0px 2px 1px 1px black;;
+	margin-bottom: 0px;
+}
+
+.sectionBody {
+	width: 400px;
+	margin: auto;
+	height: 200px;
+	box-shadow:  0px 2px 1px 1px black;;
+	background-color: white;
+}
+
+h1 {
+	margin-top:10px;
+	margin-bottom:10px;
+	color: white;
+	display: inline-block;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+h3,
+h5 {
+	margin-top: 0px;
+	margin: auto;
+}
+
+h3 {
+	margin-bottom: 3px;
+}
+h5 {
+	margin-bottom: 0px;
+}
+
+
+.sectionBinary {
+	height: 80%;
+	width: 199px;
+	display: inline-block;
+}
+
+.sectionUnary {
+	height: 80%;
+	width: 400px;
+	display: inline-block;
+}
+
+.sectionLeft {
+	float: left;
+	border-right: 1px solid black;
+}
+
+.sectionRight {
+	float: right;
+}
+
+.sectionCenter {
+	text-align: center;
+}
+
+.sectionSingle {
+	float: left;
+}
+
+/* top navbar */
+.navbar {
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 0;
+	width: 580px;
+	text-align: center;
+}
+
+.dropdown {
+    height: 100px;
+    margin-top: -80px;
+    background-color: white;
+    width: 250px;
+    top: -5;
+    text-align: center;
+    box-shadow: 0px 2px 1px 1px;
+    display:inline-block;
+}
+
+.optionPanel {
+	height:80px;
+}
+
+.puller {
+	background-image: url("/assets/img/glyphicon-down-arrow.png");
+	width: 18px;
+	height: 20px;
+	border: none;
+	background-color: transparent;
+}
+
+/* Buttons */
+.switcher,
+.switcher:active,
+.switcher:focus {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	display: inline-block;
+	vertical-align: bottom;
+	color: transparent;
+	height: 50px;
+	width: 20px;
+	background-repeat: space;
+	margin-top: 5px;
+}
+
+.left {
+	float: left;
+	background-image: url("/assets/img/glyphicon-left-arrow.png");
+}
+
+.right {
+	float: right;
+	background-image: url("/assets/img/glyphicon-right-arrow.png");
+
+}
+
+.dropdown {
+	float:center;
+}
+
+/* Spinner css */
+.spinner {
+	height: 60px;
+	width: 350px;
+	margin: auto;
+}
+.spinnerHolder {
+	background-color: transparent;
+}
+
+.spinnerBlock {
+	background-color: white;
+	height: 60%;
+	position: relative;
+	top: 20%;
+}
+
+.hider {
+	height: 100%;
+	position: absolute;
+	z-index: 10000;
+	width: 70px;
+}
+
+.hider-left {
+	left: 0;
+}
+
+.hider-right {
+	right: 0;
+}
+
+.flyer {
+	height: 100%;
+	position: absolute;
+	width: 210px;
+	left: 70px;
+	font-size: 30px;
+}
+
+/*Leaderboard css*/
+.leaderitem {
+	padding-top: 10px;
+	border-bottom: 1px solid;
+	border-bottom-color: rgba(40, 48, 65, 0.29);
+	height: 10%;
+}
+
+.leadername {
+	width:200px;
+	float:left;
+}
+
+.leaderpoint {
+	width:200px;
+}
+
+
+/* Topic-based Css */
+.topicName {
+	margin: auto;
+	width: 300px;
+	box-shadow: -1px 0px 2px 1px black;
+	padding-top: 5px;
+	background-color: hsla(240, 80%, 30%, 1);
+	color: white;
+}
+
+.boxing > .sectionHeader,
+.boxing > .hider {
+	background-color: hsla(240, 80%, 20%, 1);
+}
+
+.football > .sectionHeader,
+.football > .hider {
+	background-color: crimson;
+}
+
+.esports > .sectionHeader,
+.esports > .hider {
+	background-color: gold;
+}
+
+
+
+
+
+/* FROM TINDER APP */
+
+
+body{
+  font-family: 'Lato', sans-serif;
+}
+
+#content {
+    width: 100%;
+    height: 450px;
+    margin-top: 10px;
+}
+
+
+.mainBox {
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 90%;
+    width: 100%;
+    text-align: center;
+}
+
+.predictionBox {
+    height: 82%;
+    width: 100%;
+    text-align: center;
+}
+
+.menuBox {
+    display: block;
+    position: relative;
+    padding: 5px;
+    height: 10%;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.predictionImg{
+    width: 100%;
+    cursor: hand;
+    position: absolute;
+    left: 0px;
+}
+
+
+.yes_stamp{
+  left: 42%;
+  padding: 5px;
+  margin-top: 30px;
+  z-index: 1000;
+  position: absolute;
+  border: 5px solid green;
+  border-radius: 5px;
+  color: green;
+  font-size: 50px;
+  font-weight: bold; 
+  opacity: 0;
+}
+
+.no_stamp{
+  left: 42%;
+  padding: 5px;
+  margin-top: 30px;
+  z-index: 1000;
+  position: absolute;
+  border: 5px solid red;
+  font-size: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: red;
+  opacity: 0;
+}
+
+.visible{
+  opacity: 1;
+}
+
+
+.textBox{
+  height: 60px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+   vertical-align: middle;
+  padding-top: 11px;
+}
+
+/* SWIPE */
+
+#container {
+  width: 500px;
+  margin: auto !important;
+  display: block;
+  height: 500px;
+  position: relative;
+  list-style-type: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.buddy {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  color: #fff;
+  padding: 20px;
+  width: 360px;
+  height: 360px;
+  top: 50px;
+  left: 50px;
+  position: absolute;
+  cursor: hand;
+}
+.rotate-left {
+  transform: rotate(30deg) scale(0.8);
+  transition: 1s;
+  margin-left: 400px;
+  cursor: e-resize;
+  opacity: 0;
+}
+.rotate-right {
+  transform: rotate(-30deg) scale(0.8);
+  transition: 1s;
+  opacity: 0;
+  margin-left: -400px;
+  cursor: w-resize;
+}
+.avatar {
+  background: #222;
+  width: 340px;
+  height: 340px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-size: 100% auto !important;
+  background-position: center;
+ background-repeat: no-repeat;
+}
+
+.like {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 2px solid green;
+  color: green;
+  text-transform: uppercase;
+  font-size: 15px;
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  text-shadow: none;
+}
+.dislike {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 2px solid red;
+  color: red;
+  text-transform: uppercase;
+  font-size: 15px;
+  position: absolute;
+  top: 50px;
+  left: 40px;
+  text-shadow: none;
+}
+
+
+
+.imageBox {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+
+.swipe-leave{
+    display:none;
+}
+
+.swipe-left {
+  transform: rotate(5deg) scale(0.8) translate(-400px,0);
+  opacity: 0;
+  transition: 1.5s;
+}
+
+
+.imgText{
+    position: absolute;
+}
+
+.swipe-right {
+  transform: rotate(-5deg) scale(0.8) translate(400px,0);
+  opacity: 0;
+
+  transition: 1.5s;
+}
+
+.swipe-enter {
+  opacity: 0.01;
+transition: opacity .5s ease-in;
+}
+
+.swipe-enter.swipe-enter-active {
+  opacity: 1;
+}
+

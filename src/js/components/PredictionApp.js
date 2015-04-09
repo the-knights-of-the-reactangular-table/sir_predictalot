@@ -38,8 +38,6 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		console.log('user in PredictionApp: ', this.state.user);
-		console.log('data in PredictionApp: ', this.state.data);
 		var preferences = this.state.user.preferences;
 		var sections = preferences.sections.map(function(ele, ind) {
 				switch(ele) {

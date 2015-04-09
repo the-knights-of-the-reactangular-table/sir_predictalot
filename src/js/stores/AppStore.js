@@ -7,16 +7,16 @@ var ActionTypes  = PredictionConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 
 var DATA = [
-    {url: '/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
-    {url: '/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
-    {url: '/david-cameron_square.jpg', text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
-    {url: '/kim-jong-un_square.jpg', text: 'Will Kim die this year?', key: 3, animation_class: "",left: false, right: false},
-    {url: '/is_square.jpg', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
-    {url: '/saudi_square.png', text: 'Will Saudi Arabia invade Yemen this month?', key: 2, animation_class: "",left: false, right: false},
-    {url: '/ronaldo_square.jpg', text: "Will Real Madrid win the Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
-    {url: '/sterling_square.jpg', text: 'Will Raheem Sterling leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
-    {url: '/manu_square.jpg', text: "Will Man Utd finish second in the Premier League?", key: 6, animation_class: "",left: false, right: false},
-    {url: '/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
+    {topic: "celebrity", 	url: '/bieber_square.jpg', 		  text: 'Will they get back together in 2015?', 			 animation_class: "", left: false, right: false, id: 1234567890},
+    {topic: "celebrity", 	url: '/one_direction_square.png', text: 'Will they break up this year?', 					 animation_class: "", left: false, right: false, id: 1234567891},
+    {topic: "politics", 	url: '/david-cameron_square.jpg', text: "Will he be PM after the election?", 				 animation_class: "", left: false, right: false, id: 1234567892},
+    {topic: "politics", 	url: '/kim-jong-un_square.jpg',   text: 'Will Kim die this year?', 							 animation_class: "", left: false, right: false, id: 1234567893},
+    {topic: "politics", 	url: '/is_square.jpg', 			  text: "Will IS lose the city of Mosul this summer?", 		 animation_class: "", left: false, right: false, id: 1234567894},
+    {topic: "politics", 	url: '/saudi_square.png', 		  text: 'Will Saudi Arabia invade Yemen this month?', 		 animation_class: "", left: false, right: false, id: 1234567895},
+    {topic: "football", 	url: '/ronaldo_square.jpg', 	  text: "Will Real Madrid win the Champions League 2015?", 	 animation_class: "", left: false, right: false, id: 1234567896},
+    {topic: "football", 	url: '/sterling_square.jpg', 	  text: 'Will Raheem Sterling leave Liverpool this summer?', animation_class: "", left: false, right: false, id: 1234567897},
+    {topic: "football", 	url: '/manu_square.jpg', 		  text: "Will Man Utd finish second in the Premier League?", animation_class: "", left: false, right: false, id: 1234567898},
+    {topic: "boxing", 		url: '/boxing_square.jpg', 		  text: 'Will Mayweather beat Pacquiao?', 					 animation_class: "", left: false, right: false, id: 1234567899}
 ];
 
 var active = DATA.length - 1;

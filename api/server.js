@@ -1,5 +1,5 @@
 var Path 	= require('path');
-var Db 		= require('./db');
+var Data 	= require("./dummydata.json");
 var Hapi 	= require('hapi');
 var server 	= new Hapi.Server();
 
@@ -9,7 +9,7 @@ server.connection({
 });
 
 server.route([
-		{
+	{
 		path: '/{param*}',
 		method: 'GET',
 		handler: {
@@ -24,11 +24,11 @@ server.route([
 		path: '/api/v1/events',
 		method: 'GET',
 		handler: function(request, reply) {
-			reply('Hi m8');
+			reply(Data.events);
 		}
 	},
 
-		{
+	{
 		path: '/api/v1/events',
 		method: 'POST',
 		handler: function(request, reply) {
@@ -37,7 +37,7 @@ server.route([
 	},
 
 
-		{
+	{
 		path: '/api/v1/events/{name}',
 		method: 'GET',
 		handler: function(request, reply) {
@@ -46,7 +46,7 @@ server.route([
 	},
 
 
-		{
+	{
 		path: '/api/v1/events/{name}',
 		method: 'PUT',
 		handler: function(request, reply) {
@@ -55,11 +55,22 @@ server.route([
 	},
 
 
-		{
+	{
 		path: '/api/v1/events/{name}',
 		method: 'POST',
 		handler: function(request, reply) {
 			reply('Hi m8');
+		}
+	},
+
+	//Route for posting predictions
+	{
+		path: '/api/v1/events/{topic}/predictions',
+		method: 'POST',
+		handler: function(request, reply) {
+			var topic = request.params.topic;
+
+			Data.events[topic].predictions.push(request.payload);
 		}
 	}
 ]);

@@ -14,7 +14,7 @@ var Login = React.createClass({
 	        <div className="LPage">
 	            <img className="imaage" src="/assets/img/glyphicon-bank.png" alt="" />
 	            <form className="LC" onSubmit={this.onSubmit}>
-	                <input type="text" ref="username" />
+	                <input type="text" className="logInput" placeholder="Enter your username..." ref="username" />
 	                <button id="lbutton"type="submit" onClick={this.onSubmit}></button>
 	            </form>
 	        </div>

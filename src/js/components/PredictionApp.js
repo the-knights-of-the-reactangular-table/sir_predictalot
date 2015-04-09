@@ -1,26 +1,19 @@
 var React 		 		= require("react");
 var PredictionSection 	= require("./sections/Prediction");
-var ChallengeSection 	= require("./sections/Challenge");
-var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
 var SubmissionSection   = require("./sections/Submission");
+var LoginSection 		= require("./sections/Login");
 
 function getStateFromStores() {
 
-	var currentUser  	 = AppStore.getUser();
-	var currentSelection = currentUser.preferences.currentSelection;
-	var predictionId 	 = currentUser.stats[currentSelection].predictions;
-	var data 			 = AppStore.getData();
-	var active 			 = AppStore.getActive();
-	var route			 = AppStore.getRoute();
+	var currentUser  = AppStore.getUser();
+	var predictions  = AppStore.getPredictions();
+	var active 		 = AppStore.getActive();
+	var route		 = AppStore.getRoute();
 
 	return {
 		user 		     : currentUser,
-		currentEventName : currentSelection,
-		currentEvent 	 : AppStore.getCurrentEvent(),
-		predictionId 	 : predictionId,
-		current_pred  	 : AppStore.getCurrentSubject("predictions"),
-		data 			 : data,
+		predictions 	 : predictions,
 		active           : active,
 		route   		 : route
 	};
@@ -44,17 +37,23 @@ var PredictionApp = React.createClass({
 
 	render: function() {
 
-		if (this.state.route.submission) {
+		if(this.state.route === "login") {
 			return (
-				<div>
-					<SubmissionSection />
+				<div className="app-wrapper">
+					<LoginSection />
+				</div>
+				);
+		} else if (this.state.route === "submission") {
+			return (
+				<div className="app-wrapper">
+					<SubmissionSection user={this.state.user} />
 				</div>
 			);
 
-		} else if (this.state.route.prediction) {
+		} else if (this.state.route === "prediction") {
 			return (
-				<div>
-					<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>
+				<div className="app-wrapper">
+					<PredictionSection username={this.state.user.username} predictions={this.state.predictions} active={this.state.active}/>
 				</div>
 			);
 		}

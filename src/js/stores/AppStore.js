@@ -68,6 +68,7 @@ PredictionAppDispatcher.register(function(action) {
 	        	_predictions[_predictions.length-1].right=true;
 
 	        }
+	        _predictions.shift();
 			_predictions.push(action.newPrediction);
 	        AppStore.emitChange();
 

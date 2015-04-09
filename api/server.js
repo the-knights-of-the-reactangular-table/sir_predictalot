@@ -113,8 +113,8 @@ server.route([
 			Data.topics[prediction.topic].predictions.forEach(function(ele, index) {
 				if (ele.id === prediction.id) {
 					// Check that the user hasn't already voted
-					if (ele.option1.indexOf(user) !== -1 &&
-						ele.option2.indexOf(user) !== -1) {
+					if (ele.option1.indexOf(user) === -1 &&
+						ele.option2.indexOf(user) === -1) {
 						ele[prediction.chosen].push(user);
 					} else {
 						return reply({alert: "error", description: "You've already voted on that!"});
@@ -122,7 +122,14 @@ server.route([
 				}
 			});
 
-			return reply();
+			var options = {
+				url: '/api/v1/topics/random/1',
+				method: 'GET',
+			};
+			server.inject(options, function(err,response){
+				reply(response.payload);
+			});
+
 
 		}
 	},

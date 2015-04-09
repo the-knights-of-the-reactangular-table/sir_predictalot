@@ -8,7 +8,7 @@ var Prediction = React.createClass({
 
 	render: function(){
 		return (
-			<PredictionBox prediction={this.props.prediction} />
+			<PredictionBox prediction={this.props.prediction} username={this.props.username} />
 			);
 	}
 
@@ -22,7 +22,7 @@ var PredictionBox = React.createClass({
         return(
             <div className="predictionBox">
                 <TextBox text={this.props.prediction.text} />
-                <ImageBox prediction={this.props.prediction} />
+                <ImageBox username={this.props.username} prediction={this.props.prediction} />
                 <MenuBox />
             </div>
         );
@@ -60,6 +60,8 @@ var ImageBox = React.createClass({
 
 
     onTouchEnd: function(image){
+    	console.log('image.target: ', image.target);
+    	console.log('on touch end');
         var didSwipe = false;
         var swipe = "";
         var option;
@@ -76,9 +78,9 @@ var ImageBox = React.createClass({
 
 
         var swipeInfo = {
-        	id: image.id,
+        	id: this.props.prediction.id,
         	username: this.props.username,
-			topic: image.topic,
+			topic: this.props.prediction.topic,
 			option: option,
 			type: swipe
 		};

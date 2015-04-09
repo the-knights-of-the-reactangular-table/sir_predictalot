@@ -25,6 +25,7 @@ var PredictionBox = React.createClass({
             <div className="predictionBox">
                 <TextBox data={this.props.data} active={this.props.active}/>
                 <ImageBox data={this.props.data} />
+                <MenuBox />
             </div>
         );
     }
@@ -88,27 +89,6 @@ var ImageBox = React.createClass({
 
 		PredictionActionCreators.newSwipe(swipeInfo);
 
-
-
-
-	
-/*
-        newData[image_number].animation_class = swipe;
-        new_active = image_number - 1;
-
-        var newStateObj = {};
-        newStateObj.data = newData;
-        newStateObj.active = new_active;
-
-        if (didSwipe){
-            newStateObj.swipe = {};
-            newStateObj.swipe.left = "";
-            newStateObj.swipe.right = "";
-        }
-
-        this.setState(newStateObj);
-
-*/
     },
 
 
@@ -152,73 +132,32 @@ var ImageBox = React.createClass({
 });
 
 
+var MenuBox = React.createClass({
 
-
-/*
-
-	clickHandler: function(e) {
-		e.preventDefault();
-		var predictionInfo = {
-			type: "predictions",
-			topic: this.props.currentEventName,
-			pred_id: this.props.predictionId,
-			chosen: e.target.value
+	create: function(){
+		
+		var route = {
+			submission  : true,
+			prediction  : false
 		};
-		PredictionActionCreators.newPrediction(predictionInfo);
+
+		PredictionActionCreators.navigateTo(route);
+
 	},
 
-	
-
-
-	render: function() {
-		var prediction = this.props.prediction;
-		var predictionBody = (function(){
-
-			switch (prediction.type[0]) {
-
-				case "binary":
-					return (
-						<div className="sectionBody">
-							<div className="topicName">
-								<h3>{prediction.name}</h3>
-								<h5>{prediction.pointsForCorrect}</h5>
-							</div>
-							<div className="sectionBinary sectionLeft">
-								<h3>HardCodedBoxer1</h3>
-								<button value="option1" onClick={this.clickHandler}>1</button>
-							</div>
-							<div className="sectionBinary sectionRight">
-								<h3>HardCodedBoxer2</h3>
-								<button value="option2" onClick={this.clickHandler}>2</button>
-							</div>
-						</div>
-						);
-
-				case "unary":
-					return (
-						<div className="sectionBody">
-							<div className="topicName">
-								<h3>{prediction.name}</h3>
-								<h5>{prediction.pointsForCorrect}</h5>
-							</div>
-							<div className="sectionUnary">HardCodedBoxer1</div>
-						</div>
-					);
-
-				}
-			}.bind(this)());
-
+	render: function(){
 		return (
-			<div className={"sectionHolder " + this.props.currentEventName} id="Predictions">
-				<div className="sectionHeader">
-					<h1>Prediction</h1>
-				</div>
-				{predictionBody}
+			<div className="menuBox">
+				<input type="submit" value="Profile" className="menu_button" />
+				<input type="submit" value="Create" className="menu_button"  onClick={this.create}/>
+				<input type="submit" value="Friends" className="menu_button" />
 			</div>
-		);
+			);
 	}
+})
 
-*/
+
+
 
 
 

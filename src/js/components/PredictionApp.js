@@ -47,7 +47,7 @@ var PredictionApp = React.createClass({
 		if (this.state.route.submission) {
 			return (
 				<div>
-					<SubmissionSection />
+					<SubmissionSection currentUser={this.state.currentUser}/>
 				</div>
 			);
 		} else if (this.state.route.prediction) {

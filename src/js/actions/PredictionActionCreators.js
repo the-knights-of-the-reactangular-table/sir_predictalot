@@ -21,12 +21,13 @@ module.exports = {
 	newSwipe: function(info){
 
 		var choice = {
-			username : "MIJOTHY",
-			image    : info.image,
-			type 	 : info.type,
-			topic 	 : info.topic
+			username 	 : "MIJOTHY",
+			image    	 : info.image,
+			direction 	 : info.direction,
+			topic 	 	 : info.topic
 		};
 
+	console.log('choice: ', choice);
 	PredictionServerActionCreators.receiveSwipe(choice);
 
 	},

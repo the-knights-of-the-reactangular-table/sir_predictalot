@@ -12,16 +12,16 @@ var route = {
 };
 
 var DATA = [
-    {url: '/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
-    {url: '/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
-    {url: '/david-cameron_square.jpg', text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
-    {url: '/kim-jong-un_square.jpg', text: 'Will Kim die this year?', key: 3, animation_class: "",left: false, right: false},
-    {url: '/is_square.jpg', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
-    {url: '/saudi_square.png', text: 'Will Saudi Arabia invade Yemen this month?', key: 2, animation_class: "",left: false, right: false},
-    {url: '/ronaldo_square.jpg', text: "Will Real Madrid win the Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
-    {url: '/sterling_square.jpg', text: 'Will Raheem Sterling leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
-    {url: '/manu_square.jpg', text: "Will Man Utd finish second in the Premier League?", key: 6, animation_class: "",left: false, right: false},
-    {url: '/boxing_square.jpg', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
+    {url: '/bieber_square.jpg',        category: 'celebrities', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
+    {url: '/one_direction_square.png', category: 'celebrities', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
+    {url: '/david-cameron_square.jpg', category: 'politics',  text: "Will he be PM after the election?", key: 10, animation_class: "", left: false, right: false},
+    {url: '/kim-jong-un_square.jpg',   category: 'politics', text: 'Will Kim die this year?', key: 3, animation_class: "",left: false, right: false},
+    {url: '/is_square.jpg',            category: 'politics', text: "Will IS lose the city of Mosul this summer?", key: 1, animation_class: "", left: false, right: false},
+/*    {url: '/saudi_square.png',         category: 'politics', text: 'Will Saudi Arabia invade Yemen this month?', key: 2, animation_class: "",left: false, right: false},
+    {url: '/ronaldo_square.jpg',       category: 'sports', text: "Will Real Madrid win the Champions League 2015?", key: 4, animation_class: "", left: false, right: false},
+    {url: '/sterling_square.jpg',      category: 'sports',text: 'Will Raheem Sterling leave Liverpool this summer?', key: 5, animation_class: "",left: false, right: false},
+    {url: '/manu_square.jpg',          category: 'sports',text: "Will Man Utd finish second in the Premier League?", key: 6, animation_class: "",left: false, right: false},*/
+    {url: '/boxing_square.jpg',        category: 'sports', text: 'Will Mayweather beat Pacquiao?', key: 7, animation_class: "",left: false, right: false}
 ];
 
 var active = DATA.length - 1;
@@ -111,7 +111,7 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 		case ActionTypes.RECEIVE_SWIPE:
 			rawData = action.rawData;
 			var image_number = DATA.indexOf(rawData.image);
-			DATA[image_number].animation_class = rawData.type;
+			DATA[image_number].animation_class = rawData.direction;
 	        active = image_number - 1;
 
 	        if (rawData.type==='swipe-left'){
@@ -119,9 +119,18 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 
 	        } else if (rawData.type==='swipe-right'){
 	        	DATA[image_number].right=true;
-
 	        }
+
+	       	console.log('DATA: ', DATA);
+	    	console.log('active: ', active);
 	        AppStore.emitChange();
+
+	        /*setTimeout(function(){
+
+	        	DATA.splice(DATA.length - 1, 1);
+	        	AppStore.emitChange();
+	        }, 3000);*/
+
 	        break;
 
 
@@ -138,7 +147,20 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 	    case ActionTypes.RECEIVE_FORM_DATA:
 	    	rawData = action.rawData;
 
-	    	DATA.unshift(rawData);
+	    	var dummy_key = Math.floor(Math.random()* 10000);
+
+	    	var newPredictionData = {
+	    		url: rawData.inputURL,
+	    		text: rawData.inputText,
+	    		category: rawData.inputCategory,
+	    		animationClass: '',
+	    		left: false,
+	    		right: false,
+	    		key: dummy_key
+	    	}
+
+
+	    	DATA.unshift(newPredictionData);
 
 	    	active = DATA.length - 1;
 
@@ -146,7 +168,8 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 	    		prediction : true,
 	    		submission : false
 	    	};
-
+	    	console.log('DATA: ', DATA);
+	    	console.log('active: ', active);
 	    	AppStore.emitChange();
 	    	break;
 

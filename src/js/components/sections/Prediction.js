@@ -80,9 +80,11 @@ var ImageBox = React.createClass({
 
         var swipeInfo = {
         	image: image,
-			type: swipe,
+			direction: swipe,
 			topic: 'football'
 		};
+
+		console.log('on touche end triggered');
 
 
 		PredictionActionCreators.newSwipe(swipeInfo);
@@ -105,7 +107,7 @@ var ImageBox = React.createClass({
 	        }
 
 	        return (
-	                <div key={this.props.data.key}>
+	                <div key={image.url}>
 	                    <div  className={image.animation_class}
 		                      onTouchMove={this.handleTouchMove}
 	                          onTouchEnd={this.onTouchEnd.bind(null,image)}

@@ -16,17 +16,23 @@ var SubmissionForm = React.createClass({
 	},
 
 	render: function(){
+
+		var dummy_selectOptions = ['sports','celebrities', 'politics','dark', 'funny'];
+
+		var selectOptions = dummy_selectOptions.map(function(category){
+			return (
+				<option value={category}>{category}</option>
+			);
+		});
+
 		return (
 			<div>
 				<form onSubmit={this.getFormInput}>
 					<input type="text" ref="inputText" placeholder="Enter your prediction..."  />
 	  				<input type="text" ref="inputURL" placeholder="Enter image url..." />
-					<select ref="inputCategory">
-					  <option value="sports">Sports</option>
-					  <option value="politics">Politics</option>
-					  <option value="dark_news">Dark News</option>
-					  <option value="celebrities">Celebrities</option>
-					</select>
+	  				<select ref="inputCategory">
+	  				{selectOptions}
+	  				</select>
 	  				<input type="submit" value="Create prediction" />
 	  			</form>
 			</div>

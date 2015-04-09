@@ -12,10 +12,10 @@ var Login = React.createClass({
 	render: function() {
 	    return (
 	        <div className="LPage">
-	            <img className="imaage" src="glyphicons-43-pie-chart.png" alt="" />
-	            <form className="LC">
-	                <input type="text" ref="username" placeholder="username" />
-	                <button id="lbutton"type="submit" onClick={this.onSubmit}>Login</button>
+	            <img className="imaage" src="/assets/img/glyphicon-bank.png" alt="" />
+	            <form className="LC" onSubmit={this.onSubmit}>
+	                <input type="text" ref="username" />
+	                <button id="lbutton"type="submit" onClick={this.onSubmit}></button>
 	            </form>
 	        </div>
 	    );

@@ -40,19 +40,19 @@ var PredictionApp = React.createClass({
 
 		if(this.state.route === "login") {
 			return (
-				<div>
+				<div className="app-wrapper">
 					<LoginSection />
 				</div>
 				);
 		} else if (this.state.route === "submission") {
 			return (
-				<div>
+				<div className="app-wrapper">
 					<SubmissionSection user={this.state.user} />
 				</div>
 			);
 		} else if (this.state.route === "prediction") {
 			return (
-				<div>
+				<div className="app-wrapper">
 					<PredictionSection username={this.state.user.username} predictions={this.state.predictions} active={this.state.active}/>
 				</div>
 			);

@@ -142,9 +142,7 @@ var MenuBox = React.createClass({
 	render: function(){
 		return (
 			<div className="menuBox">
-				<input type="submit" value="Profile" className="menu_button" />
-				<input type="submit" value="Create" className="menu_button"  onClick={this.clickHandler}/>
-				<input type="submit" value="Friends" className="menu_button" />
+				<button className="menu_button"  onClick={this.clickHandler}/>
 			</div>
 		);
 	}

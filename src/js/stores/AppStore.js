@@ -9,7 +9,7 @@ var CHANGE_EVENT = "change";
 var route = {
 	prediction: true,
 	submission: false
-}
+};
 
 var DATA = [
     {url: '/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
@@ -106,7 +106,6 @@ var AppStore = assign({}, EventEmitter.prototype, {
 });
 
 AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
-	console.log(action);
 	switch(action.type) {
 
 		case ActionTypes.RECEIVE_SWIPE:
@@ -133,6 +132,21 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 	    		prediction : rawData.prediction,
 	    		submission : rawData.submission
 	    	};
+	    	AppStore.emitChange();
+	    	break;
+
+	    case ActionTypes.RECEIVE_FORM_DATA:
+	    	rawData = action.rawData;
+
+	    	DATA.unshift(rawData);
+
+	    	active = DATA.length - 1;
+
+	    	route = {
+	    		prediction : true,
+	    		submission : false
+	    	};
+
 	    	AppStore.emitChange();
 	    	break;
 

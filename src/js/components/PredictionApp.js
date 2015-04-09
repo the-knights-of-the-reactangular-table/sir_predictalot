@@ -6,7 +6,7 @@ var AppStore 			= require("../stores/AppStore");
 var SubmissionSection   = require("./sections/Submission");
 
 function getStateFromStores() {
-	
+
 	var currentUser  	 = AppStore.getUser();
 	var currentSelection = currentUser.preferences.currentSelection;
 	var predictionId 	 = currentUser.stats[currentSelection].predictions;
@@ -27,8 +27,6 @@ function getStateFromStores() {
 }
 
 
-
-
 var PredictionApp = React.createClass({
 
 
@@ -45,35 +43,26 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		console.log('user in PredictionApp: ', this.state.user);
-		console.log('data in PredictionApp: ', this.state.data);
-		
-	if (this.state.route.submission){
-		return (
-			<div>
-				<SubmissionSection />
-			</div>
-		);
 
-
-	} else if (this.state.route.prediction){
-		return (
-			<div>
-				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>;
-			</div>
-		);
-	}
-
-		
+		if (this.state.route.submission) {
+			return (
+				<div>
+					<SubmissionSection />
+				</div>
+			);
+		} else if (this.state.route.prediction) {
+			return (
+				<div>
+					<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>
+				</div>
+			);
+		}
 	},
-
 
 	_onChange: function() {
 		this.setState(getStateFromStores());
 	}
 });
-
-
 
 
 module.exports = PredictionApp;

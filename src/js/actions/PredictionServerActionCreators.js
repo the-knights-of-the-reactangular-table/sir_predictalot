@@ -12,6 +12,13 @@ module.exports = {
     });
   },
 
+  receiveFormData: function(rawData) {
+    PredictionAppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_FORM_DATA,
+      rawData: rawData
+    });
+  },
+
   receiveSwipe: function(rawData){
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_SWIPE,

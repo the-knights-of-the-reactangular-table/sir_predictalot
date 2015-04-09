@@ -19,16 +19,29 @@ module.exports = {
 	},
 
 	newSwipe: function(info){
-		
+
 		var choice = {
 			username : "MIJOTHY",
 			image    : info.image,
 			type 	 : info.type,
-			topic 	 : info.topic	
+			topic 	 : info.topic
 		};
 
 	PredictionServerActionCreators.receiveSwipe(choice);
-	
+
+	},
+
+	getFormInput: function(info) {
+
+		var data = {
+			username  	  : "MIJOTHY",
+			inputText 	  : info.inputText,
+			inputURL  	  : info.inputURL,
+			inputCategory : info.inputCategory
+		};
+
+	PredictionServerActionCreators.receiveFormData(data);
+
 	},
 
 

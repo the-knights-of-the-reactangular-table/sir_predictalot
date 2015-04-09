@@ -7,7 +7,6 @@ var PredictionActionCreators = require("../../actions/PredictionActionCreators")
 var Prediction = React.createClass({
 
 	render: function(){
-		console.log('data in Prediction: ', this.props.data);
 
 		return (
 			<PredictionBox data={this.props.data} active={this.props.active}/>
@@ -20,7 +19,6 @@ var Prediction = React.createClass({
 
 var PredictionBox = React.createClass({
     render: function() {
-      	console.log('data in PredictionBox: ', this.props.data);
         return(
             <div className="predictionBox">
                 <TextBox data={this.props.data} active={this.props.active}/>
@@ -66,7 +64,7 @@ var ImageBox = React.createClass({
         firstX = e.touches[0].pageX;
     },
 
-  	
+
     onTouchEnd: function(image){
         var didSwipe = false;
         var swipe = "";
@@ -93,9 +91,8 @@ var ImageBox = React.createClass({
 
 
     render: function() {
-    		console.log('data in ImageBox: ', this.props.data);
 	        var images = this.props.data.map(function(image, i){
-	        
+
 	        if (image.left){
 	            var no_style = {
 	                opacity: 1
@@ -106,7 +103,7 @@ var ImageBox = React.createClass({
 	                opacity: 1
 	            };
 	        }
-	           
+
 	        return (
 	                <div key={this.props.data.key}>
 	                    <div  className={image.animation_class}
@@ -135,7 +132,7 @@ var ImageBox = React.createClass({
 var MenuBox = React.createClass({
 
 	create: function(){
-		
+
 		var route = {
 			submission  : true,
 			prediction  : false
@@ -152,12 +149,9 @@ var MenuBox = React.createClass({
 				<input type="submit" value="Create" className="menu_button"  onClick={this.create}/>
 				<input type="submit" value="Friends" className="menu_button" />
 			</div>
-			);
+		);
 	}
-})
-
-
-
+});
 
 
 

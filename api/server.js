@@ -125,6 +125,9 @@ server.route([
 			var options = {
 				url: '/api/v1/topics/random/1',
 				method: 'GET',
+				payload: {
+					username: user
+				}
 			};
 			server.inject(options, function(err,response){
 				reply(response.payload);
@@ -215,7 +218,7 @@ server.route([
 		path: '/api/v1/topics/random/{number?}',
 		method: 'GET',
 		handler: function(request, reply) {
-
+			console.log('request', request);
 			var user 			= request.payload.username;
 			var topicOptions 	= Data.users[user].preferences.topics;
 			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];

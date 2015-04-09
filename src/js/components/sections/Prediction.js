@@ -47,8 +47,23 @@ var TextBox = React.createClass({
 
 var lastX;
 var firstX;
+var swipe;
 
 var ImageBox = React.createClass({
+
+    render: function() { 
+    	var key = Math.floor(Math.random()*10000);
+     return(
+            <ReactTransitionGroup transitionName="swipe">
+	           <SingleImage key={key} image={this.props.prediction} />
+		    </ReactTransitionGroup>
+        );
+    }
+});
+
+
+
+var SingleImage = React.createClass({
 
 	handleTouchMove: function(e){
         lastX = e.touches[0].pageX;
@@ -58,43 +73,45 @@ var ImageBox = React.createClass({
         firstX = e.touches[0].pageX;
     },
 
-
     onTouchEnd: function(image){
-    	console.log('image.target: ', image.target);
-    	console.log('on touch end');
         var didSwipe = false;
-        var swipe = "";
-        var option;
 
-        if(firstX - lastX > 75) {
+        if(firstX - lastX > 50) {
             didSwipe = true;
             swipe = 'swipe-left';
-            option = "option2";
-        } else if (firstX - lastX < -75) {
+        } else if (firstX - lastX < -50) {
             didSwipe = true;
             swipe = 'swipe-right';
-        	option = "option2";
         }
 
-
         var swipeInfo = {
-        	id: this.props.prediction.id,
-        	username: this.props.username,
-			topic: this.props.prediction.topic,
-			option: option,
-			type: swipe
+        	image: image,
+			direction: swipe,
+			topic: 'football'
 		};
 
-		if(didSwipe){
+		console.log('on touch end triggered');
+
+		if (didSwipe){
 			PredictionActionCreators.newSwipe(swipeInfo);
 		}
 
     },
 
-    componentWillLeave: function(done){
-		console.log('this.getDOMENode() ', this.getDOMNode());
+	componentWillLeave: function(done){
 		var animated_element = this.getDOMNode();
 		animated_element.className = swipe;
+		var children = animated_element.childNodes;
+		console.log('children; ',children);
+
+
+		if (swipe === 'swipe-left'){
+			children[1].style["opacity"] = 1;
+		} else if (swipe === 'swipe-right'){
+			children[0].style["opacity"] = 1;
+		}
+
+
     	console.log('component will leave triggered');
     	console.log('Swipe is :', swipe);
     	setTimeout(function(){
@@ -112,28 +129,20 @@ var ImageBox = React.createClass({
     	console.log('componentWillUnmount triggered');
     },
 
-    render: function() { 
-     return(
-      
-            <ReactTransitionGroup transitionName="swipe">
-            <div className="imageBox">
-               <div key={this.props.prediction.url}>
-	                    <div className={this.props.prediction.animation_class}
-		                      onTouchMove={this.handleTouchMove}
-	                          onTouchEnd={this.onTouchEnd}
-	                          onTouchStart={this.handleTouchStart}
-	                    >
-	                    <div  className='yes_stamp'>Yes</div>
-	                    <div  className='no_stamp'>No</div>
-	                    <img className="predictionImg" src={this.props.prediction.url} /></div>
-	            </div>
+	render: function(){
+		return(
+            <div  className={this.props.image.animation_class}
+	              onTouchMove={this.handleTouchMove}
+	              onTouchEnd={this.onTouchEnd.bind(null,this.props.image)}
+	              onTouchStart={this.handleTouchStart}
+	             >
+	            <div className='yes_stamp'>Yes</div>
+	            <div className='no_stamp'>No</div>
+	            <img className="predictionImg" src={this.props.image.url} /> 
             </div>
-            </ReactTransitionGroup>
-          
-        );
-    }
+			)
+	}
 });
-
 
 var MenuBox = React.createClass({
 
@@ -152,6 +161,8 @@ var MenuBox = React.createClass({
 		);
 	}
 });
+
+
 
 
 

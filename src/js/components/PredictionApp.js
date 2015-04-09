@@ -4,17 +4,28 @@ var ChallengeSection 	= require("./sections/Challenge");
 var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
 
-
 function getStateFromStores() {
 	var currentUser  	 = AppStore.getUser();
 	var currentSelection = currentUser.preferences.currentSelection;
 	var predictionId 	 = currentUser.stats[currentSelection].predictions;
 	var data 			 = AppStore.getData();
+	var active 			 = AppStore.getActive();
 
 	return {
-		data 			 : data
+		user 		     : currentUser,
+		currentEventName : currentSelection,
+		currentEvent 	 : AppStore.getCurrentEvent(),
+		predictionId 	 : predictionId,
+		current_pred  	 : AppStore.getCurrentSubject("predictions"),
+		data 			 : data,
+		active           : active
 	};
 }
+
+
+var isOnPredictionPage = false;
+var isOnSubmissionPage= true;
+
 
 var PredictionApp = React.createClass({
 
@@ -39,9 +50,13 @@ var PredictionApp = React.createClass({
 		);
 	},
 
+
 	_onChange: function() {
 		this.setState(getStateFromStores());
 	}
 });
+
+
+
 
 module.exports = PredictionApp;

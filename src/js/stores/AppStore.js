@@ -70,6 +70,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return _DATA;
 	},
 
+	getActive: function(){
+		return active;
+	},
+
 	getUser: function() {
 		return _user;
 	},

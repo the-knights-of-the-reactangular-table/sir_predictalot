@@ -4,9 +4,9 @@ body{
 }
 
 #content {
-  height: 600px;
-  width: 400px;
-  position:absolute;
+  height: 100%;
+  width: 100%;
+  position:relative;
 }
 
 .app-wrapper {
@@ -63,6 +63,12 @@ body{
   float: right;
 }
 
+.backButton {
+  margin-top: 10px;
+  position: relative;
+  margin-left: 10px;
+}
+
 .mainBox {
     margin-top: 5px;
     border-radius: 10px;
@@ -78,25 +84,15 @@ body{
 
 }
 
-/*.menuBox {
+.menuBox {
     display: block;
     position: relative;
-    padding: 5px;
-    height: 10%;
-    width: 95%;
-    font-weight: bold;
-    text-align: center;
-    border: 2px solid blue;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 10px;
-     height: 26%;
     width: 100%;
     font-weight: bold;
     text-align: center;
-    bottom: 0;
+    bottom: 10px;
     position: absolute;
-}*/
+}
 
 
 

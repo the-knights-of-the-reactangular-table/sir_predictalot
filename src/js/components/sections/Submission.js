@@ -32,11 +32,11 @@ var SubmissionForm = React.createClass({
 
 		return (
 			<div>
-				<button onClick={this.clickHandler} />
+				<button className="backButton" onClick={this.clickHandler}> Back </button>
 				<form onSubmit={this.getFormInput}>
-					<input type="text" ref="inputText" placeholder="Enter your prediction..."  />
-	  				<input type="text" ref="inputURL" placeholder="Enter image url..." />
-					<select ref="inputCategory">
+					<input type="text" ref="inputText" className="subText" placeholder="Enter your prediction..."  />
+	  				<input type="text" ref="inputURL" className="subURL" placeholder="Enter image url..." />
+					<select ref="inputCategory" className="subCategory">
 					  {topicOptions}
 					</select>
 	  				<input type="submit" value=" Create prediction!     ✔" className="subButton subForm"/>

@@ -7,43 +7,43 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
+	login: function(username) {
+		PredictionAPIUtils.login(username);
+	},
+
+	navigateTo: function(info){
+
+		var route = info;
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.NAVIGATE_TO,
+			route: route
+		});
+	},
+
 	newSwipe: function(info){
-		
-		var choice = {
-			username : "MIJOTHY",
-			image    : info.image,
-			type 	 : info.type,
-			topic 	 : info.topic	
-		};
 
-	PredictionServerActionCreators.receiveSwipe(choice);
-	
-	},
-
-
-
-	newPrediction: function(info) {
 		var prediction = {
-			username : "MIJOTHY",
-			type 	 : info.type,
+			username : info.username,
+			id 		 : info.id,
 			topic 	 : info.topic,
-			pred_id  : info.pred_id,
-			chosen   : info.chosen
+			chosen   : info.option,
+			type 	 : info.type,
 		};
 
-		PredictionAPIUtils.createPrediction(prediction);
+		PredictionAPIUtils.makePrediction(prediction);
+
 	},
 
-	nextRandomEvent: function() {
-		PredictionAppDispatcher.dispatch({
-			type: ActionTypes.NEXT_RANDOM_EVENT
-		});
-	},
+	getFormInput: function(info) {
 
-	previousEvent: function() {
-		PredictionAppDispatcher.dispatch({
-			type: ActionTypes.PREVIOUS_EVENT
-		});
+		var prediction = {
+			username : info.username,
+			text     : info.inputText,
+			url      : info.inputURL,
+			topic 	 : info.inputCategory
+		};
+
+		PredictionAPIUtils.submitForm(prediction);
 	}
 
 };

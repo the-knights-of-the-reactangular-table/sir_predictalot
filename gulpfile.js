@@ -58,3 +58,11 @@ gulp.task("watch", function() {
 });
 
 gulp.task("default", ["browserify"]);
+
+// gulp.task('serveprod', function() {
+//   connect.server({
+//     root: "/Users/rorysedgwick/Projects/fac4/week10/sir_predictalot",
+//     port: process.env.PORT || 5000, // localhost:5000
+//     livereload: false
+//   });
+// });

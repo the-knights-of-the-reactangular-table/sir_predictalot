@@ -5,17 +5,32 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
-  receiveSwipe: function(rawData){
+  receiveRoute: function (rawData){
     PredictionAppDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_SWIPE,
+      type: ActionTypes.RECEIVE_NAVIGATION,
       rawData: rawData
     });
   },
 
-  receiveAll: function(rawData) {
+  receiveAlert: function(alert) {
+    PredictionAppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_ALERT,
+      alert: alert
+    });
+  },
+
+  receiveSwipe: function(newPrediction, direction){
+    PredictionAppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_SWIPE,
+      newPrediction: newPrediction,
+      direction: direction
+    });
+  },
+
+  receiveRawData: function(rawData) {
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_DATA,
-      rawData: rawData
+      rawData: rawData,
     });
   },
 

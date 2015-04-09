@@ -1,30 +1,23 @@
 var React 		 		= require("react");
 var PredictionSection 	= require("./sections/Prediction");
-var ChallengeSection 	= require("./sections/Challenge");
-var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
+var SubmissionSection   = require("./sections/Submission");
+var LoginSection 		= require("./sections/Login");
 
 function getStateFromStores() {
-	var currentUser  	 = AppStore.getUser();
-	var currentSelection = currentUser.preferences.currentSelection;
-	var predictionId 	 = currentUser.stats[currentSelection].predictions;
-	var data 			 = AppStore.getData();
-	var active 			 = AppStore.getActive();
+
+	var currentUser  = AppStore.getUser();
+	var predictions  = AppStore.getPredictions();
+	var active 		 = AppStore.getActive();
+	var route		 = AppStore.getRoute();
 
 	return {
 		user 		     : currentUser,
-		currentEventName : currentSelection,
-		currentEvent 	 : AppStore.getCurrentEvent(),
-		predictionId 	 : predictionId,
-		current_pred  	 : AppStore.getCurrentSubject("predictions"),
-		data 			 : data,
-		active           : active
+		predictions 	 : predictions,
+		active           : active,
+		route   		 : route
 	};
 }
-
-
-var isOnPredictionPage = false;
-var isOnSubmissionPage= true;
 
 
 var PredictionApp = React.createClass({
@@ -43,20 +36,33 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		return (
-			<div>
-				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} />;
-			</div>
-		);
-	},
+		console.log(this.state);
 
+		if(this.state.route === "login") {
+			return (
+				<div>
+					<LoginSection />
+				</div>
+				);
+		} else if (this.state.route === "submission") {
+			return (
+				<div>
+					<SubmissionSection user={this.state.user} />
+				</div>
+			);
+		} else if (this.state.route === "prediction") {
+			return (
+				<div>
+					<PredictionSection username={this.state.user.username} predictions={this.state.predictions} active={this.state.active}/>
+				</div>
+			);
+		}
+	},
 
 	_onChange: function() {
 		this.setState(getStateFromStores());
 	}
 });
-
-
 
 
 module.exports = PredictionApp;

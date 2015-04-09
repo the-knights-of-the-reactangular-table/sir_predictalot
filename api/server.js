@@ -22,7 +22,7 @@ server.route([
 
 	{
 		path: '/login',
-		method: 'GET',
+		method: ['GET', "POST"],
 		handler: function(request, reply) {
 			var user = request.payload.user;
 			var initialBatch = {
@@ -31,6 +31,7 @@ server.route([
 			};
 
 			if (!Data.users.hasOwnProperty(user)) {
+				console.log("error");
 				return reply({alert: "error", description: "That user doesn't exist"});
 			}
 
@@ -38,10 +39,19 @@ server.route([
 			var userTopics = Data.users[user].preferences.topics;
 			// Add logic for in case user has >10 topics in preferences
 			var predictionsPerTopic = Math.floor(10 / userTopics.length);
+			console.log(predictionsPerTopic);
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
 				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id;
+
+				if(!idOfLastEvent) {
+					for (var i = 0; i < predictionsPerTopic; i++) {
+						initialBatch.predictions.push(Data.topics[ele].predictions[i]);
+						console.log(initialBatch);
+					}
+					return;
+				}
 
 				// Look at the corresponding list of predictions available for it
 				Data.topics[ele].predictions.forEach(function(prediction, index) {

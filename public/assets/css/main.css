@@ -18,12 +18,11 @@ body{
 
 /* login stuff */
 .LPage {
-  display: inline-block;
   height: 180px;
   position: relative;
   width: 200px;
-  margin-left: 100px;
   text-align: center;
+  margin: 0 auto;
   transform: translateY(60%);
 }
 

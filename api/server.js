@@ -121,7 +121,15 @@ server.route([
 				}
 			});
 
-			return reply();
+			var options = {
+				path: '/api/v1/topics/random/1',
+				method: 'GET',
+			};
+
+			server.inject(options, function(err, response) {
+				console.log(response);
+				reply(response.payload);
+			});
 
 		}
 	},

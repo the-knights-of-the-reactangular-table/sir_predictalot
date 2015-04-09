@@ -36,7 +36,6 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
-		console.log(this.state);
 
 		if(this.state.route === "login") {
 			return (

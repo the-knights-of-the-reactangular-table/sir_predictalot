@@ -34,6 +34,10 @@ module.exports = {
 
 	},
 
+	deleteTopic: function(topic) {
+		PredictionAPIUtils.deleteTopic(topic);
+	},
+
 	getFormInput: function(info) {
 
 		var prediction = {

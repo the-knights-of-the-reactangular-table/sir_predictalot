@@ -49,16 +49,24 @@ body{
   background-repeat: no-repeat;
 }
 
-.menu_button {
+.button {
   height: 30px;
   border: none;
   background-color: transparent;
-  background-image: url(/assets/img/glyphicon-plus.png);
   background-position: 5;
   width: 45px;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.add_button {
   float: right;
+  background-image: url(/assets/img/glyphicon-plus.png);
+}
+
+.delete_button {
+  float: left;
+  background-image: url(/assets/img/glyphicon-circle-remove.png);
 }
 
 .mainBox {

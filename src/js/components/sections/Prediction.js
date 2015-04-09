@@ -10,7 +10,7 @@ var Prediction = React.createClass({
 		console.log('data in Prediction: ', this.props.data);
 
 		return (
-			<PredictionBox data={this.props.data} />
+			<PredictionBox data={this.props.data} active={this.props.active}/>
 			);
 	}
 
@@ -23,7 +23,7 @@ var PredictionBox = React.createClass({
       	console.log('data in PredictionBox: ', this.props.data);
         return(
             <div className="predictionBox">
-                <TextBox />
+                <TextBox data={this.props.data} active={this.props.active}/>
                 <ImageBox data={this.props.data} />
             </div>
         );
@@ -44,6 +44,7 @@ var TextBox = React.createClass({
 
         return(
             <div className="textBox">
+           {this.props.data[this.props.active].text}
             </div>
             );
         }
@@ -114,6 +115,7 @@ var ImageBox = React.createClass({
     render: function() {
     		console.log('data in ImageBox: ', this.props.data);
 	        var images = this.props.data.map(function(image, i){
+	        
 	        if (image.left){
 	            var no_style = {
 	                opacity: 1

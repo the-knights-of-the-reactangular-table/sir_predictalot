@@ -70,6 +70,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return DATA;
 	},
 
+	getActive: function(){
+		return active;
+	},
+
 	getUser: function() {
 		return _user;
 	},
@@ -101,6 +105,18 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 			var image_number = DATA.indexOf(rawData.image);
 			DATA[image_number].animation_class = rawData.type;
 	        active = image_number - 1;
+
+	        if (rawData.type==='swipe-left'){
+	        	DATA[image_number].left=true;
+
+	        } else if (rawData.type==='swipe-right'){
+	        	DATA[image_number].right=true;
+
+	        }
+
+
+
+
 
 
 

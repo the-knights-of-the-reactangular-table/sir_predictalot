@@ -3,13 +3,14 @@ var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
 var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
-
+var SubmissionSection 	= require("../sections/Submission");
 
 function getStateFromStores() {
 	var currentUser  	 = AppStore.getUser();
 	var currentSelection = currentUser.preferences.currentSelection;
 	var predictionId 	 = currentUser.stats[currentSelection].predictions;
 	var data 			 = AppStore.getData();
+	var active 			 = AppStore.getActive();
 
 	return {
 		user 		     : currentUser,
@@ -17,10 +18,16 @@ function getStateFromStores() {
 		currentEvent 	 : AppStore.getCurrentEvent(),
 		predictionId 	 : predictionId,
 		current_pred  	 : AppStore.getCurrentSubject("predictions"),
-		data 			 : data
+		data 			 : data,
+		active           : active
 
 	};
 }
+
+
+var isOnPredictionPage = false;
+var isOnSubmissionPage= true;
+
 
 var PredictionApp = React.createClass({
 
@@ -51,17 +58,34 @@ var PredictionApp = React.createClass({
 						return;
 				}
 		}, this);
-		return (
-			<div>
-				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} />;
-				{sections}
-			</div>
-		);
+		
+		if (isOnPredictionPage){
+			return (
+					<div>
+						<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>;
+						{sections}
+					</div>
+				);
+		}
+		else if (isOnSubmissionPage){
+			return (
+					<div>
+						<SubmissionSection />
+					</div>
+				);
+		}
+
+	
+
+
 	},
 
 	_onChange: function() {
 		this.setState(getStateFromStores());
 	}
 });
+
+
+
 
 module.exports = PredictionApp;

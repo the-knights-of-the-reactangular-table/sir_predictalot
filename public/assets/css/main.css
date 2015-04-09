@@ -239,7 +239,7 @@ body{
 }
 
 #content {
-    width: 250px;
+    width: 100%;
     height: 450px;
     margin-top: 10px;
 }
@@ -269,9 +269,6 @@ body{
 }
 
 
-#content{
-    width: 300px;
-}
 
 .predictionImg{
     width: 100%;
@@ -378,6 +375,7 @@ body{
   background-position: center;
  background-repeat: no-repeat;
 }
+
 .like {
   border-radius: 5px;
   padding: 5px 10px;

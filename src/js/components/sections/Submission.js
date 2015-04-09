@@ -23,6 +23,7 @@ var SubmissionForm = React.createClass({
 	},
 
 	render: function(){
+
 		var topicOptions = this.props.user.preferences.topics.map(function(topic) {
 			return (
 				<option value={topic}>{topic.split("")[0].toUpperCase() + topic.slice(1)}</option>
@@ -35,6 +36,7 @@ var SubmissionForm = React.createClass({
 				<form onSubmit={this.getFormInput}>
 					<input type="text" ref="inputText" placeholder="Enter your prediction..."  />
 	  				<input type="text" ref="inputURL" placeholder="Enter image url..." />
+
 					<select ref="inputCategory">
 					  {topicOptions}
 					</select>

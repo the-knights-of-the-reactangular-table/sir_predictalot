@@ -7,13 +7,14 @@ var LoginSection 		= require("./sections/Login");
 function getStateFromStores() {
 
 	var currentUser  = AppStore.getUser();
-	var predictions  = AppStore.getPredictions();
+	var prediction   = AppStore.getPrediction();
 	var active 		 = AppStore.getActive();
 	var route		 = AppStore.getRoute();
 
+
 	return {
 		user 		     : currentUser,
-		predictions 	 : predictions,
+		prediction  	 : prediction,
 		active           : active,
 		route   		 : route
 	};
@@ -39,6 +40,7 @@ var PredictionApp = React.createClass({
 
 		if(this.state.route === "login") {
 			return (
+
 				<div className="app-wrapper">
 					<LoginSection />
 				</div>
@@ -52,7 +54,7 @@ var PredictionApp = React.createClass({
 		} else if (this.state.route === "prediction") {
 			return (
 				<div className="app-wrapper">
-					<PredictionSection username={this.state.user.username} predictions={this.state.predictions} active={this.state.active}/>
+					<PredictionSection username={this.state.user.username} prediction={this.state.prediction} active={this.state.active}/>
 				</div>
 			);
 		}

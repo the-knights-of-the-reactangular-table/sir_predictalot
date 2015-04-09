@@ -1,6 +1,7 @@
 var React 			  		 = require("react/addons");
 var ReactCSSTransitionGroup  = React.addons.CSSTransitionGroup;
 var PredictionActionCreators = require("../../actions/PredictionActionCreators");
+var ReactTransitionGroup  = React.addons.TransitionGroup;
 
 
 var Prediction = React.createClass({
@@ -21,8 +22,8 @@ var PredictionBox = React.createClass({
         return(
             <div className="predictionBox">
                 <TextBox text={this.props.prediction.text} />
-                <ImageBox url={this.props.prediction.url} />
-                <MenuBox topic={this.props.prediction.topic} username={this.props.user.username} />
+                <ImageBox prediction={this.props.prediction} username={this.props.username} />
+                <MenuBox topic={this.props.prediction.topic} username={this.props.username} />
             </div>
         );
     }
@@ -75,9 +76,9 @@ var ImageBox = React.createClass({
 
 
         var swipeInfo = {
-        	id: image.id,
+        	id: this.props.prediction.id,
         	username: this.props.username,
-			topic: image.topic,
+			topic: this.props.prediction.topic,
 			option: option,
 			type: swipe
 		};
@@ -88,37 +89,39 @@ var ImageBox = React.createClass({
 
     },
 
+    componentWillLeave: function(done){
+		var animated_element = this.getDOMNode();
+		animated_element.className = swipe;
+    	setTimeout(function(){
+	    	done();
+    	},1000);
+    },
+
+    componentDidLeave: function(){
+
+    },
+
+    componentWillUnmount: function(){
+    },
 
     render: function() {
-	        var yes_style;
-	        var no_style;
+     return(
 
-	        if (this.props.left){
-	            no_style = {
-	                opacity: 1
-	            };
-	        }
-	        if (this.props.right){
-	            yes_style = {
-	                opacity: 1
-	            };
-	        }
-
-        return(
-            <div className="imageBox" >
-	            <ReactCSSTransitionGroup transitionName="swipe">
-		            <div key={this.props.url + this.props.text}>
-		                <div  className={this.props.animation_class}
+            <ReactTransitionGroup transitionName="swipe">
+            <div className="imageBox">
+               <div key={this.props.prediction.url}>
+	                    <div className={this.props.prediction.animation_class}
 		                      onTouchMove={this.handleTouchMove}
-		                      onTouchEnd={this.onTouchEnd}
-		                      onTouchStart={this.handleTouchStart}
-		                >
-		                <div style={yes_style} className='yes_stamp'>Yes</div>
-		                <div style={no_style} className='no_stamp'>No</div>
-		                <img className="predictionImg" src={this.props.url} /></div>
-		            </div>
-	            </ReactCSSTransitionGroup>
+	                          onTouchEnd={this.onTouchEnd}
+	                          onTouchStart={this.handleTouchStart}
+	                    >
+	                    <div  className='yes_stamp'>Yes</div>
+	                    <div  className='no_stamp'>No</div>
+	                    <img className="predictionImg" src={this.props.prediction.url} /></div>
+	            </div>
             </div>
+            </ReactTransitionGroup>
+
         );
     }
 });

@@ -30,6 +30,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return _user;
 	},
 
+	getPrediction: function(){
+		return _predictions[0];
+	},
+
 	getPredictions: function() {
 		return _predictions;
 	},
@@ -48,6 +52,7 @@ PredictionAppDispatcher.register(function(action) {
 
 	switch(action.type) {
 
+
 		case ActionTypes.RECEIVE_RAW_DATA:
 			_user = action.rawData.user;
 			_predictions = action.rawData.predictions;
@@ -64,8 +69,8 @@ PredictionAppDispatcher.register(function(action) {
 
 	        }
 			_predictions.push(action.newPrediction);
-
 	        AppStore.emitChange();
+
 	        break;
 
 

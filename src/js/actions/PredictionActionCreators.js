@@ -7,68 +7,44 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
+	login: function(username) {
+		PredictionAPIUtils.login(username);
+	},
+
 	navigateTo: function(info){
 
-		var route = {
-			username    : "MIJOTHY",
-			submission  : info.submission,
-			prediction  : info.prediction
-		};
-
-		PredictionServerActionCreators.receiveRoute(route);
+		var route = info;
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.NAVIGATE_TO,
+			route: route
+		});
 	},
 
 	newSwipe: function(info){
 
-		var choice = {
-			username 	 : "MIJOTHY",
-			image    	 : info.image,
-			direction 	 : info.direction,
-			topic 	 	 : info.topic
+
+		var prediction = {
+			username : info.username,
+			id 		 : info.id,
+			topic 	 : info.topic,
+			chosen   : info.option,
+			type 	 : info.type,
 		};
 
-	console.log('choice: ', choice);
-	PredictionServerActionCreators.receiveSwipe(choice);
+		PredictionAPIUtils.makePrediction(prediction);
 
 	},
 
 	getFormInput: function(info) {
 
-		var data = {
-			username  	  : "MIJOTHY",
-			inputText 	  : info.inputText,
-			inputURL  	  : info.inputURL,
-			inputCategory : info.inputCategory
-		};
-
-	PredictionServerActionCreators.receiveFormData(data);
-
-	},
-
-
-
-	newPrediction: function(info) {
 		var prediction = {
-			username : "MIJOTHY",
-			type 	 : info.type,
-			topic 	 : info.topic,
-			pred_id  : info.pred_id,
-			chosen   : info.chosen
+			username : info.username,
+			text     : info.inputText,
+			url      : info.inputURL,
+			topic 	 : info.inputCategory
 		};
 
-		PredictionAPIUtils.createPrediction(prediction);
-	},
-
-	nextRandomEvent: function() {
-		PredictionAppDispatcher.dispatch({
-			type: ActionTypes.NEXT_RANDOM_EVENT
-		});
-	},
-
-	previousEvent: function() {
-		PredictionAppDispatcher.dispatch({
-			type: ActionTypes.PREVIOUS_EVENT
-		});
+		PredictionAPIUtils.submitForm(prediction);
 	}
 
 };

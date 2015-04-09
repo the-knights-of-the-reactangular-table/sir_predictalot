@@ -1,8 +1,9 @@
 var React 			  		 = require("react/addons");
 var ReactCSSTransitionGroup  = React.addons.CSSTransitionGroup;
-
 var PredictionActionCreators = require("../../actions/PredictionActionCreators");
 
+var lastX;
+var firstX;
 
 var Prediction = React.createClass({
 
@@ -51,9 +52,6 @@ var TextBox = React.createClass({
 });
 
 
-var lastX;
-var firstX;
-
 var ImageBox = React.createClass({
 
 	handleTouchMove: function(e){
@@ -72,6 +70,7 @@ var ImageBox = React.createClass({
         if(firstX - lastX > 75) {
             didSwipe = true;
             swipe = 'swipe-left';
+            console.log("swipe left");
         } else if (firstX - lastX < -75) {
             didSwipe = true;
             swipe = 'swipe-right';
@@ -83,7 +82,6 @@ var ImageBox = React.createClass({
 			type: swipe,
 			topic: 'football'
 		};
-
 
 		PredictionActionCreators.newSwipe(swipeInfo);
 

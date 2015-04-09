@@ -50,6 +50,7 @@ var PredictionApp = React.createClass({
 					<SubmissionSection />
 				</div>
 			);
+
 		} else if (this.state.route.prediction) {
 			return (
 				<div>

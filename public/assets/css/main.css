@@ -303,6 +303,7 @@ body{
 
 .swipe-left {
   transform: rotate(5deg) scale(0.8) translate(-400px,0);
+  -webkit-transform: rotate(5deg) scale(0.8) translate(-400px,0);
   opacity: 0;
   transition: 1.5s;
 }
@@ -314,6 +315,8 @@ body{
 
 .swipe-right {
   transform: rotate(-5deg) scale(0.8) translate(400px,0);
+  -webkit-transform: rotate(-5deg) scale(0.8) translate(400px,0);
+
   opacity: 0;
 
   transition: 1.5s;

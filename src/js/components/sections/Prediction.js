@@ -70,7 +70,6 @@ var ImageBox = React.createClass({
         if(firstX - lastX > 75) {
             didSwipe = true;
             swipe = 'swipe-left';
-            console.log("swipe left");
         } else if (firstX - lastX < -75) {
             didSwipe = true;
             swipe = 'swipe-right';

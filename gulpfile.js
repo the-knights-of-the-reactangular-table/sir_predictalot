@@ -31,7 +31,7 @@ gulp.task("jest", function () {
 
 gulp.task('browserify', function() {
     var bundler = browserify({
-        entries: ['./src/main.js'],
+        entries: ['./src/js/main.js'],
         transform: [reactify],
         debug: true,
         cache: {}, packageCache: {}, fullPaths: true
@@ -44,12 +44,12 @@ gulp.task('browserify', function() {
         console.log('Updating!');
         watcher.bundle() // Create new bundle that uses the cache for high performance
         .pipe(source('main.js'))
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest('./public/assets/js'));
         console.log('Updated!', (Date.now() - updateStart) + 'ms');
     })
     .bundle() // Create the initial bundle when starting the task
     .pipe(source('main.js'))
-    .pipe(gulp.dest('./build/'));
+    .pipe(gulp.dest('./public/assets/js'));
 });
 
 gulp.task("watch", function() {

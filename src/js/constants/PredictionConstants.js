@@ -2,7 +2,7 @@ var keyMirror = require("react/lib/keyMirror");
 
 module.exports = {
 	ActionTypes: keyMirror({
-
+		RECEIVE_NAVIGATION: null,
 		NEXT_RANDOM_EVENT: null,
 		PREVIOUS_EVENT: null,
 

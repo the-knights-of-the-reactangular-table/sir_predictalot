@@ -3,13 +3,16 @@ var PredictionSection 	= require("./sections/Prediction");
 var ChallengeSection 	= require("./sections/Challenge");
 var PredictionSpinner 	= require("./sections/PredictionSpinner");
 var AppStore 			= require("../stores/AppStore");
+var SubmissionSection   = require("./sections/Submission");
 
 function getStateFromStores() {
+	
 	var currentUser  	 = AppStore.getUser();
 	var currentSelection = currentUser.preferences.currentSelection;
 	var predictionId 	 = currentUser.stats[currentSelection].predictions;
 	var data 			 = AppStore.getData();
 	var active 			 = AppStore.getActive();
+	var route			 = AppStore.getRoute();
 
 	return {
 		user 		     : currentUser,
@@ -18,14 +21,12 @@ function getStateFromStores() {
 		predictionId 	 : predictionId,
 		current_pred  	 : AppStore.getCurrentSubject("predictions"),
 		data 			 : data,
-		active           : active
-
+		active           : active,
+		route   		 : route
 	};
 }
 
 
-var isOnPredictionPage = false;
-var isOnSubmissionPage= true;
 
 
 var PredictionApp = React.createClass({
@@ -47,13 +48,23 @@ var PredictionApp = React.createClass({
 		console.log('user in PredictionApp: ', this.state.user);
 		console.log('data in PredictionApp: ', this.state.data);
 		
+	if (this.state.route.submission){
+		return (
+			<div>
+				<SubmissionSection />
+			</div>
+		);
 
 
-			return (
-					<div>
-						<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>;
-					</div>
-				);
+	} else if (this.state.route.prediction){
+		return (
+			<div>
+				<PredictionSection currentEventName={this.state.currentEventName} predictionId={this.state.predictionId} prediction={this.state.current_pred} data={this.state.data} active={this.state.active}/>;
+			</div>
+		);
+	}
+
+		
 	},
 
 

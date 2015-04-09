@@ -7,6 +7,17 @@ var ActionTypes = PredictionConstants.ActionTypes;
 
 module.exports = {
 
+	navigateTo: function(info){
+
+		var route = {
+			username    : "MIJOTHY",
+			submission  : info.submission,
+			prediction  : info.prediction
+		};
+
+		PredictionServerActionCreators.receiveRoute(route);
+	},
+
 	newSwipe: function(info){
 		
 		var choice = {

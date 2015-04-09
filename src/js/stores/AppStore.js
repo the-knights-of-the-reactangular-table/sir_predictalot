@@ -6,6 +6,11 @@ var assign 					= require("object-assign");
 var ActionTypes  = PredictionConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 
+var route = {
+	prediction: true,
+	submission: false
+}
+
 var DATA = [
     {url: '/bieber_square.jpg', text: 'Will they get back together in 2015?', key: 8, animation_class: "",left: false, right: false},
     {url: '/one_direction_square.png', text: 'Will they break up this year?', key: 9, animation_class: "",left: false, right: false},
@@ -70,6 +75,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 		return DATA;
 	},
 
+	getRoute: function(){
+		return route;
+	},
+
 	getActive: function(){
 		return active;
 	},
@@ -113,29 +122,19 @@ AppStore.dispatchToken = PredictionAppDispatcher.register(function(action) {
 	        	DATA[image_number].right=true;
 
 	        }
-
-
-
-
-
-
-
-/*	        var newStateObj = {};
-	        newStateObj.data = newData;
-	        newStateObj.active = new_active;
-
-	        if (didSwipe){
-	            newStateObj.swipe = {};
-	            newStateObj.swipe.left = "";
-	            newStateObj.swipe.right = "";
-	        }
-
-	        this.setState(newStateObj);
-*/
-
 	        AppStore.emitChange();
 	        break;
 
+
+	    case ActionTypes.RECEIVE_NAVIGATION:
+	    	rawData = action.rawData;
+
+	    	route = {
+	    		prediction : rawData.prediction,
+	    		submission : rawData.submission
+	    	};
+	    	AppStore.emitChange();
+	    	break;
 
 		case ActionTypes.RECEIVE_RAW_DATA:
 			AppStore.init(action.rawData);

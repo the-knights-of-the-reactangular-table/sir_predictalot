@@ -64,7 +64,7 @@ var ImageBox = React.createClass({
         firstX = e.touches[0].pageX;
     },
 
-  	
+
     onTouchEnd: function(image){
         var didSwipe = false;
         var swipe = "";
@@ -90,7 +90,7 @@ var ImageBox = React.createClass({
 
 
 
-	
+
 /*
         newData[image_number].animation_class = swipe;
         new_active = image_number - 1;
@@ -124,7 +124,7 @@ var ImageBox = React.createClass({
 	                opacity: 1
 	            };
 	        }
-	           
+
 	        return (
 	                <div key={this.props.data.key}>
 	                    <div  className={image.animation_class}
@@ -165,7 +165,7 @@ var ImageBox = React.createClass({
 		PredictionActionCreators.newPrediction(predictionInfo);
 	},
 
-	
+
 
 
 	render: function() {

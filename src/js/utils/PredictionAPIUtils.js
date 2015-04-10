@@ -4,7 +4,8 @@ var Request = require("superagent");
 module.exports = {
 
   login: function(username) {
-  	var userObj = {
+
+    var userObj = {
   		user: username
   	};
 
@@ -26,11 +27,20 @@ module.exports = {
 
   makePrediction: function(predictionInfo) {
 
+    console.log(predictionInfo);
     Request.post("/makeprediction")
         .send(predictionInfo)
         .end(function(err, res) {
             PredictionServerActionCreators.receiveSwipe(res.body, predictionInfo.type);
         });
+  },
+
+  deleteTopic: function(deletionInfo) {
+    Request.post("/deletetopic")
+      .send(deletionInfo)
+      .end(function(err, res) {
+          PredictionServerActionCreators.receiveRawData(res.body);
+      });
   }
 
 };

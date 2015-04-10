@@ -21,7 +21,7 @@ server.route([
 
 	{
 		path: '/login',
-		method: ['GET', "POST"],
+		method: ["POST"],
 		handler: function(request, reply) {
 			var user = request.payload.user;
 			var initialBatch = {
@@ -30,7 +30,6 @@ server.route([
 			};
 
 			if (!Data.users.hasOwnProperty(user)) {
-				console.log("error");
 				return reply({alert: "error", description: "That user doesn't exist"});
 			}
 
@@ -38,7 +37,6 @@ server.route([
 			var userTopics = Data.users[user].preferences.topics;
 			// Add logic for in case user has >10 topics in preferences
 			var predictionsPerTopic = Math.floor(10 / userTopics.length);
-			console.log(predictionsPerTopic);
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
@@ -47,7 +45,6 @@ server.route([
 				if(!idOfLastEvent) {
 					for (var i = 0; i < predictionsPerTopic; i++) {
 						initialBatch.predictions.push(Data.topics[ele].predictions[i]);
-						console.log(initialBatch);
 					}
 					return;
 				}
@@ -122,16 +119,48 @@ server.route([
 
 			var options = {
 				url: '/api/v1/topics/random/1',
-				method: 'GET',
+				method: 'POST',
 				payload: {
 					username: user
 				}
 			};
-			server.inject(options, function(err,response){
+			server.inject(options, function(response){
 				reply(response.payload);
 			});
 
+		}
+	},
 
+	{
+		path: "/deletetopic",
+		method: "POST",
+		handler: function(request, reply) {
+			var user = request.payload.username;
+			var topic = request.payload.topic;
+
+			if (!Data.users.hasOwnProperty(user)) {
+				return reply({alert: "error", description: "That user doesn't exist"});
+			} else if (Data.users[user].preferences.topics.indexOf(topic) === -1) {
+				return reply({alert: "error", description: "You've already binned that topic"});
+			}
+
+			// Find the index of the desired element to be removed
+			var topicPrefs = Data.users[user].preferences.topics;
+			var topicLocation = topicPrefs.indexOf(topic);
+			// Delete that element from the array
+			topicPrefs.splice(topicLocation, 1);
+
+			var options = {
+				url: "/login",
+				method: "POST",
+				payload: {
+					user: user
+				}
+			};
+
+			server.inject(options, function(response) {
+				return reply(response.result);
+			});
 		}
 	},
 
@@ -214,9 +243,9 @@ server.route([
 
 	{
 		path: '/api/v1/topics/random/{number?}',
-		method: 'GET',
+		method: 'POST',
 		handler: function(request, reply) {
-			console.log('request', request);
+
 			var user 			= request.payload.username;
 			var topicOptions 	= Data.users[user].preferences.topics;
 			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];
@@ -285,6 +314,7 @@ server.route([
 		path: '/api/v1/topics/{topic}/predictions',
 		method: 'POST',
 		handler: function(request, reply) {
+			console.log(request.payload);
 			var topic = request.params.topic;
 			var info  = request.payload;
 			var newPrediction;
@@ -310,9 +340,10 @@ server.route([
 			// If the prediction is for the friend network only, for each friend in the user's friends list,
 			// Add that prediction's id to their array of available m8 predictions.
 			if(newPrediction.topic === "m8s") {
-				Data.users[request.payload.username].friendsList.forEach(function(m8, ind) {
-					m8.stats.m8_predictions.push(newPrediction.id);
+				Data.users[request.payload.username].friendList.forEach(function(m8, ind) {
+					Data.users[m8].stats.m8s.m8_predictions.push(newPrediction.id);
 				});
+				Data.users[request.payload.username].stats.m8s.m8_predictions.push(newPrediction.id);
 			}
 
 			return reply({alert: "success", description: "Your prediction has been saved!"});

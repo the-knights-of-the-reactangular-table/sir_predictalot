@@ -9,7 +9,6 @@ module.exports = {
 
 		NAVIGATE_TO: null,
 
-		REMOVE_TOPIC: null,
 		CREATE_CUSTOM_PREDICTION: null,
 
 		// API action types

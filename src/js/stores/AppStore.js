@@ -82,6 +82,7 @@ PredictionAppDispatcher.register(function(action) {
 
 	    case ActionTypes.RECEIVE_ALERT:
 	    	_route = "prediction";
+	    	console.log(_route);
 	    	AppStore.emitChange();
 	    	break;
 

@@ -32,7 +32,7 @@ var SubmissionForm = React.createClass({
 
 		return (
 			<div>
-				<button className="backButton" onClick={this.clickHandler}> Back </button>
+				<button className="backButton" onClick={this.clickHandler}></button>
 				<form onSubmit={this.getFormInput}>
 					<input type="text" ref="inputText" className="subText" placeholder="Enter your prediction..."  />
 	  				<input type="text" ref="inputURL" className="subURL" placeholder="Enter image url..." />

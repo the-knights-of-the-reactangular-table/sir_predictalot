@@ -6,13 +6,13 @@
 			"email": "BEECHWARE@BEECH.com",
 			"stats": {
 				"points": 	30000,
-				"boxing":	{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
-				"celebrity": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"boxing":	{"name": "boxing", "points": 10000 },
+				"football": {"name": "football", "points": 20000 },
+				"celebrity": {"name": "football", "points": 20000 },
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football", "celebrity", "m8s"]
+				"topics": ["boxing", "football", "celebrity"]
 			},
 			"friendList": ["jaysone", "MIJOTHY"]
 		},
@@ -22,8 +22,8 @@
 			"email": "jaysone@sonejay.com",
 			"stats": {
 				"points": 30000,
-				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"boxing":{"name": "boxing", "points": 10000 },
+				"football": {"name": "football", "points": 20000 },
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
@@ -37,12 +37,12 @@
 			"email": "james.gandhi.2332@googlemail.com",
 			"stats": {
 				"points": 30000,
-				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"boxing":{"name": "boxing", "points": 10000 },
+				"football": {"name": "football", "points": 20000 },
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football", "m8s"]
+				"topics": ["boxing", "football"]
 			},
 			"friendList": ["PHB", "rory", "BEECHWARE"]
 		},
@@ -52,14 +52,14 @@
 			"email": "per.per@per.com",
 			"stats": {
 				"points": 30000,
-				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
-				"celebrity": {"name": "football", "points": 20000, "last_prediction_id": 0 },
-				"politics": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"boxing":{"name": "boxing", "points": 10000 },
+				"football": {"name": "football", "points": 20000 },
+				"celebrity": {"name": "football", "points": 20000 },
+				"politics": {"name": "football", "points": 20000 },
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football", "politics", "celebrity", "m8s"]
+				"topics": ["boxing", "football", "politics", "celebrity"]
 			},
 			"friendList": ["MIJOTHY"]
 		},
@@ -70,9 +70,9 @@
 			"email": "rory.rory@rory.com",
 			"stats": {
 				"points": 30000,
-				"boxing":{"name": "boxing", "points": 10000, "last_prediction_id": 0 },
-				"football": {"name": "football", "points": 20000, "last_prediction_id": 0 },
-				"celebrity": {"name": "football", "points": 20000, "last_prediction_id": 0 },
+				"boxing":{"name": "boxing", "points": 10000 },
+				"football": {"name": "football", "points": 20000 },
+				"celebrity": {"name": "football", "points": 20000 },
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {

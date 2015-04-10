@@ -26,7 +26,7 @@ var SubmissionForm = React.createClass({
 
 		var topicOptions = this.props.user.preferences.topics.map(function(topic) {
 			return (
-				<option value={topic}>{topic.split("")[0].toUpperCase() + topic.slice(1)}</option>
+				<option key={topic} value={topic}>{topic.split("")[0].toUpperCase() + topic.slice(1)}</option>
 				);
 		});
 

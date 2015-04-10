@@ -40,23 +40,14 @@ server.route([
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
-				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id;
-
-				if(!idOfLastEvent) {
-					for (var i = 0; i < predictionsPerTopic; i++) {
-						initialBatch.predictions.push(Data.topics[ele].predictions[i]);
-					}
-					return;
-				}
+				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id || Data.topics[ele].predictions[0].id;
+				var indexOfFirstUnfinishedEvent;
 
 				// Look at the corresponding list of predictions available for it
 				Data.topics[ele].predictions.forEach(function(prediction, index) {
-					var indexOfFirstUnfinishedEvent;
 
 					if(prediction.id === idOfLastEvent) {
 						indexOfFirstUnfinishedEvent = index + 1;
-					} else if (idOfLastEvent === undefined) {
-						indexOfFirstUnfinishedEvent = 0;
 					}
 
 					// Add the 5 predictions after the user's most prediction to the batch we send to the user
@@ -73,6 +64,17 @@ server.route([
 					return;
 				});
 				return;
+			});
+
+			// For each prediction id in the user's available social predictions
+			Data.users[user].stats.m8s.m8_predictions.forEach(function(predictionId, index) {
+				// Add 5 predictions
+				Data.topics.m8s.predictions.some(function(prediction) {
+					if (predictionId === prediction.id) {
+						initialBatch.predictions.push(prediction);
+					}
+					return index === 5;
+				});
 			});
 
 			initialBatch.user = Data.users[user];
@@ -125,6 +127,7 @@ server.route([
 				}
 			};
 			server.inject(options, function(response){
+				console.log(response.payload);
 				reply(response.payload);
 			});
 
@@ -246,46 +249,45 @@ server.route([
 		method: 'POST',
 		handler: function(request, reply) {
 
-			var user 			= request.payload.username;
-			var topicOptions 	= Data.users[user].preferences.topics;
-			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];
-			var idOfLastEvent 	= Data.users[user].stats[randomEvent].last_prediction_id;
+			var user 					= request.payload.username;
+			var numberRequested 		= request.params.number || 6;
+
+			var stats 					= Data.users[user].stats;
+			var topicOptions 			= stats.m8s.m8_predictions.length ?
+											Data.users[user].preferences.topics.concat("m8s") :
+											Data.users[user].preferences.topics;
+			var randomEvent 			= topicOptions[Math.floor(Math.random() * topicOptions.length)];
+
+			var mostRecentPredictionId 	= stats[randomEvent].last_prediction_id;
 
 			// Finding the index of the oldest non-finished topic;
 			var indexOfFirstUnfinishedEvent;
 			var batchOfPredictions = [];
 
 			// Iterate over the predictions available in the random topic
-			// Better to use array.some so we can break execution.
-			Data.topics[randomEvent].predictions.forEach(function(ele, index) {
+			Data.topics[randomEvent].predictions.some(function(prediction, index) {
 
-				if (batchOfPredictions.length < request.params.number || 6) {
+				var freshPredictionOfBelAir = {
+					id    : prediction.id,
+					text  : prediction.text,
+					url   : prediction.url,
+					topic : prediction.topic
+				};
 
-					var freshPredictionOfBelAir = {
-						id    : ele.id,
-						text  : ele.text,
-						url   : ele.url,
-						topic : ele.topic
-					};
-
-					// If the topic is m8s
-					if(randomEvent === "m8s") {
-						// If the topic's Id is available to the user
-						if (Data.users[user].stats.m8s.m8_predictions.indexOf(ele.id) !== -1) {
-							return batchOfPredictions.push(ele);
-						}
-					}
-
-					// If the topic is non-m8s
-					// If our user's last prediction ID matches the element's id, store the index of that element
-					if(ele.id === idOfLastEvent) {
+				// If the random event is m8s and the individual topic is available to the user, add it to the batch we send off
+				if(randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) {
+					batchOfPredictions.push(freshPredictionOfBelAir);
+				} else {
+					if(prediction.id === mostRecentPredictionId) {
 						indexOfFirstUnfinishedEvent = index + 1;
-					} else if (idOfLastEvent === undefined) {
+						batchOfPredictions.push(freshPredictionOfBelAir);
+					} else if (mostRecentPredictionId === undefined) {
 						indexOfFirstUnfinishedEvent = 0;
 					}
-
-					return batchOfPredictions.push(freshPredictionOfBelAir);
 				}
+				console.log(randomEvent, index);
+				console.log(batchOfPredictions.length, numberRequested);
+				return batchOfPredictions.length < numberRequested;
 			});
 
 			reply(batchOfPredictions);
@@ -314,7 +316,6 @@ server.route([
 		path: '/api/v1/topics/{topic}/predictions',
 		method: 'POST',
 		handler: function(request, reply) {
-			console.log(request.payload);
 			var topic = request.params.topic;
 			var info  = request.payload;
 			var newPrediction;

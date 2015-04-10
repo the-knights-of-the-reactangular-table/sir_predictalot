@@ -11,8 +11,12 @@ module.exports = {
 
 		CREATE_CUSTOM_PREDICTION: null,
 
+		CLOSE_ALERT: null,
+
 		// API action types
 		RECEIVE_RAW_DATA: null,
+
+		RECEIVE_ALERT: null,
 
 		RECEIVE_RAW_PREDICTIONS: null,
 

@@ -47,6 +47,12 @@ module.exports = {
 		};
 
 		PredictionAPIUtils.submitForm(prediction);
+	},
+
+	closeAlert: function() {
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.CLOSE_ALERT,
+		});
 	}
 
 };

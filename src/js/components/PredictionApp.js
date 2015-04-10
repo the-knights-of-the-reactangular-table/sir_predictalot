@@ -3,6 +3,7 @@ var PredictionSection 	= require("./sections/Prediction");
 var AppStore 			= require("../stores/AppStore");
 var SubmissionSection   = require("./sections/Submission");
 var LoginSection 		= require("./sections/Login");
+var AlertBox 			= require("./sections/AlertBox");
 
 function getStateFromStores() {
 
@@ -10,13 +11,15 @@ function getStateFromStores() {
 	var prediction   = AppStore.getPrediction();
 	var active 		 = AppStore.getActive();
 	var route		 = AppStore.getRoute();
+	var alert 		 = AppStore.getCurrentAlert();
 
 
 	return {
 		user 		     : currentUser,
 		prediction  	 : prediction,
 		active           : active,
-		route   		 : route
+		route   		 : route,
+		alert 			 : alert
 	};
 }
 
@@ -37,10 +40,13 @@ var PredictionApp = React.createClass({
 	},
 
 	render: function() {
+		var extras;
+		if (this.state.alert) {
+			extras = <AlertBox alert={this.state.alert}/>;
+		}
 
 		if(this.state.route === "login") {
 			return (
-
 				<div className="app-wrapper">
 					<LoginSection />
 				</div>

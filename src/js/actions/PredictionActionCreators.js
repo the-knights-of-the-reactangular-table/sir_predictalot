@@ -35,7 +35,7 @@ module.exports = {
 
 	},
 
-	deleteTopic: function(topic) {
+	removeTopic: function(topic) {
 		PredictionAPIUtils.deleteTopic(topic);
 	},
 

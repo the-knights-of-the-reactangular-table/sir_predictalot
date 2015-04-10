@@ -11,9 +11,9 @@
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football"]
+				"topics": ["boxing", "football", "celebrity", "m8s"]
 			},
-			"friendList": []
+			"friendList": ["jaysone", "MIJOTHY"]
 		},
 
 		"jaysone": {
@@ -28,7 +28,7 @@
 			"preferences": {
 				"topics": ["boxing", "football"]
 			},
-			"friendList": []
+			"friendList": ["BEECHWARE"]
 		},
 
 		"MIJOTHY": {
@@ -41,9 +41,9 @@
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football"]
+				"topics": ["boxing", "football", "m8s"]
 			},
-			"friendList": []
+			"friendList": ["PHB", "rory", "BEECHWARE"]
 		},
 
 		"PHB": {
@@ -56,9 +56,9 @@
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football"]
+				"topics": ["boxing", "football", "politics", "celebrity", "m8s"]
 			},
-			"friendList": []
+			"friendList": ["MIJOTHY"]
 		},
 
 
@@ -72,9 +72,9 @@
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football"]
+				"topics": ["boxing", "football", "celebrity"]
 			},
-			"friendList": []
+			"friendList": ["MIJOTHY"]
 		}
 
 
@@ -84,43 +84,47 @@
 
 		"boxing": {
 			"predictions": [
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Fayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567899},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Mayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567814},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Crayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567812},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Jayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567821},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "Will Scayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567811}
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "Will Fayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "Will Mayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567814},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "Will Crayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567812},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "Will Jayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567821},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "Will Scayweather beat Pacquiao?", 					 "option1": [], "option2": [], "id": 1234567811}
 			]
 		},
 		"football": {
 			"predictions": [
-				{"topic": "football", 	"url": "/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "option1": [], "option2": [], "id": 1234567896},
-				{"topic": "football", 	"url": "/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "option1": [], "option2": [], "id": 1234567897},
-				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567891},
-				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567892},
-				{"topic": "football", 	"url": "/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567893}
+				{"topic": "football", 	"url": "/assets/img/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "option1": [], "option2": [], "id": 1234567896},
+				{"topic": "football", 	"url": "/assets/img/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "option1": [], "option2": [], "id": 1234567897},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567891},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567892},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567893}
 			]
 		},
 		"esports": {
 			"predictions": [
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports?", 					 "option1": [], "option2": [], "id": 1234567899},
-				{"topic": "boxing", 	"url": "/boxing_square.jpg",  		"text": "esports!", 					 "option1": [], "option2": [], "id": 1234567899}
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "esports?", 					 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "esports?", 					 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "esports?", 					 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "esports?", 					 					 "option1": [], "option2": [], "id": 1234567899},
+				{"topic": "boxing", 	"url": "/assets/img/boxing_square.jpg",  		"text": "esports!", 					 					 "option1": [], "option2": [], "id": 1234567899}
 			]
 		},
 		"politics": {
 			"predictions": [
-				{"topic": "politics", 	"url": "/david-cameron_square.jpg", "text": "Will he be PM after the election?", 				 "option1": [], "option2": [], "id": 1234567892},
-				{"topic": "politics", 	"url": "/kim-jong-un_square.jpg",   "text": "Will Kim die this year?", 							 "option1": [], "option2": [], "id": 1234567893},
-				{"topic": "politics", 	"url": "/is_square.jpg", 			"text": "Will IS lose the city of Mosul this summer?", 		 "option1": [], "option2": [], "id": 1234567894},
-				{"topic": "politics", 	"url": "/saudi_square.png", 		"text": "Will Saudi Arabia invade Yemen this month?", 		 "option1": [], "option2": [], "id": 1234567895}
+				{"topic": "politics", 	"url": "/assets/img/saudi_square.png", 			"text": "Will Saudi Arabia invade Yemen this month m80s?", 	 "option1": [], "option2": [], "id": 1234567815},
+				{"topic": "politics", 	"url": "/assets/img/david-cameron_square.jpg",  "text": "Will he be PM after the election?", 				 "option1": [], "option2": [], "id": 1234567892},
+				{"topic": "politics", 	"url": "/assets/img/kim-jong-un_square.jpg",    "text": "Will Kim die this year?", 							 "option1": [], "option2": [], "id": 1234567893},
+				{"topic": "politics", 	"url": "/assets/img/is_square.jpg", 			"text": "Will IS lose the city of Mosul this summer?", 		 "option1": [], "option2": [], "id": 1234567894},
+				{"topic": "politics", 	"url": "/assets/img/saudi_square.png", 			"text": "Will Saudi Arabia invade Yemen this month?", 		 "option1": [], "option2": [], "id": 1234567895}
 			]
 		},
 		"celebrity": {
 			"predictions": [
-			    {"topic": "celebrity", 	"url": "/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890},
-			    {"topic": "celebrity", 	"url": "/one_direction_square.png", "text": "Will they break up this year?", 					 "option1": [], "option2": [], "id": 1234567891}
+			    {"topic": "celebrity", 	"url": "/assets/img/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/assets/img/one_direction_square.png",  "text": "Will they break up this year?", 					 "option1": [], "option2": [], "id": 1234567891},
+			    {"topic": "celebrity", 	"url": "/assets/img/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/assets/img/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/assets/img/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1234567890}
 			]
 		},
 		"m8s": {

@@ -1,6 +1,7 @@
 var React 			  		 = require("react/addons");
-var ReactCSSTransitionGroup  = React.addons.CSSTransitionGroup;
 var PredictionActionCreators = require("../../actions/PredictionActionCreators");
+var SpinBox 				 = require("./SpinBox");
+
 var ReactTransitionGroup  = React.addons.TransitionGroup;
 
 
@@ -8,7 +9,7 @@ var Prediction = React.createClass({
 
 	render: function(){
 		return (
-			<PredictionBox prediction={this.props.prediction} />
+			<PredictionBox prediction={this.props.prediction} username={this.props.username} />
 			);
 	}
 
@@ -19,11 +20,19 @@ var Prediction = React.createClass({
 var PredictionBox = React.createClass({
 
     render: function() {
+    	var mainbox;
+        var prediction = this.props.prediction;
+
+    	if(prediction) {
+    		mainBox = <ImageBox prediction={prediction} username={this.props.username} />;
+    	} else {
+    		mainBox = <ErrorBox />;
+    	}
         return(
             <div className="predictionBox">
-                <TextBox text={this.props.prediction.text} />
-                <ImageBox prediction={this.props.prediction} username={this.props.username} />
-                <MenuBox topic={this.props.prediction.topic} username={this.props.username} />
+                <TextBox text={prediction && prediction.text || "No predictions remaining! Wait a while or try making your own"} />
+                {mainBox}
+                <MenuBox topic={prediction && prediction.topic || null} username={this.props.username} />
             </div>
         );
     }
@@ -126,18 +135,33 @@ var ImageBox = React.createClass({
     }
 });
 
+var ErrorBox = React.createClass({
+	render: function() {
+		return(
+            <div className="imageBox">
+            	<img className="predictionImg" src="/assets/img/ainsley.png" />
+            </div>
+			);
+
+	}
+});
 
 var MenuBox = React.createClass({
 
 	clickHandler: function(){
-
 		var route = "submission";
 		PredictionActionCreators.navigateTo(route);
 
 	},
 
 	deleteHandler: function() {
-		PredictionActionCreators.deleteTopic(this.props.topic);
+		var deleteMe = {
+			topic: this.props.topic,
+			username: this.props.username
+		};
+		if (this.props.topic) {
+			PredictionActionCreators.removeTopic(deleteMe);
+		}
 	},
 
 	render: function(){

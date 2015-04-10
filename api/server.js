@@ -22,7 +22,7 @@ server.route([
 
 	{
 		path: '/login',
-		method: ['GET', "POST"],
+		method: ["POST"],
 		handler: function(request, reply) {
 			var user = request.payload.user;
 			var initialBatch = {
@@ -31,7 +31,6 @@ server.route([
 			};
 
 			if (!Data.users.hasOwnProperty(user)) {
-				console.log("error");
 				return reply({alert: "error", description: "That user doesn't exist"});
 			}
 
@@ -39,7 +38,6 @@ server.route([
 			var userTopics = Data.users[user].preferences.topics;
 			// Add logic for in case user has >10 topics in preferences
 			var predictionsPerTopic = Math.floor(10 / userTopics.length);
-			console.log(predictionsPerTopic);
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
@@ -48,7 +46,6 @@ server.route([
 				if(!idOfLastEvent) {
 					for (var i = 0; i < predictionsPerTopic; i++) {
 						initialBatch.predictions.push(Data.topics[ele].predictions[i]);
-						console.log(initialBatch);
 					}
 					return;
 				}
@@ -91,7 +88,6 @@ server.route([
 		handler: function(request, reply) {
 			var prediction = request.payload;
 			var user 	   = prediction.username;
-			console.log(prediction);
 			var topicStats = Data.users[user].stats[prediction.topic];
 
 			if (!Data.topics[prediction.topic]) {
@@ -113,8 +109,8 @@ server.route([
 			Data.topics[prediction.topic].predictions.forEach(function(ele, index) {
 				if (ele.id === prediction.id) {
 					// Check that the user hasn't already voted
-					if (ele.option1.indexOf(user) !== -1 &&
-						ele.option2.indexOf(user) !== -1) {
+					if (ele.option1.indexOf(user) === -1 &&
+						ele.option2.indexOf(user) === -1) {
 						ele[prediction.chosen].push(user);
 					} else {
 						return reply({alert: "error", description: "You've already voted on that!"});
@@ -123,14 +119,49 @@ server.route([
 			});
 
 			var options = {
-				path: '/api/v1/topics/random/1',
-				method: 'GET',
+				url: '/api/v1/topics/random/1',
+				method: 'POST',
+				payload: {
+					user: user
+				}
 			};
-
-			server.inject(options, function(err, response) {
+			server.inject(options, function(response){
 				reply(response.payload);
 			});
 
+		}
+	},
+
+	{
+		path: "/deletetopic",
+		method: "POST",
+		handler: function(request, reply) {
+			var user = request.payload.username;
+			var topic = request.payload.topic;
+
+			if (!Data.users.hasOwnProperty(user)) {
+				return reply({alert: "error", description: "That user doesn't exist"});
+			} else if (Data.users[user].preferences.topics.indexOf(topic) === -1) {
+				return reply({alert: "error", description: "You've already binned that topic"});
+			}
+
+			// Find the index of the desired element to be removed
+			var topicPrefs = Data.users[user].preferences.topics;
+			var topicLocation = topicPrefs.indexOf(topic);
+			// Delete that element from the array
+			topicPrefs.splice(topicLocation, 1);
+
+			var options = {
+				url: "/login",
+				method: "POST",
+				payload: {
+					user: user
+				}
+			};
+
+			server.inject(options, function(response) {
+				return reply(response.result);
+			});
 		}
 	},
 
@@ -213,9 +244,8 @@ server.route([
 
 	{
 		path: '/api/v1/topics/random/{number?}',
-		method: 'GET',
+		method: 'POST',
 		handler: function(request, reply) {
-
 			var user 			= request.payload.username;
 			var topicOptions 	= Data.users[user].preferences.topics;
 			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];

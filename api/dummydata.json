@@ -97,11 +97,11 @@
 		},
 		"football": {
 			"predictions": [
-				{"topic": "football", 	"url": "/assets/img/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",   "option1": [], "option2": [], "id": 1234567896},
-				{"topic": "football", 	"url": "/assets/img/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?", "option1": [], "option2": [], "id": 1234567897},
-				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567891},
-				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567892},
-				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League?", "option1": [], "option2": [], "id": 1234567893}
+				{"topic": "football", 	"url": "/assets/img/ronaldo_square.jpg", 	 	"text": "Will Real Madrid win the Champions League 2015?",    "option1": [], "option2": [], "id": 1234567896},
+				{"topic": "football", 	"url": "/assets/img/sterling_square.jpg", 	 	"text": "Will Raheem Sterling leave Liverpool this summer?",  "option1": [], "option2": [], "id": 1234567897},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League1?", "option1": [], "option2": [], "id": 1234567891},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League2?", "option1": [], "option2": [], "id": 1234567892},
+				{"topic": "football", 	"url": "/assets/img/manu_square.jpg", 		 	"text": "Will Man Utd finish second in the Premier League3?", "option1": [], "option2": [], "id": 1234567893}
 			]
 		},
 		"esports": {

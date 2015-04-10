@@ -36,7 +36,7 @@ server.route([
 			// Get the users preferences and return them a selection of predictions per topic;
 			var userTopics = Data.users[user].preferences.topics;
 			// Add logic for in case user has >10 topics in preferences
-			var predictionsPerTopic = Math.floor(10 / userTopics.length);
+			var predictionsPerTopic = 1;
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
@@ -95,7 +95,6 @@ server.route([
 				return reply({alert: "error", description: "That topic doesn't exist!?"});
 			}
 
-
 			// for the topic the user predicted on
 			// if the topic is m8s, delete that id from their 'unfinished' m8s array
 			// otherwise update the user's last prediction id with the prediction id
@@ -107,14 +106,13 @@ server.route([
 				topicStats.last_prediction_id = prediction.id;
 			}
 
-			Data.topics[prediction.topic].predictions.forEach(function(ele, index) {
+			Data.topics[prediction.topic].predictions.some(function(ele, index) {
 				if (ele.id === prediction.id) {
 					// Check that the user hasn't already voted
 					if (ele.option1.indexOf(user) === -1 &&
 						ele.option2.indexOf(user) === -1) {
 						ele[prediction.chosen].push(user);
-					} else {
-						return reply({alert: "error", description: "You've already voted on that!"});
+						return true;
 					}
 				}
 			});
@@ -127,8 +125,7 @@ server.route([
 				}
 			};
 			server.inject(options, function(response){
-				console.log(response.payload);
-				reply(response.payload);
+				reply(response.result[0]);
 			});
 
 		}
@@ -253,14 +250,21 @@ server.route([
 			var numberRequested 		= request.params.number || 6;
 
 			var stats 					= Data.users[user].stats;
+			var prefs 					= Data.users[user].preferences;
+
 			var topicOptions 			= stats.m8s.m8_predictions.length ?
 											Data.users[user].preferences.topics.concat("m8s") :
 											Data.users[user].preferences.topics;
-			var randomEvent 			= topicOptions[Math.floor(Math.random() * topicOptions.length)];
+
+			// aii sick array randomizer but we gots to check if the topic got any preds for you
+			var randomEvent = topicOptions.filter(function(ele) {
+				return Data.topics[ele].predictions.length;
+			}).sort(function(a, b) {
+				return Math.floor(Math.random() > Math.random()) * 2 - 1;
+			})[0];
 
 			var mostRecentPredictionId 	= stats[randomEvent].last_prediction_id;
 
-			// Finding the index of the oldest non-finished topic;
 			var indexOfFirstUnfinishedEvent;
 			var batchOfPredictions = [];
 
@@ -273,21 +277,22 @@ server.route([
 					url   : prediction.url,
 					topic : prediction.topic
 				};
-
 				// If the random event is m8s and the individual topic is available to the user, add it to the batch we send off
 				if(randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) {
 					batchOfPredictions.push(freshPredictionOfBelAir);
 				} else {
-					if(prediction.id === mostRecentPredictionId) {
+
+					if(prediction.id === mostRecentPredictionId ) {
 						indexOfFirstUnfinishedEvent = index + 1;
-						batchOfPredictions.push(freshPredictionOfBelAir);
 					} else if (mostRecentPredictionId === undefined) {
 						indexOfFirstUnfinishedEvent = 0;
 					}
+					if (indexOfFirstUnfinishedEvent === index) {
+						batchOfPredictions.push(freshPredictionOfBelAir);
+					}
+
 				}
-				console.log(randomEvent, index);
-				console.log(batchOfPredictions.length, numberRequested);
-				return batchOfPredictions.length < numberRequested;
+				return batchOfPredictions.length == numberRequested;
 			});
 
 			reply(batchOfPredictions);

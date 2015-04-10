@@ -75,7 +75,9 @@ PredictionAppDispatcher.register(function(action) {
 
 	        }
 	        _predictions.shift();
-			_predictions.push(action.newPrediction);
+	        if(action.newPrediction) {
+				_predictions.push(action.newPrediction);
+	        }
 	        AppStore.emitChange();
 
 	        break;
@@ -89,7 +91,6 @@ PredictionAppDispatcher.register(function(action) {
 	    case ActionTypes.RECEIVE_ALERT:
 	    	_route = "prediction";
 	    	_alert = action.alert;
-	    	console.log(_alert);
 	    	AppStore.emitChange();
 	    	break;
 

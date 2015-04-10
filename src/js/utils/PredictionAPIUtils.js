@@ -12,7 +12,7 @@ module.exports = {
 	Request.post("/login")
 		.send(userObj)
 		.end(function(err, res) {
-				PredictionServerActionCreators.receiveRawData(res.body);
+			PredictionServerActionCreators.receiveRawData(res.body);
 		});
   },
 
@@ -21,7 +21,7 @@ module.exports = {
 	Request.post("/api/v1/topics/" + formData.topic + "/predictions")
 		.send(formData)
 		.end(function(err, res) {
-				PredictionServerActionCreators.receiveAlert(res.body);
+			PredictionServerActionCreators.receiveAlert(res.body);
 		});
   },
 
@@ -30,7 +30,8 @@ module.exports = {
 	Request.post("/makeprediction")
 		.send(predictionInfo)
 		.end(function(err, res) {
-				PredictionServerActionCreators.receiveSwipe(res.body, predictionInfo.type);
+			console.log(res);
+			PredictionServerActionCreators.receiveSwipe(res.body, predictionInfo.type);
 		});
   },
 
@@ -38,7 +39,7 @@ module.exports = {
 	Request.post("/deletetopic")
 	 	.send(deletionInfo)
 	  	.end(function(err, res) {
-				PredictionServerActionCreators.receiveRawData(res.body);
+			PredictionServerActionCreators.receiveRawData(res.body);
 	  });
   }
 

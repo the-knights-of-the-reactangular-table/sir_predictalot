@@ -77,7 +77,7 @@
 				"m8s": {"name": "m8s", "points": 20000, "m8_predictions": [] }
 			},
 			"preferences": {
-				"topics": ["boxing", "football", "celebrity", "politics"]
+				"topics": ["boxing", "football", "celebrity", "politics", "m8s"]
 			},
 			"friendList": ["MIJOTHY"]
 		}
@@ -127,7 +127,7 @@
 			"predictions": [
 			    {"topic": "celebrity", 	"url": "/assets/img/bieber_square.jpg", 		"text": "Will they get back together in 2015?", 			 "option1": [], "option2": [], "id": 1214567890},
 			    {"topic": "celebrity", 	"url": "/assets/img/one_direction_square.png",  "text": "Will they break up this year?", 					 "option1": [], "option2": [], "id": 1224567891},
-			    {"topic": "celebrity", 	"url": "/assets/img/oscars_square.png", 		"text": "Will Emma Watson kiss Steve Carrell at the Oscars?","option1": [], "option2": [], "id": 1234567890},
+			    {"topic": "celebrity", 	"url": "/assets/img/oscars_square.png", 		"text": "Will Emma Watson kiss Steve Carrell at the Oscars?", "option1": [], "option2": [], "id": 1234567890},
 			    {"topic": "celebrity", 	"url": "/assets/img/oscars_square2.png", 		"text": "Will he win an Oscar in 2015?", 			 		 "option1": [], "option2": [], "id": 1244567890},
 			    {"topic": "celebrity", 	"url": "/assets/img/glasto_square.png", 		"text": "Will Kanye West headline Glastonbury 2015?", 		 "option1": [], "option2": [], "id": 1254567890}
 			]
@@ -138,10 +138,9 @@
 			    {"topic": "m8s", 	"url": "/assets/img/rory_square.png", 			"text": "Will Rory get eaten by an elephant this weekend?", 	"option1": [], "option2": [], "id": 1234567890},
 			    {"topic": "m8s", 	"url": "/assets/img/dave_square.png", 			"text": "Will Dave shave his head before graduation?", 			"option1": [], "option2": [], "id": 1334567890},
 			    {"topic": "m8s", 	"url": "/assets/img/james_square.png", 			"text": "Will James wear any pink clothes next week?", 			"option1": [], "option2": [], "id": 1434567890},
-			    {"topic": "m8s", 	"url": "/assets/img/jason_square.png", 			"text": "Will Jason headline Glastonbury 2015?", 			 	"option1": [], "option2": [], "id": 1534567890},
+			    {"topic": "m8s", 	"url": "/assets/img/jason_square.png", 			"text": "Will Jason headline Glastonbury 2015?", 			 	"option1": [], "option2": [], "id": 1534567890}
 
 			]
 		}
 	}
-
 }

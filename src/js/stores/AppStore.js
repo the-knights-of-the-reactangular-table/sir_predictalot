@@ -9,12 +9,14 @@ var CHANGE_EVENT = "change";
 var _user 		 = null;
 var _route 		 = "login";
 var _active 	 = null;
+var _alert 		 = null;
 
 var _predictions = [];
 
 var AppStore = assign({}, EventEmitter.prototype, {
 
 	emitChange: function() {
+		console.log(_predictions);
 		this.emit(CHANGE_EVENT);
 	},
 
@@ -44,6 +46,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 	getRoute: function() {
 		return _route;
+	},
+
+	getCurrentAlert: function() {
+		return _alert;
 	}
 
 });
@@ -82,9 +88,15 @@ PredictionAppDispatcher.register(function(action) {
 
 	    case ActionTypes.RECEIVE_ALERT:
 	    	_route = "prediction";
+	    	_alert = action.alert;
+	    	console.log(_alert);
 	    	AppStore.emitChange();
 	    	break;
 
+	    case ActionTypes.CLOSE_ALERT:
+	    	_alert = null;
+	    	AppStore.emitChange();
+	    	break;
 
 		default:
 

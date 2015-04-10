@@ -26,13 +26,13 @@ var SubmissionForm = React.createClass({
 
 		var topicOptions = this.props.user.preferences.topics.map(function(topic) {
 			return (
-				<option value={topic}>{topic.split("")[0].toUpperCase() + topic.slice(1)}</option>
+				<option key={topic} value={topic}>{topic.split("")[0].toUpperCase() + topic.slice(1)}</option>
 				);
 		});
 
 		return (
 			<div>
-				<button className="backButton" onClick={this.clickHandler}> Back </button>
+				<button className="backButton" onClick={this.clickHandler}></button>
 				<form onSubmit={this.getFormInput}>
 					<input type="text" ref="inputText" className="subText" placeholder="Enter your prediction..."  />
 	  				<input type="text" ref="inputURL" className="subURL" placeholder="Enter image url..." />

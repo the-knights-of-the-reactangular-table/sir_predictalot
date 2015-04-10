@@ -21,7 +21,7 @@ server.route([
 
 	{
 		path: '/login',
-		method: ['GET', "POST"],
+		method: ["POST"],
 		handler: function(request, reply) {
 			var user = request.payload.user;
 			var initialBatch = {
@@ -30,7 +30,6 @@ server.route([
 			};
 
 			if (!Data.users.hasOwnProperty(user)) {
-				console.log("error");
 				return reply({alert: "error", description: "That user doesn't exist"});
 			}
 
@@ -38,28 +37,17 @@ server.route([
 			var userTopics = Data.users[user].preferences.topics;
 			// Add logic for in case user has >10 topics in preferences
 			var predictionsPerTopic = Math.floor(10 / userTopics.length);
-			console.log(predictionsPerTopic);
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
-				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id;
-
-				if(!idOfLastEvent) {
-					for (var i = 0; i < predictionsPerTopic; i++) {
-						initialBatch.predictions.push(Data.topics[ele].predictions[i]);
-						console.log(initialBatch);
-					}
-					return;
-				}
+				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id || Data.topics[ele].predictions[0].id;
+				var indexOfFirstUnfinishedEvent;
 
 				// Look at the corresponding list of predictions available for it
 				Data.topics[ele].predictions.forEach(function(prediction, index) {
-					var indexOfFirstUnfinishedEvent;
 
 					if(prediction.id === idOfLastEvent) {
 						indexOfFirstUnfinishedEvent = index + 1;
-					} else if (idOfLastEvent === undefined) {
-						indexOfFirstUnfinishedEvent = 0;
 					}
 
 					// Add the 5 predictions after the user's most prediction to the batch we send to the user
@@ -76,6 +64,17 @@ server.route([
 					return;
 				});
 				return;
+			});
+
+			// For each prediction id in the user's available social predictions
+			Data.users[user].stats.m8s.m8_predictions.forEach(function(predictionId, index) {
+				// Add 5 predictions
+				Data.topics.m8s.predictions.some(function(prediction) {
+					if (predictionId === prediction.id) {
+						initialBatch.predictions.push(prediction);
+					}
+					return index === 5;
+				});
 			});
 
 			initialBatch.user = Data.users[user];
@@ -122,16 +121,49 @@ server.route([
 
 			var options = {
 				url: '/api/v1/topics/random/1',
-				method: 'GET',
+				method: 'POST',
 				payload: {
 					username: user
 				}
 			};
-			server.inject(options, function(err,response){
+			server.inject(options, function(response){
+				console.log(response.payload);
 				reply(response.payload);
 			});
 
+		}
+	},
 
+	{
+		path: "/deletetopic",
+		method: "POST",
+		handler: function(request, reply) {
+			var user = request.payload.username;
+			var topic = request.payload.topic;
+
+			if (!Data.users.hasOwnProperty(user)) {
+				return reply({alert: "error", description: "That user doesn't exist"});
+			} else if (Data.users[user].preferences.topics.indexOf(topic) === -1) {
+				return reply({alert: "error", description: "You've already binned that topic"});
+			}
+
+			// Find the index of the desired element to be removed
+			var topicPrefs = Data.users[user].preferences.topics;
+			var topicLocation = topicPrefs.indexOf(topic);
+			// Delete that element from the array
+			topicPrefs.splice(topicLocation, 1);
+
+			var options = {
+				url: "/login",
+				method: "POST",
+				payload: {
+					user: user
+				}
+			};
+
+			server.inject(options, function(response) {
+				return reply(response.result);
+			});
 		}
 	},
 
@@ -214,49 +246,48 @@ server.route([
 
 	{
 		path: '/api/v1/topics/random/{number?}',
-		method: 'GET',
+		method: 'POST',
 		handler: function(request, reply) {
-			console.log('request', request);
-			var user 			= request.payload.username;
-			var topicOptions 	= Data.users[user].preferences.topics;
-			var randomEvent 	= topicOptions[Math.floor(Math.random() * topicOptions.length)];
-			var idOfLastEvent 	= Data.users[user].stats[randomEvent].last_prediction_id;
+
+			var user 					= request.payload.username;
+			var numberRequested 		= request.params.number || 6;
+
+			var stats 					= Data.users[user].stats;
+			var topicOptions 			= stats.m8s.m8_predictions.length ?
+											Data.users[user].preferences.topics.concat("m8s") :
+											Data.users[user].preferences.topics;
+			var randomEvent 			= topicOptions[Math.floor(Math.random() * topicOptions.length)];
+
+			var mostRecentPredictionId 	= stats[randomEvent].last_prediction_id;
 
 			// Finding the index of the oldest non-finished topic;
 			var indexOfFirstUnfinishedEvent;
 			var batchOfPredictions = [];
 
 			// Iterate over the predictions available in the random topic
-			// Better to use array.some so we can break execution.
-			Data.topics[randomEvent].predictions.forEach(function(ele, index) {
+			Data.topics[randomEvent].predictions.some(function(prediction, index) {
 
-				if (batchOfPredictions.length < request.params.number || 6) {
+				var freshPredictionOfBelAir = {
+					id    : prediction.id,
+					text  : prediction.text,
+					url   : prediction.url,
+					topic : prediction.topic
+				};
 
-					var freshPredictionOfBelAir = {
-						id    : ele.id,
-						text  : ele.text,
-						url   : ele.url,
-						topic : ele.topic
-					};
-
-					// If the topic is m8s
-					if(randomEvent === "m8s") {
-						// If the topic's Id is available to the user
-						if (Data.users[user].stats.m8s.m8_predictions.indexOf(ele.id) !== -1) {
-							return batchOfPredictions.push(ele);
-						}
-					}
-
-					// If the topic is non-m8s
-					// If our user's last prediction ID matches the element's id, store the index of that element
-					if(ele.id === idOfLastEvent) {
+				// If the random event is m8s and the individual topic is available to the user, add it to the batch we send off
+				if(randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) {
+					batchOfPredictions.push(freshPredictionOfBelAir);
+				} else {
+					if(prediction.id === mostRecentPredictionId) {
 						indexOfFirstUnfinishedEvent = index + 1;
-					} else if (idOfLastEvent === undefined) {
+						batchOfPredictions.push(freshPredictionOfBelAir);
+					} else if (mostRecentPredictionId === undefined) {
 						indexOfFirstUnfinishedEvent = 0;
 					}
-
-					return batchOfPredictions.push(freshPredictionOfBelAir);
 				}
+				console.log(randomEvent, index);
+				console.log(batchOfPredictions.length, numberRequested);
+				return batchOfPredictions.length < numberRequested;
 			});
 
 			reply(batchOfPredictions);
@@ -310,9 +341,10 @@ server.route([
 			// If the prediction is for the friend network only, for each friend in the user's friends list,
 			// Add that prediction's id to their array of available m8 predictions.
 			if(newPrediction.topic === "m8s") {
-				Data.users[request.payload.username].friendsList.forEach(function(m8, ind) {
-					m8.stats.m8_predictions.push(newPrediction.id);
+				Data.users[request.payload.username].friendList.forEach(function(m8, ind) {
+					Data.users[m8].stats.m8s.m8_predictions.push(newPrediction.id);
 				});
+				Data.users[request.payload.username].stats.m8s.m8_predictions.push(newPrediction.id);
 			}
 
 			return reply({alert: "success", description: "Your prediction has been saved!"});

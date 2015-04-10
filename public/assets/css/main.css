@@ -14,7 +14,12 @@ body{
   width: 100%;
   background-color: hsl(100, 50%, 50%);
   border-radius: 10px;
+  position: absolute;
+  max-width: 500px;
+  max-height: 800px;
 }
+
+
 
 /* login stuff */
 .LPage {
@@ -22,8 +27,8 @@ body{
   position: relative;
   width: 200px;
   text-align: center;
-  margin: 0 auto;
-  transform: translateY(60%);
+  transform: translateY(100%);
+  margin:auto;
 }
 
 .LC {
@@ -34,6 +39,7 @@ body{
 
 .LC > input {
   width: 100%;
+  text-align: center;
 }
 
 .logInput {
@@ -48,24 +54,39 @@ body{
   width: 20px;
   background-size: contain;
   background-repeat: no-repeat;
+  margin-top: 10px;
 }
 
-.menu_button {
+.button {
   height: 30px;
   border: none;
   background-color: transparent;
-  background-image: url(/assets/img/glyphicon-plus.png);
   background-position: 5;
   width: 45px;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.add_button {
   float: right;
+  background-image: url(/assets/img/glyphicon-plus.png);
+}
+
+.delete_button {
+  float: left;
+  background-image: url(/assets/img/glyphicon-circle-remove.png);
 }
 
 .backButton {
   margin-top: 10px;
   position: relative;
   margin-left: 10px;
+  border: none;
+  background-color: transparent;
+  background-image: url("/assets/img/glyphicon-left.png");
+  background-repeat: no-repeat;
+  width: 26px;
+  height: 26px;
 }
 
 .mainBox {
@@ -97,6 +118,7 @@ body{
 
 .predictionImg{
     width: 100%;
+    height: 400px;
     cursor: hand;
     position: absolute;
     left: 0px;
@@ -119,7 +141,7 @@ body{
 .subText {
   display: block;
   margin: auto ;
-  margin-top: 25%;
+  margin-top: 3%;
   border: 1px solid lightblue;
   border-radius: 2px;
   height: 6%;
@@ -330,3 +352,59 @@ transition: opacity .5s ease-in;
   opacity: 1;
 }
 
+/* Spinner stuff */
+
+.spin-holder {
+  margin: auto;
+  width: 300px;
+  height: 80px;
+  overflow: hidden;
+  background-color: black;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+  position: relative;
+}
+
+.hider {
+  background-color: hsl(100, 50%, 50%);
+  height: 100%;
+  width: 25%;
+}
+
+.hider-left {
+  float: left;
+  z-index: 10000;
+}
+
+.hider-right {
+  float:right;
+  z-index: 10000;
+}
+
+.spinner-enter {
+  position: absolute;
+  right: 0;
+}
+
+.spinner-enter.spinner-enter-active {
+  transition: 1s ease-in-out;
+  transform: translate(-100px, 0);
+}
+
+.spinner-leave {
+  positon: absolute;
+}
+
+.spinner-leave.spinner-leave-active {
+  transition: 1s ease-in-out;
+  transform: translate(-100px, 0);
+}
+
+.spin-holder > span> div: {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  color: white;
+  font-size: 35px;
+};

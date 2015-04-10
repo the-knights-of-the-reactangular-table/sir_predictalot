@@ -22,17 +22,19 @@ module.exports = {
 
 	newSwipe: function(info){
 
-
 		var prediction = {
 			username : info.username,
 			id 		 : info.id,
 			topic 	 : info.topic,
 			chosen   : info.option,
-			type 	 : info.type,
 		};
 
 		PredictionAPIUtils.makePrediction(prediction);
 
+	},
+
+	removeTopic: function(topic) {
+		PredictionAPIUtils.deleteTopic(topic);
 	},
 
 	getFormInput: function(info) {
@@ -45,6 +47,12 @@ module.exports = {
 		};
 
 		PredictionAPIUtils.submitForm(prediction);
+	},
+
+	closeAlert: function() {
+		PredictionAppDispatcher.dispatch({
+			type: ActionTypes.CLOSE_ALERT,
+		});
 	}
 
 };

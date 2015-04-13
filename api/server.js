@@ -1,6 +1,8 @@
-var Path 	= require('path');
 var Data 	= require("./dummydata.json");
+var Path 	= require('path');
+var Joi 	= require("joi");
 var Hapi 	= require('hapi');
+
 var server 	= new Hapi.Server();
 
 server.connection({
@@ -21,7 +23,7 @@ server.route([
 
 	{
 		path: '/login',
-		method: ["POST"],
+		method: "POST",
 		handler: function(request, reply) {
 			var user = request.payload.user;
 			var initialBatch = {
@@ -30,7 +32,7 @@ server.route([
 			};
 
 			if (!Data.users.hasOwnProperty(user)) {
-				return reply({alert: "error", description: "That user doesn't exist"});
+				return reply({alert: "error", description: "That user doesn't exist"}).code(404);
 			}
 
 			// Get the users preferences and return them a selection of predictions per topic;
@@ -40,18 +42,16 @@ server.route([
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
-				var idOfLastEvent = Data.users[user].stats[ele].last_prediction_id || Data.topics[ele].predictions[0].id;
-				var indexOfFirstUnfinishedEvent;
+				var idOfLastPrediction = Data.users[user].stats[ele].id_of_last_predicted || Data.topics[ele].predictions[0].id;
+				var indexOfFirstUnfinishedPrediction;
 
 				// Look at the corresponding list of predictions available for it
-				Data.topics[ele].predictions.forEach(function(prediction, index) {
-
-					if(prediction.id === idOfLastEvent) {
-						indexOfFirstUnfinishedEvent = index + 1;
+				Data.topics[ele].predictions.some(function(prediction, index) {
+					if(prediction.id === idOfLastPrediction) {
+						indexOfFirstUnfinishedPrediction = index + 1;
 					}
-
-					// Add the 5 predictions after the user's most prediction to the batch we send to the user
-					if(index - indexOfFirstUnfinishedEvent < predictionsPerTopic) {
+					// *** Problem - one prediction from a topic ends up being sent over despite it already being predicted.
+					if(indexOfFirstUnfinishedPrediction && index >= indexOfFirstUnfinishedPrediction) {
 						var freshPrediction = {
 							id    : prediction.id,
 							text  : prediction.text,
@@ -59,26 +59,29 @@ server.route([
 							topic : prediction.topic
 						};
 
+						// Push the current prediction to the batch we send off to the user, and record that we sent it
 						initialBatch.predictions.push(freshPrediction);
+						Data.users[user].stats[ele].id_of_last_dispatched = prediction.id;
 					}
-					return;
+
+					// Cease iteration once we have pushed a certain number of predictions from this topic to the batch
+					return index - indexOfFirstUnfinishedPrediction >= predictionsPerTopic;
 				});
 				return;
 			});
 
 			// For each prediction id in the user's available social predictions
 			Data.users[user].stats.m8s.m8_predictions.forEach(function(predictionId, index) {
-				// Add 5 predictions
+				// Add 3 predictions to the batch we send off to the user
 				Data.topics.m8s.predictions.some(function(prediction) {
 					if (predictionId === prediction.id) {
 						initialBatch.predictions.push(prediction);
 					}
-					return index === 5;
+					return index === 3;
 				});
 			});
 
 			initialBatch.user = Data.users[user];
-
 			return reply(initialBatch);
 		}
 	},
@@ -103,7 +106,7 @@ server.route([
 				var indexOfPrediction = topicStats.m8_predictions.indexOf(prediction.id);
 				topicStats.m8_predictions.splice(indexOfPrediction, 1);
 			} else {
-				topicStats.last_prediction_id = prediction.id;
+				topicStats.id_of_last_predicted = prediction.id;
 			}
 
 			Data.topics[prediction.topic].predictions.some(function(ele, index) {
@@ -256,16 +259,17 @@ server.route([
 											Data.users[user].preferences.topics.concat("m8s") :
 											Data.users[user].preferences.topics;
 
-			// aii sick array randomizer but we gots to check if the topic got any preds for you
+			// aii sick array randomizer but we gots to check if the topic got any preds for you first
 			var randomEvent = topicOptions.filter(function(ele) {
 				return Data.topics[ele].predictions.length;
 			}).sort(function(a, b) {
 				return Math.floor(Math.random() > Math.random()) * 2 - 1;
 			})[0];
 
-			var mostRecentPredictionId 	= stats[randomEvent].last_prediction_id;
+			var mostRecentPredictionId 	= stats[randomEvent].id_of_last_predicted;
+			var mostRecentDispatchedId  = stats[randomEvent].id_of_last_dispatched;
 
-			var indexOfFirstUnfinishedEvent;
+			var indexOfFirstNonDispatchedPrediction;
 			var batchOfPredictions = [];
 
 			// Iterate over the predictions available in the random topic
@@ -281,20 +285,19 @@ server.route([
 				if(randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) {
 					batchOfPredictions.push(freshPredictionOfBelAir);
 				} else {
-
-					if(prediction.id === mostRecentPredictionId ) {
-						indexOfFirstUnfinishedEvent = index + 1;
-					} else if (mostRecentPredictionId === undefined) {
-						indexOfFirstUnfinishedEvent = 0;
+					if(prediction.id === mostRecentDispatchedId ) {
+						indexOfFirstNonDispatchedPrediction = index + 1;
+					} else if (mostRecentDispatchedId === undefined) {
+						indexOfFirstNonDispatchedPrediction = 0;
 					}
-					if (indexOfFirstUnfinishedEvent === index) {
+
+					if (indexOfFirstNonDispatchedPrediction === index) {
 						batchOfPredictions.push(freshPredictionOfBelAir);
+						Data.users[user].stats[randomEvent].id_of_last_dispatched = prediction.id;
 					}
-
 				}
-				return batchOfPredictions.length == numberRequested;
+				return batchOfPredictions.length === +numberRequested;
 			});
-
 			reply(batchOfPredictions);
 		}
 	},

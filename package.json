@@ -21,7 +21,7 @@
     "gulp": "^3.8.11",
     "gulp-jest": "^0.4.0",
     "harmonize": "^1.4.1",
-    "jest": "^0.1.39",
+    "jest-cli": "^0.1.39",
     "reactify": "^1.1.0",
     "shot": "^1.4.2",
     "vinyl-source-stream": "^1.1.0",

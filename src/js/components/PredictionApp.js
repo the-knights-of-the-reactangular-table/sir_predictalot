@@ -6,20 +6,12 @@ var LoginSection 		= require("./sections/Login");
 var AlertBox 			= require("./sections/AlertBox");
 
 function getStateFromStores() {
-
-	var currentUser  = AppStore.getUser();
-	var prediction   = AppStore.getPrediction();
-	var active 		 = AppStore.getActive();
-	var route		 = AppStore.getRoute();
-	var alert 		 = AppStore.getCurrentAlert();
-
-
 	return {
-		user 		     : currentUser,
-		prediction  	 : prediction,
-		active           : active,
-		route   		 : route,
-		alert 			 : alert
+		user 		     : AppStore.getUser(),
+		prediction  	 : AppStore.getPrediction(),
+		active           : AppStore.getActive(),
+		route   		 : AppStore.getRoute(),
+		alert 			 : AppStore.getCurrentAlert()
 	};
 }
 

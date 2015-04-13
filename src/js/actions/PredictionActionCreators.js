@@ -51,7 +51,7 @@ module.exports = {
 
 	closeAlert: function() {
 		PredictionAppDispatcher.dispatch({
-			type: ActionTypes.CLOSE_ALERT,
+			type: ActionTypes.CLOSE_ALERT
 		});
 	}
 

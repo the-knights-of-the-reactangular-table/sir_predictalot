@@ -73,18 +73,12 @@ var SingleImage = React.createClass({
     	},1000);
     },
 
-    componentDidLeave: function(){
-
-    },
-
-    componentWillUnmount: function(){
-    },
-
 	render: function(){
 		return(
-            <div  className={this.props.image.animation_class}
+            <div  key={this.props.image.id}
+                  className={this.props.image.animation_class}
 	              onTouchMove={this.handleTouchMove}
-	              onTouchEnd={this.onTouchEnd}
+	              onTouchEnd={this.onTouchEnd.bind(null, this.props.image)}
 	              onTouchStart={this.handleTouchStart}
 	             >
 	            <div className='yes_stamp'>Yes</div>

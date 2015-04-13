@@ -33,32 +33,26 @@ var PredictionApp = React.createClass({
 
 	render: function() {
 		var extras;
+		var section;
 
 		if (this.state.alert) {
 			extras = <AlertBox alert={this.state.alert} />;
 		}
 
 		if(this.state.route === "login") {
-			return (
-				<div className="app-wrapper">
-					<LoginSection />
-				</div>
-				);
+			section = <LoginSection />;
 		} else if (this.state.route === "submission") {
-			return (
-				<div className="app-wrapper">
-					<SubmissionSection user={this.state.user} />
-				</div>
-			);
-
+			section = <SubmissionSection user={this.state.user} />;
 		} else if (this.state.route === "prediction") {
-			return (
-				<div className="app-wrapper">
-					{extras}
-					<PredictionSection username={this.state.user.username} prediction={this.state.prediction} active={this.state.active}/>
-				</div>
-			);
+			section = <PredictionSection username={this.state.user.username} prediction={this.state.prediction} active={this.state.active}/>;
 		}
+
+		return (
+			<div className="app-wrapper">
+				{extras}
+				{section}
+			</div>
+			);
 	},
 
 	_onChange: function() {

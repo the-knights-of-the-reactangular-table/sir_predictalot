@@ -37,8 +37,8 @@ var SubmissionForm = React.createClass({
 					<input type="text" ref="inputText" className="subText" placeholder="Enter your prediction..."  />
 	  				<input type="text" ref="inputURL" className="subURL" placeholder="Enter image url..." />
 					<select ref="inputCategory" className="subCategory">
-						<option key="m8s" value="m8s">M8s only</option>
 						{topicOptions}
+						<option key="m8s" value="m8s">4 ur m8s only</option>
 					</select>
 	  				<input type="submit" value=" Create prediction!     ✔" className="subButton subForm"/>
 	  			</form>

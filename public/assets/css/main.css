@@ -434,7 +434,8 @@ transition: opacity .5s ease-in;
   position: fixed;
   z-index: 1000000;
   margin: auto;
-  left: 24%;
+  font-size: 15px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .red {
@@ -442,5 +443,5 @@ transition: opacity .5s ease-in;
 }
 
 .blue {
-  background-color: hsla(100, 61%, 46%, 0.6);
+  background-color: hsla(200, 95%, 46%, 0.6);
 }

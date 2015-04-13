@@ -5,7 +5,7 @@ var TextBox = React.createClass({
     render: function() {
 	    return(
 	        <div className="textBox">
-	       		{this.props.text}
+	       		<h4>{this.props.text}</h4>
 	        </div>
 	    );
     }

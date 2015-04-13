@@ -1,6 +1,5 @@
 var Data 	= require("./dummydata.json");
 var Path 	= require('path');
-var Joi 	= require("joi");
 var Hapi 	= require('hapi');
 
 var server 	= new Hapi.Server();
@@ -42,16 +41,18 @@ server.route([
 
 			// For each topic in the user's preferences
 			userTopics.forEach(function(ele) {
-				var idOfLastPrediction = Data.users[user].stats[ele].id_of_last_predicted || Data.topics[ele].predictions[0].id;
+				var idOfLastPrediction = Data.users[user].stats[ele].id_of_last_predicted;
 				var indexOfFirstUnfinishedPrediction;
 
 				// Look at the corresponding list of predictions available for it
 				Data.topics[ele].predictions.some(function(prediction, index) {
 					if(prediction.id === idOfLastPrediction) {
 						indexOfFirstUnfinishedPrediction = index + 1;
+					} else if (!idOfLastPrediction) {
+						indexOfFirstUnfinishedPrediction = 0;
 					}
 					// *** Problem - one prediction from a topic ends up being sent over despite it already being predicted.
-					if(indexOfFirstUnfinishedPrediction && index >= indexOfFirstUnfinishedPrediction) {
+					if(indexOfFirstUnfinishedPrediction !== undefined && index >= indexOfFirstUnfinishedPrediction) {
 						var freshPrediction = {
 							id    : prediction.id,
 							text  : prediction.text,
@@ -76,6 +77,7 @@ server.route([
 				Data.topics.m8s.predictions.some(function(prediction) {
 					if (predictionId === prediction.id) {
 						initialBatch.predictions.push(prediction);
+						Data.users[user].stats.m8s.id_of_last_dispatched = prediction.id;
 					}
 					return index === 3;
 				});
@@ -115,7 +117,7 @@ server.route([
 					if (ele.option1.indexOf(user) === -1 &&
 						ele.option2.indexOf(user) === -1) {
 						ele[prediction.chosen].push(user);
-						return true;
+						return;
 					}
 				}
 			});
@@ -235,15 +237,6 @@ server.route([
 		}
 	},
 
-
-		{
-		path: '/api/v1/topics',
-		method: 'GET',
-		handler: function(request, reply) {
-			reply(Data.topics);
-		}
-	},
-
 	{
 		path: '/api/v1/topics/random/{number?}',
 		method: 'POST',
@@ -281,10 +274,9 @@ server.route([
 					url   : prediction.url,
 					topic : prediction.topic
 				};
-				// If the random event is m8s and the individual topic is available to the user, add it to the batch we send off
-				if(randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) {
-					batchOfPredictions.push(freshPredictionOfBelAir);
-				} else {
+				// If the random event is m8s we check if the individual topic is available to the user. For all other events, no need
+				if((randomEvent === "m8s" && stats.m8s.m8_predictions.indexOf(prediction.id) !== -1) || randomEvent !== "m8s") {
+
 					if(prediction.id === mostRecentDispatchedId ) {
 						indexOfFirstNonDispatchedPrediction = index + 1;
 					} else if (mostRecentDispatchedId === undefined) {
@@ -299,23 +291,6 @@ server.route([
 				return batchOfPredictions.length === +numberRequested;
 			});
 			reply(batchOfPredictions);
-		}
-	},
-
-	{
-		path: '/api/v1/topics/{name}',
-		method: 'GET',
-		handler: function(request, reply) {
-			reply('Hi m8');
-		}
-	},
-
-
-	{
-		path: '/api/v1/topics/{name}',
-		method: 'POST',
-		handler: function(request, reply) {
-			reply('Hi m8');
 		}
 	},
 

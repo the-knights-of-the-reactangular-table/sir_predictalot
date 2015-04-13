@@ -84,7 +84,7 @@ var SingleImage = React.createClass({
 		return(
             <div  className={this.props.image.animation_class}
 	              onTouchMove={this.handleTouchMove}
-	              onTouchEnd={this.onTouchEnd.bind(null,this.props.image)}
+	              onTouchEnd={this.onTouchEnd}
 	              onTouchStart={this.handleTouchStart}
 	             >
 	            <div className='yes_stamp'>Yes</div>

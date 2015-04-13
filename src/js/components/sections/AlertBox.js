@@ -10,12 +10,14 @@ var AlertBox = React.createClass({
 	},
 
 	render: function() {
-		var AlertClass = (this.props.alert === "success") ? "alertBox green" : "alertBox red";
+		var alertClass = (this.props.alert.alert === "success") ? "alertBox blue" : "alertBox red";
 
 		return (
 			<div className={alertClass}>
-				<span>{this.props.alert.description}</span>
-				<button className="button alertButton" onClick={this.closeAlert}></button>
+				<span id="alert-span">{this.props.alert.description}</span>
+				<button className="button alert-button" onClick={this.closeAlert}>
+					<img src="/assets/img/glyphicon-remove.png" className="close-image" />
+				</button>
 			</div>
 		);
 	}

@@ -408,3 +408,39 @@ transition: opacity .5s ease-in;
   color: white;
   font-size: 35px;
 };
+
+/* alert box */
+
+.close-image {
+  float: right;
+  width: 11px;
+  height: 10px;
+  top: 0;
+}
+
+.alert-button {
+  padding-right: 2px;
+  right: 0;
+  width: auto;
+  height: auto;
+}
+
+#alert-span {
+  display: inline-block;
+  line-height: 20px;
+}
+
+.alertBox {
+  position: fixed;
+  z-index: 1000000;
+  margin: auto;
+  left: 24%;
+}
+
+.red {
+  background-color: hsla(337, 61%, 46%, 0.6);
+}
+
+.blue {
+  background-color: hsla(100, 61%, 46%, 0.6);
+}

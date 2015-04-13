@@ -20,7 +20,6 @@ module.exports = {
   },
 
   receiveSwipe: function(newPrediction, direction){
-    console.log(newPrediction);
     PredictionAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_SWIPE,
       newPrediction: newPrediction,

@@ -33,8 +33,9 @@ var PredictionApp = React.createClass({
 
 	render: function() {
 		var extras;
+
 		if (this.state.alert) {
-			extras = <AlertBox alert={this.state.alert}/>;
+			extras = <AlertBox alert={this.state.alert} />;
 		}
 
 		if(this.state.route === "login") {
@@ -53,6 +54,7 @@ var PredictionApp = React.createClass({
 		} else if (this.state.route === "prediction") {
 			return (
 				<div className="app-wrapper">
+					{extras}
 					<PredictionSection username={this.state.user.username} prediction={this.state.prediction} active={this.state.active}/>
 				</div>
 			);

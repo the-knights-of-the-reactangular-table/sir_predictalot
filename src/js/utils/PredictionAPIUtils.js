@@ -22,7 +22,8 @@ module.exports = {
 	Request.post("/api/v1/topics/" + formData.topic + "/predictions")
 		.send(formData)
 		.end(function(err, res) {
-			if(res.body && res.body.alert) {return PredictionServerActionCreators.receiveAlert(res.body.alert);}
+			// Currently merely redirects on form submission without receiving a new prediction, 
+			// perhaps better to have it display the new prediction? its a minor;
 			PredictionServerActionCreators.receiveAlert(res.body);
 		});
   },
@@ -32,7 +33,6 @@ module.exports = {
 	Request.post("/makeprediction")
 		.send(predictionInfo)
 		.end(function(err, res) {
-			// Currently merely redirects on form submission, perhaps better to have it display the new prediction? its a minor;
 			if(res.body && res.body.alert) {return PredictionServerActionCreators.receiveAlert(res.body.alert);}
 			PredictionServerActionCreators.receiveSwipe(res.body, predictionInfo.type);
 		});
